@@ -1,24 +1,42 @@
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using RMS.Web.Helpers;
+var builder = WebApplication.CreateBuilder(args);
 
-namespace RMS.Web.Website.PhilipsPH
+// Add services to the container.
+// Bind the Newtonsoft Serializer to the controllers.
+builder.Services.AddControllers().AddNewtonsoftJson();
+
+builder.Services.AddCors(options =>
 {
-    public class Program
+    options.AddPolicy("CorsPolicy", builder =>
     {
-        public static void Main(string[] args)
-        {
-            CurrentDirectoryHelpers.SetCurrentDirectory();
-            CreateWebHostBuilder(args).Build().Run();
-        }
+        builder
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials()
+        .WithOrigins("https://philipsph.rms2.eu/");
+    });
+});
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            new WebHostBuilder()
-                .UseKestrel(options => options.AddServerHeader = false)
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIIS()
-                .UseIISIntegration()
-                .UseStartup<Startup.Startup>();
-    }
+builder.Services.AddMvc(option => option.EnableEndpointRouting = false);
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
+
+app.UseStaticFiles();
+
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+//app.UseAuthorization();
+
+
+app.Run();

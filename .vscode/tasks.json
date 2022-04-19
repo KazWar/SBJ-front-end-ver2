@@ -1,0 +1,98 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "killNode",
+            "command": "taskkill /f /im node.exe",
+            "windows":{
+                "command": "taskkill /f /im node.exe",
+            },
+            "type": "shell"
+        },
+        {
+            "label": "build1",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/RMS.Web.Website.MakitaBE/RMS.Web.Website.MakitaBE.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build2",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/RMS.Web.Website.PhilipsPH/RMS.Web.Website.PhilipsPH.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build3",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/RMS.Web.Website.PhilipsDA/RMS.Web.Website.PhilipsDA.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/src/RMS.Web.Website.MakitaBE/RMS.Web.Website.MakitaBE.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/src/RMS.Web.Website.MakitaBE/RMS.Web.Website.MakitaBE.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build",
+            "dependsOrder": "sequence",
+            "dependsOn":[
+                "killNode",
+                "build1"
+            ]
+        },
+        {
+            "label": "buildDA",
+            "dependsOrder": "sequence",
+            "dependsOn":[
+                "killNode",
+                "build3"
+            ]
+        },
+        {
+            "label": "buildPH",
+            "dependsOrder": "sequence",
+            "dependsOn":[
+                "killNode",
+                "build2"
+            ]
+        }
+    ]
+}

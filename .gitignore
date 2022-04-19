@@ -5,8 +5,7 @@
 # Logs
 Logs/
 
-# VScode generated content
-.vscode
+
 
 # Generated files
 project.lock.json

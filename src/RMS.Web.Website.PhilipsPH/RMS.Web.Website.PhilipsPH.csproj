@@ -18,6 +18,8 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <AssemblyName>RMS.Web.Website.PhilipsPH</AssemblyName>
     <DebugType>embedded</DebugType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -29,12 +31,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.4" />
     <PackageReference Include="RestSharp" Version="107.3.0" />
-    <PackageReference Include="System.ServiceModel.Duplex" Version="4.7.*" />
-    <PackageReference Include="System.ServiceModel.Http" Version="4.7.*" />
-    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.7.*" />
-    <PackageReference Include="System.ServiceModel.Security" Version="4.7.*" />
-    <PackageReference Include="VueCliMiddleware" Version="3.0.0" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.9.0" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.9.0" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.9.0" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.9.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,13 +56,193 @@
 
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RMS.Application\RMS.Application.csproj" />
-    <ProjectReference Include="..\RMS.Core\RMS.Core.csproj" />
-    <ProjectReference Include="..\RMS.Web.Core\RMS.Web.Core.csproj" />
-    <ProjectReference Include="..\RMS.Web.Mvc\RMS.Web.Mvc.csproj" />
+    <None Include="wwwroot\.eslintignore" />
+    <None Include="wwwroot\.eslintrc.js" />
+    <None Include="wwwroot\.gitignore" />
+    <None Include="wwwroot\.prettierrc.json" />
+    <None Include="wwwroot\documentation\todo.md" />
+    <None Include="wwwroot\index.html" />
+    <None Include="wwwroot\package-lock.json" />
+    <None Include="wwwroot\package.json" />
+    <None Include="wwwroot\public\favicon.ico" />
+    <None Include="wwwroot\public\img\icons\android-chrome-192x192.png" />
+    <None Include="wwwroot\public\img\icons\android-chrome-512x512.png" />
+    <None Include="wwwroot\public\img\icons\android-chrome-maskable-192x192.png" />
+    <None Include="wwwroot\public\img\icons\android-chrome-maskable-512x512.png" />
+    <None Include="wwwroot\public\img\icons\apple-touch-icon-120x120.png" />
+    <None Include="wwwroot\public\img\icons\apple-touch-icon-152x152.png" />
+    <None Include="wwwroot\public\img\icons\apple-touch-icon-180x180.png" />
+    <None Include="wwwroot\public\img\icons\apple-touch-icon-60x60.png" />
+    <None Include="wwwroot\public\img\icons\apple-touch-icon-76x76.png" />
+    <None Include="wwwroot\public\img\icons\apple-touch-icon.png" />
+    <None Include="wwwroot\public\img\icons\favicon-16x16.png" />
+    <None Include="wwwroot\public\img\icons\favicon-32x32.png" />
+    <None Include="wwwroot\public\img\icons\msapplication-icon-144x144.png" />
+    <None Include="wwwroot\public\img\icons\mstile-150x150.png" />
+    <None Include="wwwroot\public\img\icons\safari-pinned-tab.svg" />
+    <None Include="wwwroot\public\robots.txt" />
+    <None Include="wwwroot\src\App.vue" />
+    <None Include="wwwroot\src\assets\bground-header5-p-2600.jpeg" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-Black.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-BlackIt.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-Bold.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-BoldIt.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-Book.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-BookIt.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-Heavy.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-HeavyIt.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-It.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-Light.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-LightIt.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-Medium.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-MediumIt.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-Regular.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-Thin.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-ThinIt.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-UltLt.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-UltLtIt.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-XtraBlk.ttf" />
+    <None Include="wwwroot\src\assets\fonts\NeueFrutigerWorld-XtraBlkIt.ttf" />
+    <None Include="wwwroot\src\assets\img\footer-logo.png" />
+    <None Include="wwwroot\src\assets\img\icons\facebook.png" />
+    <None Include="wwwroot\src\assets\img\icons\instagram.png" />
+    <None Include="wwwroot\src\assets\img\icons\linkedin.png" />
+    <None Include="wwwroot\src\assets\img\icons\pinterest.png" />
+    <None Include="wwwroot\src\assets\img\icons\twitter.png" />
+    <None Include="wwwroot\src\assets\img\icons\youtube.png" />
+    <None Include="wwwroot\src\assets\img\logo-makita-be.jpg" />
+    <None Include="wwwroot\src\assets\img\wordmark_1x.svg" />
+    <None Include="wwwroot\src\assets\img\wordmark_2x.svg" />
+    <None Include="wwwroot\src\assets\logo-sbj.svg" />
+    <None Include="wwwroot\src\assets\logo.png" />
+    <None Include="wwwroot\src\assets\styles\master.scss" />
+    <None Include="wwwroot\src\assets\styles\mixins.scss" />
+    <None Include="wwwroot\src\assets\styles\reset.scss" />
+    <None Include="wwwroot\src\assets\styles\typography.scss" />
+    <None Include="wwwroot\src\assets\styles\_variables.scss" />
+    <None Include="wwwroot\src\assets\thank-you-steps.svg" />
+    <None Include="wwwroot\src\common\components\app\footer.vue" />
+    <None Include="wwwroot\src\common\components\index.ts" />
+    <None Include="wwwroot\src\common\components\loading-bar.vue" />
+    <None Include="wwwroot\src\common\components\tooltip.vue" />
+    <None Include="wwwroot\src\common\index.ts" />
+    <None Include="wwwroot\src\common\models\campaign\campaign.classes.ts" />
+    <None Include="wwwroot\src\common\models\campaign\campaign.types.ts" />
+    <None Include="wwwroot\src\common\models\campaign\index.ts" />
+    <None Include="wwwroot\src\common\models\configs\campaign-settings.model.ts" />
+    <None Include="wwwroot\src\common\models\dto\classes\dto-block.ts" />
+    <None Include="wwwroot\src\common\models\dto\classes\dto-field.ts" />
+    <None Include="wwwroot\src\common\models\dto\classes\dto-form.ts" />
+    <None Include="wwwroot\src\common\models\dto\classes\dto-retailer.ts" />
+    <None Include="wwwroot\src\common\models\dto\classes\dto-value.ts" />
+    <None Include="wwwroot\src\common\models\dto\classes\index.ts" />
+    <None Include="wwwroot\src\common\models\dto\index.ts" />
+    <None Include="wwwroot\src\common\models\form\classes\field.ts" />
+    <None Include="wwwroot\src\common\models\form\classes\form.ts" />
+    <None Include="wwwroot\src\common\models\form\classes\index.ts" />
+    <None Include="wwwroot\src\common\models\form\classes\section.ts" />
+    <None Include="wwwroot\src\common\models\form\classes\value.ts" />
+    <None Include="wwwroot\src\common\models\form\index.ts" />
+    <None Include="wwwroot\src\common\models\iban.ts" />
+    <None Include="wwwroot\src\common\models\index.ts" />
+    <None Include="wwwroot\src\common\models\locale\index.ts" />
+    <None Include="wwwroot\src\common\models\locale\locales.classes.ts" />
+    <None Include="wwwroot\src\common\models\locale\locales.interfaces.ts" />
+    <None Include="wwwroot\src\common\models\locale\locales.types.ts" />
+    <None Include="wwwroot\src\common\styling\copy.txt" />
+    <None Include="wwwroot\src\common\styling\quasar-variables.sass" />
+    <None Include="wwwroot\src\common\utilities\assert-never.ts" />
+    <None Include="wwwroot\src\common\utilities\base64-encode.ts" />
+    <None Include="wwwroot\src\common\utilities\index.ts" />
+    <None Include="wwwroot\src\common\utilities\navigate.ts" />
+    <None Include="wwwroot\src\common\utilities\unique-elements.ts" />
+    <None Include="wwwroot\src\common\utilities\with-setup.ts" />
+    <None Include="wwwroot\src\configs\index.ts" />
+    <None Include="wwwroot\src\configs\settings.json" />
+    <None Include="wwwroot\src\env.d.ts" />
+    <None Include="wwwroot\src\global.d.ts" />
+    <None Include="wwwroot\src\main.ts" />
+    <None Include="wwwroot\src\plugins\axios.ts" />
+    <None Include="wwwroot\src\plugins\i18n.ts" />
+    <None Include="wwwroot\src\plugins\index.ts" />
+    <None Include="wwwroot\src\plugins\pinia.ts" />
+    <None Include="wwwroot\src\plugins\sentry.ts" />
+    <None Include="wwwroot\src\plugins\vue-router.ts" />
+    <None Include="wwwroot\src\quasar.conf.js" />
+    <None Include="wwwroot\src\services\data-services\base-service.ts" />
+    <None Include="wwwroot\src\services\data-services\campaign-service\campaign-service.ts" />
+    <None Include="wwwroot\src\services\data-services\campaign-service\index.ts" />
+    <None Include="wwwroot\src\services\data-services\form-service\form-service.ts" />
+    <None Include="wwwroot\src\services\data-services\form-service\index.ts" />
+    <None Include="wwwroot\src\services\data-services\iban-service\iban-service.ts" />
+    <None Include="wwwroot\src\services\data-services\iban-service\index.ts" />
+    <None Include="wwwroot\src\services\data-services\index.ts" />
+    <None Include="wwwroot\src\services\data-services\locale-service\index.ts" />
+    <None Include="wwwroot\src\services\data-services\locale-service\locale-service.ts" />
+    <None Include="wwwroot\src\services\index.ts" />
+    <None Include="wwwroot\src\stores\campaign\actions.ts" />
+    <None Include="wwwroot\src\stores\campaign\getters.ts" />
+    <None Include="wwwroot\src\stores\campaign\index.ts" />
+    <None Include="wwwroot\src\stores\campaign\state.ts" />
+    <None Include="wwwroot\src\stores\configuration\actions.ts" />
+    <None Include="wwwroot\src\stores\configuration\getters.ts" />
+    <None Include="wwwroot\src\stores\configuration\index.ts" />
+    <None Include="wwwroot\src\stores\configuration\state.ts" />
+    <None Include="wwwroot\src\stores\form\actions.ts" />
+    <None Include="wwwroot\src\stores\form\form.test.ts" />
+    <None Include="wwwroot\src\stores\form\getters.ts" />
+    <None Include="wwwroot\src\stores\form\index.ts" />
+    <None Include="wwwroot\src\stores\form\state.ts" />
+    <None Include="wwwroot\src\stores\index.ts" />
+    <None Include="wwwroot\src\stores\locale\actions.ts" />
+    <None Include="wwwroot\src\stores\locale\getters.ts" />
+    <None Include="wwwroot\src\stores\locale\index.ts" />
+    <None Include="wwwroot\src\stores\locale\locale.test.ts" />
+    <None Include="wwwroot\src\stores\locale\state.ts" />
+    <None Include="wwwroot\src\stores\registration\actions.ts" />
+    <None Include="wwwroot\src\stores\registration\getters.ts" />
+    <None Include="wwwroot\src\stores\registration\index.ts" />
+    <None Include="wwwroot\src\stores\registration\state.ts" />
+    <None Include="wwwroot\src\views\about\about.routes.ts" />
+    <None Include="wwwroot\src\views\about\about.vue" />
+    <None Include="wwwroot\src\views\campaigns\campaigns.routes.ts" />
+    <None Include="wwwroot\src\views\campaigns\campaigns.translations.json" />
+    <None Include="wwwroot\src\views\campaigns\campaigns.vue" />
+    <None Include="wwwroot\src\views\campaigns\components\campaign-cards.vue" />
+    <None Include="wwwroot\src\views\campaigns\components\components\campaign-card.translations.json" />
+    <None Include="wwwroot\src\views\campaigns\components\components\campaign-card.vue" />
+    <None Include="wwwroot\src\views\error\error.routes.ts" />
+    <None Include="wwwroot\src\views\error\error.vue" />
+    <None Include="wwwroot\src\views\home\home.routes.ts" />
+    <None Include="wwwroot\src\views\home\home.test.ts" />
+    <None Include="wwwroot\src\views\home\home.vue" />
+    <None Include="wwwroot\src\views\index.ts" />
+    <None Include="wwwroot\src\views\language-select\components\locale-selector.translations.json" />
+    <None Include="wwwroot\src\views\language-select\components\locale-selector.vue" />
+    <None Include="wwwroot\src\views\language-select\language-select.routes.ts" />
+    <None Include="wwwroot\src\views\language-select\language-select.vue" />
+    <None Include="wwwroot\src\views\registration\components\components\components\check-box.vue" />
+    <None Include="wwwroot\src\views\registration\components\components\components\components\toggle-button.vue" />
+    <None Include="wwwroot\src\views\registration\components\components\components\components\upload-preview-card.vue" />
+    <None Include="wwwroot\src\views\registration\components\components\components\date-picker.vue" />
+    <None Include="wwwroot\src\views\registration\components\components\components\dropdown.vue" />
+    <None Include="wwwroot\src\views\registration\components\components\components\file-picker.vue" />
+    <None Include="wwwroot\src\views\registration\components\components\components\iban-checker.vue" />
+    <None Include="wwwroot\src\views\registration\components\components\components\index.ts" />
+    <None Include="wwwroot\src\views\registration\components\components\components\input.vue" />
+    <None Include="wwwroot\src\views\registration\components\components\components\radio-button.vue" />
+    <None Include="wwwroot\src\views\registration\components\components\step.vue" />
+    <None Include="wwwroot\src\views\registration\components\components\summary-step.vue" />
+    <None Include="wwwroot\src\views\registration\components\form-stepper.vue" />
+    <None Include="wwwroot\src\views\registration\registration-edit.vue" />
+    <None Include="wwwroot\src\views\registration\registration.routes.ts" />
+    <None Include="wwwroot\src\views\registration\registration.translations.json" />
+    <None Include="wwwroot\src\views\registration\registration.vue" />
+    <None Include="wwwroot\src\views\thank-you\thank-you.routes.ts" />
+    <None Include="wwwroot\src\views\thank-you\thank-you.translations.json" />
+    <None Include="wwwroot\src\views\thank-you\thank-you.vue" />
+    <None Include="wwwroot\tsconfig.json" />
+    <None Include="wwwroot\vite.config.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
