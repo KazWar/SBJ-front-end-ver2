@@ -1,0 +1,564 @@
+﻿@model RMS.SBJ.Forms.Dtos.GetFormBlockFieldForEditDto;
+
+<input type="hidden" id="@("LookupFieldId__" + Model.BlockId + Model.FieldId)" value="@(Model.BlockId.ToString() + @Model.FieldId.ToString())" />
+<input type="hidden" id="@("FieldId__" + Model.BlockId + Model.FieldId)" value="@Model.FieldId" />
+<input type="hidden" id="@("BlockId__" + Model.BlockId + Model.FieldId)" value="@Model.BlockId" />
+<input type="hidden" id="@("LocaleId__" + Model.BlockId + Model.FieldId)" value="@Model.LocaleId" />
+<input type="hidden" id="@("SortOrderBlock__" + Model.BlockId + Model.FieldId)" value="@Model.SortOrderBlock" />
+<input type="hidden" id="@("SortOrderField__" + Model.BlockId + Model.FieldId)" value="@Model.SortOrderField" />
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <i>This is a...</i>
+            </td>
+            <td colspan="2">
+                <div class="form-group">
+                    <select id="@("FieldTarget__" + Model.BlockId + Model.FieldId)" name="FieldTargetList" type="number" style="font-style: italic;" class="form-control field__dropdown-menu" value="@Model.FieldTarget">
+                        @if (Model.FieldTarget == -1)
+                        {
+                            <option value="-1" selected>- ERROR: MISSING DATA -</option>
+                        }
+                        @if (Model.FieldTarget == 0)
+                        {
+                            <option value="0" selected>- choose field target -</option>
+                        }
+                        else
+                        {
+                            <option value="0">- choose field target -</option>
+                        }
+                        @if (Model.FieldTarget == 1)
+                        {
+                            <option value="1" selected>...default Registration field</option>
+                        }
+                        else
+                        {
+                            <option value="1">...default Registration field</option>
+                        }
+                        @if (Model.FieldTarget == 2)
+                        {
+                            <option value="2" selected>...default PurchaseRegistration field</option>
+                        }
+                        else
+                        {
+                            <option value="2">...default PurchaseRegistration field</option>
+                        }
+                        @if (Model.FieldTarget == 3)
+                        {
+                            <option value="3" selected>...custom Registration field</option>
+                        }
+                        else
+                        {
+                            <option value="3">...custom Registration field</option>
+                        }
+                        @if (Model.FieldTarget == 4)
+                        {
+                            <option value="4" selected>...custom PurchaseRegistration field</option>
+                        }
+                        else
+                        {
+                            <option value="4">...custom PurchaseRegistration field</option>
+                        }
+                        @if (Model.FieldTarget == 5)
+                        {
+                            <option value="5" selected>...built-in selector</option>
+                        }
+                        else
+                        {
+                            <option value="5">...built-in selector</option>
+                        }
+                        @if (Model.FieldTarget == 6)
+                        {
+                            <option value="6" selected>...html label</option>
+                        }
+                        else
+                        {
+                            <option value="6">...html label</option>
+                        }
+                        @if (Model.FieldTarget == 7)
+                        {
+                            <option value="7" selected>...page separator</option>
+                        }
+                        else
+                        {
+                            <option value="7">...page separator</option>
+                        }
+                    </select>
+                </div>
+            </td>
+        </tr>
+        @if (Model.FieldTarget == 1)
+        {
+            <tr id="@("RegistrationFieldRow__" + Model.BlockId + Model.FieldId)">
+                <td>
+                    <label for="RegistrationField">Registration field</label>
+                </td>
+                <td colspan="2">
+                    <div class="form-group">
+                        <select id="@("RegistrationField__" + Model.BlockId + Model.FieldId)" name="RegistrationField" type="text" class="form-control field__dropdown-menu" value="@Model.RegistrationField">
+                            @if (String.IsNullOrWhiteSpace(Model.RegistrationField))
+                            {
+                                <option value="" selected>- choose Registration field -</option>
+                            }
+                            else
+                            {
+                                <option value="">- choose Registration field -</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.RegistrationField) && Model.RegistrationField.ToLower().Trim() == "firstname")
+                            {
+                                <option value="FirstName" selected>FirstName</option>
+                            }
+                            else
+                            {
+                                <option value="FirstName">FirstName</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.RegistrationField) && Model.RegistrationField.ToLower().Trim() == "lastname")
+                            {
+                                <option value="LastName" selected>LastName</option>
+                            }
+                            else
+                            {
+                                <option value="LastName">LastName</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.RegistrationField) && Model.RegistrationField.ToLower().Trim() == "gender")
+                            {
+                                <option value="Gender" selected>Gender</option>
+                            }
+                            else
+                            {
+                                <option value="Gender">Gender</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.RegistrationField) && Model.RegistrationField.ToLower().Trim() == "street")
+                            {
+                                <option value="Street" selected>Street</option>
+                            }
+                            else
+                            {
+                                <option value="Street">Street</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.RegistrationField) && Model.RegistrationField.ToLower().Trim() == "housenr")
+                            {
+                                <option value="HouseNr" selected>HouseNr</option>
+                            }
+                            else
+                            {
+                                <option value="HouseNr">HouseNr</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.RegistrationField) && Model.RegistrationField.ToLower().Trim() == "postalcode")
+                            {
+                                <option value="PostalCode" selected>PostalCode</option>
+                            }
+                            else
+                            {
+                                <option value="PostalCode">PostalCode</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.RegistrationField) && Model.RegistrationField.ToLower().Trim() == "city")
+                            {
+                                <option value="City" selected>City</option>
+                            }
+                            else
+                            {
+                                <option value="City">City</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.RegistrationField) && Model.RegistrationField.ToLower().Trim() == "emailaddress")
+                            {
+                                <option value="EmailAddress" selected>EmailAddress</option>
+                            }
+                            else
+                            {
+                                <option value="EmailAddress">EmailAddress</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.RegistrationField) && Model.RegistrationField.ToLower().Trim() == "phonenumber")
+                            {
+                                <option value="PhoneNumber" selected>PhoneNumber</option>
+                            }
+                            else
+                            {
+                                <option value="PhoneNumber">PhoneNumber</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.RegistrationField) && Model.RegistrationField.ToLower().Trim() == "companyname")
+                            {
+                                <option value="CompanyName" selected>CompanyName</option>
+                            }
+                            else
+                            {
+                                <option value="CompanyName">CompanyName</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.RegistrationField) && Model.RegistrationField.ToLower().Trim() == "bic")
+                            {
+                                <option value="Bic" selected>Bic</option>
+                            }
+                            else
+                            {
+                                <option value="Bic">Bic</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.RegistrationField) && Model.RegistrationField.ToLower().Trim() == "iban")
+                            {
+                                <option value="Iban" selected>Iban</option>
+
+                            }
+                            else
+                            {
+                                <option value="Iban">Iban</option>
+                            }
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr id="@("RegistrationFieldRow__" + Model.BlockId + Model.FieldId)" class="d-none">
+                <td>
+                    <label for="RegistrationField">Registration field</label>
+                </td>
+                <td colspan="2">
+                    <div class="form-group">
+                        <select id="@("RegistrationField__" + Model.BlockId + Model.FieldId)" name="RegistrationField" type="text" class="form-control field__dropdown-menu" value="@Model.RegistrationField">
+                            <option value="" selected>- choose Registration field -</option>
+                            <option value="FirstName">FirstName</option>
+                            <option value="LastName">LastName</option>
+                            <option value="Gender">Gender</option>
+                            <option value="Street">Street</option>
+                            <option value="HouseNr">HouseNr</option>
+                            <option value="PostalCode">PostalCode</option>
+                            <option value="City">City</option>
+                            <option value="EmailAddress">EmailAddress</option>
+                            <option value="PhoneNumber">PhoneNumber</option>
+                            <option value="CompanyName">CompanyName</option>
+                            <option value="Bic">Bic</option>
+                            <option value="Iban">Iban</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        }
+        @if (Model.FieldTarget == 2)
+        {
+            <tr id="@("PurchaseRegistrationFieldRow__" + Model.BlockId + Model.FieldId)">
+                <td>
+                    <label for="PurchaseRegistrationField">PurchaseRegistration field</label>
+                </td>
+                <td colspan="2">
+                    <div class="form-group">
+                        <select id="@("PurchaseRegistrationField__" + Model.BlockId + Model.FieldId)" name="PurchaseRegistrationField" type="text" class="form-control field__dropdown-menu" value="@Model.PurchaseRegistrationField">
+                            @if (String.IsNullOrWhiteSpace(Model.PurchaseRegistrationField))
+                            {
+                                <option value="" selected>- choose PurchaseRegistration field -</option>
+                            }
+                            else
+                            {
+                                <option value="">- choose PurchaseRegistration field -</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.PurchaseRegistrationField) && Model.PurchaseRegistrationField.ToLower().Trim() == "quantity")
+                            {
+                                <option value="Quantity" selected>Quantity</option>
+                            }
+                            else
+                            {
+                                <option value="Quantity">Quantity</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.PurchaseRegistrationField) && Model.PurchaseRegistrationField.ToLower().Trim() == "totalamount")
+                            {
+                                <option value="TotalAmount" selected>TotalAmount</option>
+                            }
+                            else
+                            {
+                                <option value="TotalAmount">TotalAmount</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.PurchaseRegistrationField) && Model.PurchaseRegistrationField.ToLower().Trim() == "purchasedate")
+                            {
+                                <option value="PurchaseDate" selected>PurchaseDate</option>
+                            }
+                            else
+                            {
+                                <option value="PurchaseDate">PurchaseDate</option>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(Model.PurchaseRegistrationField) && Model.PurchaseRegistrationField.ToLower().Trim() == "invoiceimagepath")
+                            {
+                                <option value="InvoiceImagePath" selected>InvoiceImagePath</option>
+                            }
+                            else
+                            {
+                                <option value="InvoiceImagePath">InvoiceImagePath</option>
+                            }
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr id="@("PurchaseRegistrationFieldRow__" + Model.BlockId + Model.FieldId)" class="d-none">
+                <td>
+                    <label for="PurchaseRegistrationField">PurchaseRegistration field</label>
+                </td>
+                <td colspan="2">
+                    <div class="form-group">
+                        <select id="@("PurchaseRegistrationField__" + Model.BlockId + Model.FieldId)" name="PurchaseRegistrationField" type="text" class="form-control field__dropdown-menu" value="@Model.PurchaseRegistrationField">
+                            <option value="" selected>- choose PurchaseRegistration field -</option>
+                            <option value="Quantity">Quantity</option>
+                            <option value="TotalAmount">TotalAmount</option>
+                            <option value="PurchaseDate">PurchaseDate</option>
+                            <option value="InvoiceImagePath">InvoiceImagePath</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        }
+        @if (Model.FieldTarget == 3)
+        {
+            <tr id="@("CustomRegistrationFieldRow__" + Model.BlockId + Model.FieldId)">
+                <td>
+                    <label for="CustomRegistrationField">Custom Registration field</label>
+                </td>
+                <td colspan="2">
+                    <div class="form-group">
+                        <select id="@("CustomRegistrationField__" + Model.BlockId + Model.FieldId)" name="CustomRegistrationField" type="number" class="form-control field__dropdown-menu" value="@Model.CustomRegistrationFieldId">
+                            @if (Model.CustomRegistrationFieldId == 0)
+                            {
+                                <option value="0" selected>- choose custom field -</option>
+                            }
+                            else
+                            {
+                                <option value="0">- choose custom field -</option>
+                            }
+                            @foreach (var field in Model.AvailableCustomRegistrationFields)
+                            {
+                                @if (field.Key == Model.CustomRegistrationFieldId)
+                                {
+                                    <option value="@field.Key" selected>@field.Value</option>
+                                }
+                                else
+                                {
+                                    <option value="@field.Key">@field.Value</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr id="@("CustomRegistrationFieldRow__" + Model.BlockId + Model.FieldId)" class="d-none">
+                <td>
+                    <label for="CustomRegistrationField">Custom Registration field</label>
+                </td>
+                <td colspan="2">
+                    <div class="form-group">
+                        <select id="@("CustomRegistrationField__" + Model.BlockId + Model.FieldId)" name="CustomRegistrationField" type="number" class="form-control field__dropdown-menu" value="@Model.CustomRegistrationFieldId">
+                            <option value="0" selected>- choose custom field -</option>
+                            @foreach (var field in Model.AvailableCustomRegistrationFields)
+                            {
+                                <option value="@field.Key">@field.Value</option>
+                            }
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        }
+        @if (Model.FieldTarget == 4)
+        {
+            <tr id="@("CustomPurchaseRegistrationFieldRow__" + Model.BlockId + Model.FieldId)">
+                <td>
+                    <label for="CustomPurchaseRegistrationField">Custom PurchaseRegistration field</label>
+                </td>
+                <td colspan="2">
+                    <div class="form-group">
+                        <select id="@("CustomPurchaseRegistrationField__" + Model.BlockId + Model.FieldId)" name="CustomPurchaseRegistrationField" type="number" class="form-control field__dropdown-menu" value="@Model.CustomPurchaseRegistrationFieldId">
+                            @if (Model.CustomPurchaseRegistrationFieldId == 0)
+                            {
+                                <option value="0" selected>- choose custom field -</option>
+                            }
+                            else
+                            {
+                                <option value="0">- choose custom field -</option>
+                            }
+                            @foreach (var field in Model.AvailableCustomPurchaseRegistrationFields)
+                            {
+                                @if (field.Key == Model.CustomPurchaseRegistrationFieldId)
+                                {
+                                    <option value="@field.Key" selected>@field.Value</option>
+                                }
+                                else
+                                {
+                                    <option value="@field.Key">@field.Value</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr id="@("CustomPurchaseRegistrationFieldRow__" + Model.BlockId + Model.FieldId)" class="d-none">
+                <td>
+                    <label for="CustomPurchaseRegistrationField">Custom PurchaseRegistration field</label>
+                </td>
+                <td colspan="2">
+                    <div class="form-group">
+                        <select id="@("CustomPurchaseRegistrationField__" + Model.BlockId + Model.FieldId)" name="CustomPurchaseRegistrationField" type="number" class="form-control field__dropdown-menu" value="@Model.CustomPurchaseRegistrationFieldId">
+                            <option value="0" selected>- choose custom field -</option>
+                            @foreach (var field in Model.AvailableCustomPurchaseRegistrationFields)
+                            {
+                                <option value="@field.Key">@field.Value</option>
+                            }
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>               
+                <label for="FieldType">Field type</label>
+            </td>
+            <td colspan="2">
+                <div class="form-group">                   
+                    <select id="@("FieldType__" + Model.BlockId + Model.FieldId)" name="FieldType" type="number" class="form-control field__dropdown-menu" value="@Model.FieldTypeId">
+                        @if (Model.FieldTypeId == 0)
+                        {
+                            <option value="0" selected>- choose field type -</option>
+                        }
+                        else
+                        {
+                            <option value="0">- choose field type -</option>
+                        }
+                        @foreach (var field in Model.AvailableFieldTypes)
+                        {
+                            @if (field.Key == Model.FieldTypeId)
+                            {
+                                <option value="@field.Key" selected>@field.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@field.Key">@field.Value</option>
+                            }
+                        }
+                    </select>                    
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>               
+                <label for="FieldName">Field name (system)</label>
+            </td>
+            <td colspan="2">
+                <div class="form-group">
+                    <input id="@("FieldName__" + Model.BlockId + Model.FieldId)" name="FieldName" type="text" class="form-control field__text" value="@Model.FieldName" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>               
+                <label for="FieldDescription">Field description</label>
+            </td>
+            <td colspan="2">
+                <div class="form-group">
+                    <input id="@("FieldDescription__" + Model.BlockId + Model.FieldId)" name="FieldDescription" type="text" class="form-control field__text" value="@Model.FieldDescription" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="MaxLength">Max. length</label>
+            </td>
+            <td colspan="2">
+                <div class="form-group">
+                    <input id="@("MaxLength__" + Model.BlockId + Model.FieldId)" name="MaxLength" type="number" class="form-control field__number" value="@Model.MaxLength" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="RequiredField">Required field</label>
+            </td>
+            <td colspan="2">
+                <div class="form-group">
+                    @if (Model.RequiredField)
+                    {
+                        <input id="@("RequiredField__" + Model.BlockId + Model.FieldId)" name="RequiredField" type="checkbox" checked="checked" />
+                    }
+                    else
+                    {
+                        <input id="@("RequiredField__" + Model.BlockId + Model.FieldId)" name="RequiredField" type="checkbox" />
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="ReadOnly">Read only</label>
+            </td>
+            <td colspan="2">
+                <div class="form-group">
+                    @if (Model.ReadOnly)
+                    {
+                        <input id="@("ReadOnly__" + Model.BlockId + Model.FieldId)" name="ReadOnly" type="checkbox" checked="checked" />
+                    }
+                    else
+                    {
+                        <input id="@("ReadOnly__" + Model.BlockId + Model.FieldId)" name="ReadOnly" type="checkbox" />
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td style="text-align: center;">
+                <i>global</i>
+            </td>
+            <td style="text-align: center;">
+                <i>@Model.Locale</i>
+            </td>
+        </tr>
+        <tr>
+            <td>               
+                <label for="FieldLabel">Label</label>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input id="@("FieldLabelGlobal__" + Model.BlockId + Model.FieldId)" name="FieldLabel" type="text" class="form-control field__text" value="@Model.FieldLabelGlobal" />
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input id="@("FieldLabelLocale__" + Model.BlockId + Model.FieldId)" name="FieldLabel" type="text" class="form-control field__text" value="@Model.FieldLabelLocale" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>               
+                <label for="DefaultValue">Default value</label>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input id="@("DefaultValueGlobal__" + Model.BlockId + Model.FieldId)" name="DefaultValue" type="text" class="form-control field__text" value="@Model.DefaultValueGlobal" />
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input id="@("DefaultValueLocale__" + Model.BlockId + Model.FieldId)" name="DefaultValue" type="text" class="form-control field__text" value="@Model.DefaultValueLocale" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>               
+                <label for="RegularExpression">Regular expression</label>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input id="@("RegularExpressionGlobal__" + Model.BlockId + Model.FieldId)" name="RegularExpression" type="text" class="form-control field__text" value="@Model.RegularExpressionGlobal" />
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input id="@("RegularExpressionLocale__" + Model.BlockId + Model.FieldId)" name="RegularExpression" type="text" class="form-control field__text" value="@Model.RegularExpressionLocale" />
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

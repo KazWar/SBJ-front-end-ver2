@@ -1,0 +1,12 @@
+﻿.wrapper__tiles {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-gap: 2.5rem 2rem !important;
+}
+
+    .wrapper__tiles .user-interaction__tile {
+        border: 1px solid #ccc;
+        border-radius: 0.3rem;
+        padding: 1.5rem 2.5rem 2.5rem 2.5rem;
+        cursor: pointer;
+    }

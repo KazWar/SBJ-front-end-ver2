@@ -1,0 +1,31 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.SystemLevels
+@model CreateOrEditSystemLevelModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditSystemLevel")) : L("CreateNewSystemLevel")))
+
+<div class="modal-body">
+        <div id="SystemLevelInformationsTab">
+            <form name="SystemLevelInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.SystemLevel.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="SystemLevel_Description">@L("Description")</label>
+									<input class="form-control" id="SystemLevel_Description" value="@Model.SystemLevel.Description" type="text" name="description"  required    />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

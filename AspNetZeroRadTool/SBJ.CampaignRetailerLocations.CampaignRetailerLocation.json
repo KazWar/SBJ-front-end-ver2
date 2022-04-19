@@ -1,0 +1,50 @@
+{
+  "IsRegenerate": false,
+  "MenuPosition": null,
+  "RelativeNamespace": "SBJ.CampaignRetailerLocations",
+  "EntityName": "CampaignRetailerLocation",
+  "EntityNamePlural": "CampaignRetailerLocations",
+  "TableName": "CampaignRetailerLocation",
+  "PrimaryKeyType": "long",
+  "BaseClass": "Entity",
+  "EntityHistory": false,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
+  "CreateUserInterface": false,
+  "CreateViewOnly": false,
+  "CreateExcelExport": false,
+  "IsNonModalCRUDPage": false,
+  "IsMasterDetailPage": false,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [],
+  "NavigationProperties": [
+    {
+      "Namespace": "RMS.SBJ.CampaignProcesses",
+      "ForeignEntityName": "Campaign",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "CampaignId",
+      "DisplayPropertyName": "Name",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "LookupTable"
+    },
+    {
+      "Namespace": "RMS.SBJ.RetailerLocations",
+      "ForeignEntityName": "RetailerLocation",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "RetailerLocationId",
+      "DisplayPropertyName": "Name",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "LookupTable"
+    }
+  ],
+  "NavigationPropertyOneToManyTables": [],
+  "EnumDefinitions": [],
+  "DbContext": null
+}

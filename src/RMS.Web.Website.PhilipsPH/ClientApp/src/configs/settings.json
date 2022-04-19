@@ -1,0 +1,10 @@
+{
+  "campaignOverview": {
+    "isEnabled": true,
+    "maxColumnCount": 3,
+    "showCampaignCategories": true,
+    "tokenUser": "admin",
+    "tokenPass":  "123qwe"
+  }
+}
+  

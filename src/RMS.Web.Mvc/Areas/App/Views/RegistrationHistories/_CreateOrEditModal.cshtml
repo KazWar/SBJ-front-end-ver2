@@ -1,0 +1,87 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.RegistrationHistories
+@model CreateOrEditRegistrationHistoryModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditRegistrationHistory")) : L("CreateNewRegistrationHistory")))
+
+<div class="modal-body">
+        <div id="RegistrationHistoryInformationsTab">
+            <form name="RegistrationHistoryInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.RegistrationHistory.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="RegistrationStatusStatusCode">@L("RegistrationStatus")</label>
+									    <div class="input-group">
+											<input class="form-control" id="RegistrationStatusStatusCode" name="registrationStatusStatusCode" value="@Model.RegistrationStatusStatusCode" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenRegistrationStatusLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearRegistrationStatusStatusCodeButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="RegistrationHistory_RegistrationStatusId" value="@Model.RegistrationHistory.RegistrationStatusId" type="text" name="registrationStatusId" required hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="RegistrationHistory_RegistrationStatusId" value="" type="text" name="registrationStatusId" required hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="RegistrationFirstName">@L("Registration")</label>
+									    <div class="input-group">
+											<input class="form-control" id="RegistrationFirstName" name="registrationFirstName" value="@Model.RegistrationFirstName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenRegistrationLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearRegistrationFirstNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="RegistrationHistory_RegistrationId" value="@Model.RegistrationHistory.RegistrationId" type="text" name="registrationId" required hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="RegistrationHistory_RegistrationId" value="" type="text" name="registrationId" required hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="RegistrationHistory_DateCreated">@L("DateCreated")</label>
+									<input class="form-control m-input date-picker" id="RegistrationHistory_DateCreated" type="text" name="dateCreated" value="@Model.RegistrationHistory.DateCreated"/>
+								</div>
+					
+								<div class="form-group">
+									<label for="RegistrationHistory_Remarks">@L("Remarks")</label>
+									<input class="form-control" id="RegistrationHistory_Remarks" value="@Model.RegistrationHistory.Remarks" type="text" name="remarks"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="RegistrationHistory_AbpUserId">@L("AbpUserId")</label>
+									<input class="form-control m-input" id="RegistrationHistory_AbpUserId" value="@Model.RegistrationHistory.AbpUserId.ToString(CultureInfo.InvariantCulture)" type="number" name="abpUserId"  />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

@@ -1,0 +1,56 @@
+﻿@model RMS.Web.Areas.App.Models.PromoSteps.CustomPromoStepsViewModel
+
+<div class="form-group mt-5 mb-0">
+    <h5>@L("PromoSteps")</h5>
+    <input type="hidden" id="Promo_PromoSteps" name="PromoSteps">
+    <table id="PromoStepTable" class="table table-striped table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">@L("Nr")</th>
+                <th scope="col">@L("PromoStepAndFields")</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.PromoSteps != null)
+            {
+                foreach (var promoStep in Model.PromoSteps)
+                {
+                <tr class="row__promostep" data-promostep-id="@promoStep.StepId" data-promostep-sequence="@promoStep.Sequence">
+                    <td scope="row" data-promostep-id="@promoStep.StepId" data-promostep-sequence="@promoStep.Sequence">@promoStep.Sequence&#46;</td>
+                    <td>
+                        <span class="promostep__description" data-promostep-description="@promoStep.Description">@promoStep.Description</span>
+                        @if (promoStep.PromoStepFields != null && promoStep.PromoStepFields.Any())
+                        {
+                            <ul class="list-group promostep__promostep-fields">
+                                @foreach (var promoStepField in promoStep.PromoStepFields)
+                                {
+                                    <li class="list-group-item">
+                                        <div class="promostep__field" data-promostepfield-id="@promoStepField.FieldId">
+                                            <label name="promoStepFieldNameEdit">@promoStepField.FieldName</label>
+                                            <input class="form-control input__field-value"
+                                                   type="text"
+                                                   placeholder="@L("Enter a value...")"
+                                                   data-promostepfield-id="@promoStepField.FieldId"
+                                                   value="@promoStepField.FieldValue" />
+                                            @if (promoStepField.FieldName.Replace(" ", string.Empty).ToLower() == "ponumberhandling")
+                                            {
+                                                <button id="PoNumberHandling" type="button" class="btn-outline-info" >Get PO</button>
+                                            }
+                                            @if (promoStepField.FieldName.Replace(" ", string.Empty).ToLower() == "ponumbercashback")
+                                            {
+                                                <button id="PoNumberCashback" type="button" class="btn-outline-info" >Get PO</button>
+                                            }
+                                        </div> 
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <input type="hidden" id="input__promosteps" name="inputPromoSteps" />
+</div>

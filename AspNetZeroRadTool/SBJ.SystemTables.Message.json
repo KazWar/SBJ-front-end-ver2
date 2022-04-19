@@ -1,0 +1,57 @@
+{
+  "IsRegenerate": true,
+  "MenuPosition": "main",
+  "RelativeNamespace": "SBJ.SystemTables",
+  "EntityName": "Message",
+  "EntityNamePlural": "Messages",
+  "TableName": "Message",
+  "PrimaryKeyType": "long",
+  "BaseClass": "FullAuditedEntity",
+  "EntityHistory": true,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
+  "CreateUserInterface": true,
+  "CreateViewOnly": true,
+  "CreateExcelExport": true,
+  "IsMasterDetailPage": false,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [
+    {
+      "Name": "Version",
+      "Type": "string",
+      "MaxLength": 20,
+      "MinLength": 1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0,
+        "MaximumValue": 0
+      },
+      "Required": true,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      }
+    }
+  ],
+  "NavigationProperties": [
+    {
+      "Namespace": "RMS.SBJ.SystemTables",
+      "ForeignEntityName": "SystemLevel",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "SystemLevelId",
+      "DisplayPropertyName": "Description",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": ""
+    }
+  ],
+  "EnumDefinitions": [],
+  "DbContext": null
+}

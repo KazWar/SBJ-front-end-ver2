@@ -1,0 +1,72 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.CampaignCountries
+@model CreateOrEditCampaignCountryModalViewModel
+@using Abp.Extensions
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditCampaignCountry")) : L("CreateNewCampaignCountry")))
+
+<div class="modal-body">
+        <div id="CampaignCountryInformationsTab">
+            <form name="CampaignCountryInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.CampaignCountry.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="CampaignName">@L("Campaign")</label>
+									    <div class="input-group">
+											<input class="form-control" id="CampaignName" name="campaignName" value="@Model.CampaignName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenCampaignLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearCampaignNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="CampaignCountry_CampaignId" value="@Model.CampaignCountry.CampaignId" type="text" name="campaignId" required hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="CampaignCountry_CampaignId" value="" type="text" name="campaignId" required hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="CountryDescription">@L("Country")</label>
+									    <div class="input-group">
+											<input class="form-control" id="CountryDescription" name="countryDescription" value="@Model.CountryDescription" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenCountryLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearCountryDescriptionButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="CampaignCountry_CountryId" value="@Model.CampaignCountry.CountryId" type="text" name="countryId" required hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="CampaignCountry_CountryId" value="" type="text" name="countryId" required hidden/>
+								}
+
+
+
+				
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

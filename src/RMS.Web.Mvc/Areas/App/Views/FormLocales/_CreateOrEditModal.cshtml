@@ -1,0 +1,89 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.FormLocales
+@model CreateOrEditFormLocaleModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditFormLocale")) : L("CreateNewFormLocale")))
+
+<div class="modal-body">
+        <div id="FormLocaleInformationsTab">
+            <form name="FormLocaleInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.FormLocale.Id" />
+                }
+
+                <div class="form-group m-form__group">
+                    <label for="FormVersion">@L("Form")</label>
+                    <div class="input-group">
+                        <input class="form-control" id="FormVersion" name="formVersion" value="@Model.FormVersion" type="text" disabled>
+                        @if (ViewBag.Category == RMS.SBJ.Forms.FormConsts.Company)
+                        {
+                            <div class="input-group-append">
+                                <button class="btn btn-primary blue" id="OpenFormLookupTableButton" type="button" disabled><i class="fa fa-search"></i> @L("Pick")</button>
+                            </div>
+                            <div class="input-group-prepend">
+                                <button class="btn btn-danger btn-icon" type="button" id="ClearFormVersionButton" disabled><i class="fa fa-times"></i></button>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="input-group-append">
+                                <button class="btn btn-primary blue" id="OpenFormLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+                            </div>
+                            <div class="input-group-prepend">
+                                <button class="btn btn-danger btn-icon" type="button" id="ClearFormVersionButton"><i class="fa fa-times"></i></button>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                @if (Model.IsEditMode)
+                {
+                    <input class="form-control" id="FormLocale_FormId" value="@Model.FormLocale.FormId" type="text" name="formId" required hidden />
+                }
+                else
+                {
+                    @if (ViewBag.Category == RMS.SBJ.Forms.FormConsts.Company)
+                    {
+                        <input class="form-control" id="FormLocale_FormId" value="@Model.FormLocale.FormId" type="text" name="formId" required hidden />
+                    }
+                    else
+                    {
+                        <input class="form-control" id="FormLocale_FormId" value="" type="text" name="formId" required hidden />
+                    }
+                }
+
+                <div class="form-group m-form__group">
+                    <label for="LocaleDescription">@L("Locale")</label>
+                    <div class="input-group">
+                        <input class="form-control" id="LocaleDescription" name="localeDescription" value="@Model.LocaleDescription" type="text" disabled>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary blue" id="OpenLocaleLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+                        </div>
+                        <div class="input-group-prepend">
+                            <button class="btn btn-danger btn-icon" type="button" id="ClearLocaleDescriptionButton"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.IsEditMode)
+                {
+                    <input class="form-control" id="FormLocale_LocaleId" value="@Model.FormLocale.LocaleId" type="text" name="localeId" required hidden />
+                }
+                else
+                {
+                    <input class="form-control" id="FormLocale_LocaleId" value="" type="text" name="localeId" required hidden />
+                }
+
+                <div class="form-group">
+                    <label for="FormLocale_Description">@L("Description")</label>
+                    <input class="form-control" id="FormLocale_Description" value="@Model.FormLocale.Description" type="text" name="description" disabled/>
+                </div>
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

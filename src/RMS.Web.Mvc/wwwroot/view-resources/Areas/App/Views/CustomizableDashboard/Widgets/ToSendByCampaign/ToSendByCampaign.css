@@ -1,0 +1,53 @@
+﻿/*CUSTOM CSS MAKITA DASHBOARD*/
+
+
+iframe {
+    border: none !important;
+    margin: 0 auto;
+}
+
+
+
+@media only screen and (min-width: 992px) {
+    .grid-stack-item[data-gs-height="12"] .kt-portlet__body, .grid-stack-item[data-gs-height="11"] .kt-portlet__body, .grid-stack-item[data-gs-height="10"] .kt-portlet__body {
+        height: 320px !important;
+    }
+
+    .grid-stack-item[data-gs-height="9"] .kt-portlet__body, .grid-stack-item[data-gs-height="8"] .kt-portlet__body, .grid-stack-item[data-gs-height="7"] .kt-portlet__body {
+        height: 230px !important;
+    }
+
+    .grid-stack-item[data-gs-height="6"] .kt-portlet__body, .grid-stack-item[data-gs-height="5"] .kt-portlet__body, .grid-stack-item[data-gs-height="4"] .kt-portlet__body {
+        height: 200px !important;
+    }
+}
+
+
+@media only screen and (min-width: 576px) {
+    .grid-stack-item[data-gs-height="12"] .kt-portlet__body, .grid-stack-item[data-gs-height="11"] .kt-portlet__body {
+        height: 350px !important;
+    }
+
+    .grid-stack-item[data-gs-height="10"] .kt-portlet__body, .grid-stack-item[data-gs-height="9"] .kt-portlet__body, .grid-stack-item[data-gs-height="8"] .kt-portlet__body, .grid-stack-item[data-gs-height="7"] .kt-portlet__body {
+        height: 310px !important;
+    }
+
+    .grid-stack-item[data-gs-height="6"] .kt-portlet__body, .grid-stack-item[data-gs-height="5"] .kt-portlet__body, .grid-stack-item[data-gs-height="4"] .kt-portlet__body {
+        height: 280px !important;
+    }
+}
+
+
+@media only screen and (max-width: 576px) {
+    .grid-stack-item[data-gs-height="12"] .kt-portlet__body, .grid-stack-item[data-gs-height="11"] .kt-portlet__body, .grid-stack-item[data-gs-height="10"] .kt-portlet__body {
+        height: 330px !important;
+    }
+
+    .grid-stack-item[data-gs-height="9"] .kt-portlet__body, .grid-stack-item[data-gs-height="8"] .kt-portlet__body, .grid-stack-item[data-gs-height="7"] .kt-portlet__body {
+        height: 290px !important;
+    }
+
+    .grid-stack-item[data-gs-height="6"] .kt-portlet__body, .grid-stack-item[data-gs-height="5"] .kt-portlet__body, .grid-stack-item[data-gs-height="4"] .kt-portlet__body {
+        height: 250px !important;
+    }
+}

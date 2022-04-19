@@ -1,0 +1,82 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.PromoStepDatas
+@model CreateOrEditPromoStepDataModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditPromoStepData")) : L("CreateNewPromoStepData")))
+
+<div class="modal-body">
+        <div id="PromoStepDataInformationsTab">
+            <form name="PromoStepDataInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.PromoStepData.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="PromoStepDescription">@L("PromoStep")</label>
+									    <div class="input-group">
+											<input class="form-control" id="PromoStepDescription" name="promoStepDescription" value="@Model.PromoStepDescription" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenPromoStepLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearPromoStepDescriptionButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="PromoStepData_PromoStepId" value="@Model.PromoStepData.PromoStepId" type="text" name="promoStepId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="PromoStepData_PromoStepId" value="" type="text" name="promoStepId"  hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="PromoPromocode">@L("Promo")</label>
+									    <div class="input-group">
+											<input class="form-control" id="PromoPromocode" name="promoPromocode" value="@Model.PromoPromocode" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenPromoLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearPromoPromocodeButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="PromoStepData_PromoId" value="@Model.PromoStepData.PromoId" type="text" name="promoId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="PromoStepData_PromoId" value="" type="text" name="promoId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="PromoStepData_ConfirmationDate">@L("ConfirmationDate")</label>
+									<input class="form-control m-input date-picker" id="PromoStepData_ConfirmationDate" type="text" name="confirmationDate" value="@Model.PromoStepData.ConfirmationDate"/>
+								</div>
+					
+								<div class="form-group">
+									<label for="PromoStepData_Description">@L("Description")</label>
+									<input class="form-control" id="PromoStepData_Description" value="@Model.PromoStepData.Description" type="text" name="description"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

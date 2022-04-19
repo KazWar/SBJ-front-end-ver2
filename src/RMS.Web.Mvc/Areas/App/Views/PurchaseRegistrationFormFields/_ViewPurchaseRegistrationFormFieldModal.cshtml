@@ -1,0 +1,28 @@
+﻿
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.PurchaseRegistrationFormFields
+@model PurchaseRegistrationFormFieldViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="PurchaseRegistrationFormFieldInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Description") :</h6>
+                @Model.PurchaseRegistrationFormField.Description
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("FormField")) @L("Description") :</h6>
+                @Model.FormFieldDescription
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

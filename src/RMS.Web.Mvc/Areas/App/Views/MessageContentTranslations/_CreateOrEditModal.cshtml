@@ -1,0 +1,76 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.MessageContentTranslations
+@model CreateOrEditMessageContentTranslationModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditMessageContentTranslation")) : L("CreateNewMessageContentTranslation")))
+
+<div class="modal-body">
+        <div id="MessageContentTranslationInformationsTab">
+            <form name="MessageContentTranslationInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.MessageContentTranslation.Id" />
+                }
+
+                <div class="form-group m-form__group">
+                    <label for="LocaleDescription">@L("Locale")</label>
+                    <div class="input-group">
+                        <input class="form-control" id="LocaleDescription" name="localeDescription" value="@Model.LocaleDescription" type="text" disabled>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary blue" id="OpenLocaleLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+                        </div>
+                        <div class="input-group-prepend">
+                            <button class="btn btn-danger btn-icon" type="button" id="ClearLocaleDescriptionButton"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.IsEditMode)
+                {
+                    <input class="form-control" id="MessageContentTranslation_LocaleId" value="@Model.MessageContentTranslation.LocaleId" type="text" name="localeId" required hidden />
+                }
+                else
+                {
+                    <input class="form-control" id="MessageContentTranslation_LocaleId" value="" type="text" name="localeId" required hidden />
+                }
+
+
+                <div class="form-group m-form__group">
+                    <label for="MessageComponentContentContent">@L("MessageComponentContent")</label>
+                    <div class="input-group">
+                        <input class="form-control" id="MessageComponentContentContent" name="messageComponentContentContent" value="@Model.MessageComponentContentContent" type="text" disabled>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary blue" id="OpenMessageComponentContentLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+                        </div>
+                        <div class="input-group-prepend">
+                            <button class="btn btn-danger btn-icon" type="button" id="ClearMessageComponentContentContentButton"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.IsEditMode)
+                {
+                    <input class="form-control" id="MessageContentTranslation_MessageComponentContentId" value="@Model.MessageContentTranslation.MessageComponentContentId" type="text" name="messageComponentContentId" required hidden />
+                }
+                else
+                {
+                    <input class="form-control" id="MessageContentTranslation_MessageComponentContentId" value="" type="text" name="messageComponentContentId" required hidden />
+                }
+
+
+
+
+                <div class="form-group">
+                    <label for="MessageContentTranslation_Content">@L("Content")</label>
+                    <input class="form-control" id="MessageContentTranslation_Content" value="@Model.MessageContentTranslation.Content" type="text" name="content" required />
+                </div>
+
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

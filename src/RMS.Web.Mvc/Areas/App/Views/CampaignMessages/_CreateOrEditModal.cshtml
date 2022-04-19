@@ -1,0 +1,80 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.CampaignMessages
+@model CreateOrEditCampaignMessageModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditCampaignMessage")) : L("CreateNewCampaignMessage")))
+
+<div class="modal-body">
+        <div id="CampaignMessageInformationsTab">
+            <form name="CampaignMessageInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.CampaignMessage.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="CampaignName">@L("Campaign")</label>
+									    <div class="input-group">
+											<input class="form-control" id="CampaignName" name="campaignName" value="@Model.CampaignName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenCampaignLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearCampaignNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="CampaignMessage_CampaignId" value="@Model.CampaignMessage.CampaignId" type="text" name="campaignId" required hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="CampaignMessage_CampaignId" value="" type="text" name="campaignId" required hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="MessageVersion">@L("Message")</label>
+									    <div class="input-group">
+											<input class="form-control" id="MessageVersion" name="messageVersion" value="@Model.MessageVersion" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenMessageLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearMessageVersionButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="CampaignMessage_MessageId" value="@Model.CampaignMessage.MessageId" type="text" name="messageId" required hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="CampaignMessage_MessageId" value="" type="text" name="messageId" required hidden/>
+								}
+
+
+
+				
+								<div class="m-checkbox-list">
+									<label for="CampaignMessage_IsActive" class="kt-checkbox">
+										<input id="CampaignMessage_IsActive" type="checkbox" name="isActive" value="true" @Html.Raw(Model.CampaignMessage.IsActive ?"checked=\"checked\"":"") />
+										@L("IsActive")
+										<span></span>
+									</label>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

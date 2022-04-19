@@ -1,0 +1,48 @@
+{
+  "IsRegenerate": true,
+  "MenuPosition": "main",
+  "RelativeNamespace": "PromoPlanner",
+  "EntityName": "PromoRetailer",
+  "EntityNamePlural": "PromoRetailers",
+  "TableName": "PromoRetailer",
+  "PrimaryKeyType": "long",
+  "BaseClass": "Entity",
+  "EntityHistory": false,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
+  "CreateUserInterface": true,
+  "CreateViewOnly": true,
+  "CreateExcelExport": true,
+  "IsNonModalCRUDPage": false,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [],
+  "NavigationProperties": [
+    {
+      "Namespace": "RMS.PromoPlanner",
+      "ForeignEntityName": "Promo",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "PromoId",
+      "DisplayPropertyName": "Promocode",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "LookupTable"
+    },
+    {
+      "Namespace": "RMS.SBJ.Retailers",
+      "ForeignEntityName": "Retailer",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "RetailerId",
+      "DisplayPropertyName": "Code",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "LookupTable"
+    }
+  ],
+  "EnumDefinitions": [],
+  "DbContext": null
+}

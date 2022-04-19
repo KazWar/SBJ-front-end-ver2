@@ -1,0 +1,59 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.RegistrationJsonDatas
+@model CreateOrEditRegistrationJsonDataModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditRegistrationJsonData")) : L("CreateNewRegistrationJsonData")))
+
+<div class="modal-body">
+        <div id="RegistrationJsonDataInformationsTab">
+            <form name="RegistrationJsonDataInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.RegistrationJsonData.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="RegistrationFirstName">@L("Registration")</label>
+									    <div class="input-group">
+											<input class="form-control" id="RegistrationFirstName" name="registrationFirstName" value="@Model.RegistrationFirstName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenRegistrationLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearRegistrationFirstNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="RegistrationJsonData_RegistrationId" value="@Model.RegistrationJsonData.RegistrationId" type="text" name="registrationId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="RegistrationJsonData_RegistrationId" value="" type="text" name="registrationId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="RegistrationJsonData_Data">@L("Data")</label>
+									<input class="form-control" id="RegistrationJsonData_Data" value="@Model.RegistrationJsonData.Data" type="text" name="data"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="RegistrationJsonData_DateCreated">@L("DateCreated")</label>
+									<input class="form-control m-input date-picker" id="RegistrationJsonData_DateCreated" type="text" name="dateCreated" value="@Model.RegistrationJsonData.DateCreated"/>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

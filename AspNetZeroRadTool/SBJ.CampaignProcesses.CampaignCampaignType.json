@@ -1,0 +1,68 @@
+{
+  "IsRegenerate": false,
+  "MenuPosition": "main",
+  "RelativeNamespace": "SBJ.CampaignProcesses",
+  "EntityName": "CampaignCampaignType",
+  "EntityNamePlural": "CampaignCampaignTypes",
+  "TableName": "CampaignCampaignType",
+  "PrimaryKeyType": "long",
+  "BaseClass": "FullAuditedEntity",
+  "EntityHistory": true,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
+  "CreateUserInterface": true,
+  "CreateViewOnly": true,
+  "CreateExcelExport": true,
+  "IsNonModalCRUDPage": false,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [
+    {
+      "Name": "Description",
+      "Type": "string",
+      "MaxLength": -1,
+      "MinLength": -1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0.0,
+        "MaximumValue": 0.0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      }
+    }
+  ],
+  "NavigationProperties": [
+    {
+      "Namespace": "RMS.SBJ.CampaignProcesses",
+      "ForeignEntityName": "Campaign",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "CampaignId",
+      "DisplayPropertyName": "Description",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "Dropdown"
+    },
+    {
+      "Namespace": "RMS.SBJ.CodeTypeTables",
+      "ForeignEntityName": "CampaignType",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "CampaignTypeId",
+      "DisplayPropertyName": "Name",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "Dropdown"
+    }
+  ],
+  "EnumDefinitions": [],
+  "DbContext": null
+}

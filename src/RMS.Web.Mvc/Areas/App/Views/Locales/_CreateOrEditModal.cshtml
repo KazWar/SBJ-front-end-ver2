@@ -1,0 +1,49 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.Locales
+@model CreateOrEditLocaleModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditLocale")) : L("CreateNewLocale")))
+
+<div class="modal-body">
+        <div id="LocaleInformationsTab">
+            <form name="LocaleInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Locale.Id" />
+                }
+
+				            
+						<div class="form-group">
+							<label for="countryId">@L("Country")</label>
+							@Html.DropDownList("countryId", new SelectList(Model.LocaleCountryList,"Id","DisplayName", (Model.IsEditMode ? Model.Locale.CountryId.ToString() : "")),@L("SelectACountry"), new { @class = "form-control"  , @required="required" })
+						</div>
+
+
+				
+								<div class="form-group">
+									<label for="Locale_LanguageCode">@L("LanguageCode")</label>
+									<input class="form-control" id="Locale_LanguageCode" value="@Model.Locale.LanguageCode" type="text" name="languageCode"  required  maxlength="@RMS.SBJ.CodeTypeTables.LocaleConsts.MaxLanguageCodeLength"  minlength="@RMS.SBJ.CodeTypeTables.LocaleConsts.MinLanguageCodeLength"  pattern="@RMS.SBJ.CodeTypeTables.LocaleConsts.LanguageCodeRegex" />
+								</div>
+					
+								<div class="form-group">
+									<label for="Locale_Description">@L("Description")</label>
+									<input class="form-control" id="Locale_Description" value="@Model.Locale.Description" type="text" name="description"  required    />
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="Locale_IsActive" class="kt-checkbox">
+										<input id="Locale_IsActive" type="checkbox" name="isActive" value="true" @Html.Raw(Model.Locale.IsActive ?"checked=\"checked\"":"") />
+										@L("IsActive")
+										<span></span>
+									</label>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

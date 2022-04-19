@@ -1,0 +1,68 @@
+{
+  "IsRegenerate": false,
+  "MenuPosition": "main",
+  "RelativeNamespace": "PromoPlanner",
+  "EntityName": "PromoStepFieldData",
+  "EntityNamePlural": "PromoStepFieldDatas",
+  "TableName": "PromoStepFieldData",
+  "PrimaryKeyType": "int",
+  "BaseClass": "FullAuditedEntity",
+  "EntityHistory": false,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
+  "CreateUserInterface": true,
+  "CreateViewOnly": true,
+  "CreateExcelExport": true,
+  "IsNonModalCRUDPage": false,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [
+    {
+      "Name": "Value",
+      "Type": "string",
+      "MaxLength": -1,
+      "MinLength": -1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0,
+        "MaximumValue": 0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      }
+    }
+  ],
+  "NavigationProperties": [
+    {
+      "Namespace": "RMS.PromoPlanner",
+      "ForeignEntityName": "PromoStepField",
+      "IdType": "int",
+      "IsNullable": true,
+      "PropertyName": "PromoStepFieldId",
+      "DisplayPropertyName": "Description",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "LookupTable"
+    },
+    {
+      "Namespace": "RMS.PromoPlanner",
+      "ForeignEntityName": "PromoStepData",
+      "IdType": "int",
+      "IsNullable": true,
+      "PropertyName": "PromoStepDataId",
+      "DisplayPropertyName": "Description",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "LookupTable"
+    }
+  ],
+  "EnumDefinitions": [],
+  "DbContext": null
+}

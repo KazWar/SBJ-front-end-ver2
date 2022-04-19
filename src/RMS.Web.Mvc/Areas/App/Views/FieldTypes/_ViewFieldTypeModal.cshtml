@@ -1,0 +1,20 @@
+﻿@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.FieldTypes
+
+@model FieldTypeViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="FieldTypeInformationsTab">
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Description") :</h6>
+                @Model.FieldType.Description
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

@@ -1,0 +1,34 @@
+﻿@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.FormBlocks
+@model FormBlockViewModel
+@{ 
+    var Description = ViewBag.Description;
+} 
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel("Set Form Block Fields for " + Description))
+
+<link href="~/Common/Styles/SBJ/dual-list.min.css" rel="stylesheet" asp-append-version="true" />
+
+<div class="modal-body">
+
+    <select class="formFieldDualList" data-formBlockId="@Model.FormBlock.Id" multiple>
+
+        <!--Specific form block fields-->
+        <!--Selected Form Fields-->
+        @foreach (var item in Model.SelectedFormBlockFields)
+        {
+            <option value="@item.FormBlockField.FormFieldId" selected>@item.FormFieldDescription</option>
+        }
+
+        <!--Available/Unselected FormFields-->
+        @foreach (var item in Model.UnSelectedFormBlockFields)
+        {
+            <option value="@item.FormField.Id">@item.FormField.Description</option>
+        }
+        <!--End Specific form block fields-->
+    </select>
+
+    <script src="~/lib/dual-List/dual-listbox.js"></script>
+    <script src="~/view-resources/Areas/App/Views/FormBlocks/_ChooseFormFieldsModal.js"></script>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

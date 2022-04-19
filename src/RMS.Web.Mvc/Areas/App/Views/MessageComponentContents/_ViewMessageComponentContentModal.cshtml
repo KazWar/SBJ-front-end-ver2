@@ -1,0 +1,32 @@
+﻿
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.MessageComponentContents
+@model MessageComponentContentViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="MessageComponentContentInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Content") :</h6>
+                @Model.MessageComponentContent.Content
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("MessageComponent")) @L("IsActive") :</h6>
+                @Model.MessageComponentIsActive
+            </div>
+            <div class="col-6 mb-3">
+                <h6>(@L("CampaignTypeEventRegistrationStatus")) @L("SortOrder") :</h6>
+                @Model.CampaignTypeEventRegistrationStatusSortOrder
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

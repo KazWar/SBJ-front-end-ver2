@@ -1,0 +1,50 @@
+{
+  "IsRegenerate": true,
+  "MenuPosition": "",
+  "RelativeNamespace": "SBJ.PurchaseRegistrationFieldDatas",
+  "EntityName": "PurchaseRegistrationFieldData",
+  "EntityNamePlural": "PurchaseRegistrationFieldDatas",
+  "TableName": "PurchaseRegistrationFieldData",
+  "PrimaryKeyType": "long",
+  "BaseClass": "Entity",
+  "EntityHistory": false,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
+  "CreateUserInterface": false,
+  "CreateViewOnly": false,
+  "CreateExcelExport": false,
+  "IsNonModalCRUDPage": false,
+  "IsMasterDetailPage": false,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [],
+  "NavigationProperties": [
+    {
+      "Namespace": "RMS.SBJ.PurchaseRegistrationFormFields",
+      "ForeignEntityName": "PurchaseRegistrationFormField",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "PurchaseRegistrationFormFieldId",
+      "DisplayPropertyName": "Description",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "LookupTable"
+    },
+    {
+      "Namespace": "RMS.SBJ.PurchaseRegistrations",
+      "ForeignEntityName": "PurchaseRegistration",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "PurchaseRegistrationId",
+      "DisplayPropertyName": "InvoiceImage",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "LookupTable"
+    }
+  ],
+  "NavigationPropertyOneToManyTables": [],
+  "EnumDefinitions": [],
+  "DbContext": null
+}

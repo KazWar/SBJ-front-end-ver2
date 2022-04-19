@@ -1,0 +1,82 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.ListValueTranslations
+@model CreateOrEditListValueTranslationModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditListValueTranslation")) : L("CreateNewListValueTranslation")))
+
+<div class="modal-body">
+        <div id="ListValueTranslationInformationsTab">
+            <form name="ListValueTranslationInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.ListValueTranslation.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="ListValueKeyValue">@L("ListValue")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ListValueKeyValue" name="listValueKeyValue" value="@Model.ListValueKeyValue" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenListValueLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearListValueKeyValueButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="ListValueTranslation_ListValueId" value="@Model.ListValueTranslation.ListValueId" type="text" name="listValueId" required hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="ListValueTranslation_ListValueId" value="" type="text" name="listValueId" required hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="LocaleLanguageCode">@L("Locale")</label>
+									    <div class="input-group">
+											<input class="form-control" id="LocaleLanguageCode" name="localeLanguageCode" value="@Model.LocaleLanguageCode" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenLocaleLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearLocaleLanguageCodeButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="ListValueTranslation_LocaleId" value="@Model.ListValueTranslation.LocaleId" type="text" name="localeId" required hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="ListValueTranslation_LocaleId" value="" type="text" name="localeId" required hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="ListValueTranslation_KeyValue">@L("KeyValue")</label>
+									<input class="form-control" id="ListValueTranslation_KeyValue" value="@Model.ListValueTranslation.KeyValue" type="text" name="keyValue"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="ListValueTranslation_Description">@L("Description")</label>
+									<input class="form-control" id="ListValueTranslation_Description" value="@Model.ListValueTranslation.Description" type="text" name="description"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

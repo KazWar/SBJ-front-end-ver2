@@ -1,0 +1,67 @@
+﻿@using RMS.Web.Areas.App.Startup
+@using RMS.Web.Areas.App.Models.EmployeePerformanceReports
+
+@model EmployeePerformanceReportViewModel
+
+@{
+    ViewBag.CurrentPageName = AppPageNames.Common.EmployeePerformanceReport;
+}
+
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/App/Views/EmployeePerformanceReport/Index.js" asp-append-version="true"></script>
+}
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+
+    <div class="kt-subheader kt-grid__item">
+        <div class="@(await GetContainerClass())">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <span>@L("EmployeePerformanceReport")</span>
+                </h3>
+            </div>
+            <div class="kt-subheader__toolbar">
+                <div class="kt-subheader__wrapper">
+                    <button id="ExportToExcelButton" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="@(await GetContainerClass()) kt-grid__item kt-grid__item--fluid">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__body">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="StartDateFilterId">@L("StartDate")</label>
+                            <label class="float-right" for="EndDateFilterId">@L("EndDateUpTo")</label>
+                            <div class="input-group">
+                                <input class="form-control m-input date-picker" type="text" placeholder="@L("MinValue")" id="StartDateFilterId">
+                                <span style="line-height: 40px;padding: 0 15px 0 15px;"> &mdash; </span>
+                                <input class="form-control m-input date-picker" type="text" placeholder="@L("MaxValue")" id="EndDateFilterId">
+                            </div>
+                            <span class="input-group-btn">
+                                <button id="GetEmployeePerformanceReportButton" class="btn btn-primary" type="submit">@L("Refresh")</button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <table id="EmployeePerformanceReportTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap">
+                        <thead>
+                            <tr>
+
+                                <th>@L("AbpUserId")</th>
+                                <th>@L("UserName")</th>
+                                <th>@L("Date")</th>
+                                <th>@L("Count")</th>
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

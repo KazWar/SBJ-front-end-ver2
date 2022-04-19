@@ -1,0 +1,11 @@
+﻿#CampaignTypeIdList, #LocaleIdList {
+    font-size: 16px !important;
+}
+
+#CampaignTypeIdList :first-child {
+    margin-top: 0.8rem !important;
+}
+
+#LocaleIdList :first-child {
+    margin-top: 0.8rem !important;
+}

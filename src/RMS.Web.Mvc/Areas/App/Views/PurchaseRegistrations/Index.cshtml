@@ -1,0 +1,148 @@
+﻿@using RMS.Authorization
+@using RMS.Web.Areas.App.Models.PurchaseRegistrations
+@using RMS.Web.Areas.App.Startup
+@model PurchaseRegistrationsViewModel
+@{
+    ViewBag.CurrentPageName = AppPageNames.Common.PurchaseRegistrations;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/App/Views/PurchaseRegistrations/Index.js" asp-append-version="true"></script>
+}
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+
+
+                <div class="kt-subheader kt-grid__item">
+                  <div class="@(await GetContainerClass())">
+                    <div class="kt-subheader__main">
+                        <h3 class="kt-subheader__title">
+                            <span>@L("PurchaseRegistrations")</span>
+                        </h3>
+                        <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                        <span class="kt-subheader__desc">
+                            @L("PurchaseRegistrationsHeaderInfo")
+                        </span>
+                    </div>
+                    <div class="kt-subheader__toolbar">
+                        <div class="kt-subheader__wrapper">
+                            <button id="ExportToExcelButton" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+            @if (IsGranted(AppPermissions.Pages_PurchaseRegistrations_Create))
+                            {
+                                <a href="\App\PurchaseRegistrations\CreateOrEdit" class="btn btn-primary blue"><i class="fa fa-plus"></i> @L("CreateNewPurchaseRegistration")</a>                
+                            }
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            
+<div class="@(await GetContainerClass()) kt-grid__item kt-grid__item--fluid">   
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__body">
+            <div class="kt-form">
+                <div class="row align-items-center mb-4">
+                    <div class="col-xl-12">
+                        <div class="form-group align-items-center">
+                            <div class="input-group">
+                                <input type="text" id="PurchaseRegistrationsTableFilter" class="form-control m-input" placeholder="@L("SearchWithThreeDot")" value="@Model.FilterText">
+                                <span class="input-group-btn">
+                                    <button id="GetPurchaseRegistrationsButton" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+                <div id="AdvacedAuditFiltersArea" style="display: none" class="row mb-4">
+                    <div class="col-md-12">
+						<div class="kt-separator kt-separator--border-dashed"></div>
+					</div>
+
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinQuantityFilterId">@L("MinMax") @L("Quantity")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minQuantityFilter" id="MinQuantityFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxQuantityFilter"  id="MaxQuantityFilterId"/>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinTotalAmountFilterId">@L("MinMax") @L("TotalAmount")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minTotalAmountFilter" id="MinTotalAmountFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxTotalAmountFilter"  id="MaxTotalAmountFilterId"/>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                    <div class="form-group">
+										<label for="MinPurchaseDateFilterId">@L("PurchaseDateRange")</label>
+										<div class="input-group">
+											<input class="form-control m-input date-picker" type="text" placeholder="@L("MinValue")"  id="MinPurchaseDateFilterId">
+											<span style="line-height: 40px;padding: 0 15px 0 15px;"> &mdash; </span>
+											<input class="form-control m-input date-picker" type="text" placeholder="@L("MaxValue")"  id="MaxPurchaseDateFilterId">
+										</div>
+									</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="InvoiceImageFilterId">@L("InvoiceImage")</label>
+									<input type="text" class="form-control" name="invoiceImageFilter" id="InvoiceImageFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="RegistrationFirstNameFilterId">(@L("Registration")) @L("FirstName")</label>
+									<input type="text" class="form-control" name="registrationFirstNameFilter" id="RegistrationFirstNameFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="ProductCtnFilterId">(@L("Product")) @L("Ctn")</label>
+									<input type="text" class="form-control" name="productCtnFilter" id="ProductCtnFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="HandlingLineCustomerCodeFilterId">(@L("HandlingLine")) @L("CustomerCode")</label>
+									<input type="text" class="form-control" name="handlingLineCustomerCodeFilter" id="HandlingLineCustomerCodeFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="RetailerLocationNameFilterId">(@L("RetailerLocation")) @L("Name")</label>
+									<input type="text" class="form-control" name="retailerLocationNameFilter" id="RetailerLocationNameFilterId">
+								</div>
+                            </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xl-12">
+                        <span id="ShowAdvancedFiltersSpan" class="text-muted clickable-item"><i class="fa fa-angle-down"></i> @L("ShowAdvancedFilters")</span>
+                        <span id="HideAdvancedFiltersSpan" class="text-muted clickable-item" style="display: none"><i class="fa fa-angle-up"></i> @L("HideAdvancedFilters")</span>
+                    </div>
+                </div>
+            <div class="row align-items-center">
+                <table id="PurchaseRegistrationsTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            
+                            <th>@L("Actions")</th>
+								<th>@L("Quantity")</th>
+								<th>@L("TotalAmount")</th>
+								<th>@L("PurchaseDate")</th>
+								<th>@L("InvoiceImage")</th>
+								<th>@L("RegistrationFirstName")</th>
+								<th>@L("ProductCtn")</th>
+								<th>@L("HandlingLineCustomerCode")</th>
+								<th>@L("RetailerLocationName")</th>
+                            
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

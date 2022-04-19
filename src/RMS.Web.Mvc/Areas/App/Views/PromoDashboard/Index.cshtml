@@ -1,0 +1,62 @@
+﻿@using RMS.Web.Areas.App.Startup
+@model RMS.Web.Models.PowerBI.EmbedConfig
+@{
+    ViewBag.CurrentPageName = AppPageNames.Common.PromoDashboard;
+}
+@section Styles{
+    <link href='/lib/powerbi/powerbi.css' rel='stylesheet' />
+}
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+    <div class="kt-subheader kt-grid__item">
+        <div class="kt-container ">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <span>@L("Dashboard")</span>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="dashboardcontainer kt-grid__item kt-grid__item--fluid">
+        <div id='promodashboard'></div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src='/lib/powerbi/powerbi.min.js'></script>
+    <script>
+        // Read embed application token from Model
+        var accessToken = '@Model.EmbedToken.Token';
+
+        // Read embed URL from Model
+        var embedUrl = '@Html.Raw(Model.EmbedUrl)';
+
+        // Read report Id from Model
+        var embedReportId = '@Model.Id';
+
+        // Get models. models contains enums that can be used.
+        var models = window['powerbi-client'].models;
+
+        // Embed configuration used to describe the what and how to embed.
+        // This object is used when calling powerbi.embed.
+        // This also includes settings and options such as filters.
+        // You can find more information at https://github.com/Microsoft/PowerBI-JavaScript/wiki/Embed-Configuration-Details.
+        var config = {
+            type: 'report',
+            tokenType: models.TokenType.Embed,
+            accessToken: accessToken,
+            embedUrl: embedUrl,
+            id: embedReportId,
+            permissions: models.Permissions.All,
+            settings: {
+                filterPaneEnabled: false,
+                navContentPaneEnabled: true
+            }
+        };
+
+        // Get a reference to the embedded report HTML element
+        var reportContainer = document.getElementById('promodashboard');
+
+        // Embed the report and display it within the div container.
+        var report = powerbi.embed(reportContainer, config);
+    </script>
+}

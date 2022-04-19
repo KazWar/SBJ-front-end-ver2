@@ -1,0 +1,40 @@
+﻿@using RMS.Web.Areas.App.Models.Campaigns
+@model CampaignViewModel
+
+<head>
+    <script src="~/view-resources/Areas/App/Views/Campaigns/_CampaignMessage.js"></script>
+</head>
+
+<body>
+    <div id="dvCampaignMessages">
+        <div class="@(await GetContainerClass()) kt-grid__item kt-grid__item--fluid">
+            <div class="row">
+                <div class="kt-portlet kt-portlet--mobile">
+                    <div class="kt-portlet__body">
+                        @if (Model.Locales.Count() > 0)
+                        {
+                            <!--Add Localization text-->
+                            <label>Locale</label>
+                            <select class="campaignMessageLocale">
+                                <!--Add Localization text-->
+                                <option hidden disabled selected>Select a Locale</option>
+                                @foreach (var item in Model.Locales)
+                                {
+                                    <option value="@item.Locale.Id.ToString()" data-localeId="@item.Locale.Id" data-campaignId="@Model.Campaign.Id">@item.Locale.Description</option>
+                                }
+                            </select>
+                        }
+                        else
+                        {
+                            <!--Add Localization text-->
+                            <label>There are no Campaign Locales currently.</label>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!--Add styles to .css file-->
+            <div id="dvMessageComponentContentTable" style="display:none"></div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,38 @@
+﻿@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.MessageComponentContents
+@model CreateOrEditMessageComponentContentModalEntityViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewMessageComponentContent")))
+
+<div class="modal-body">
+    <div id="MessageComponentContentInformationsTab">
+        <form name="MessageComponentContentInformationsForm" role="form" novalidate class="form-validation">
+            <div class="form-group">
+                @if (Model.Messaging?.Count() > 0)
+                {
+                    <div class="wrapper__tiles">
+                        @foreach (var item in Model.Messaging)
+                        {
+                            <div class="user-interaction__tile" data-id="@item.CampaignTypeEventRegistrationStatus.CampaignTypeEventRegistrationStatus.Id">
+                                <h1 class="tile__title">@item.CampaignTypeEvent.CampaignTypeName</h1>
+                                <h5 class="tile__process-event">@item.CampaignTypeEvent.ProcessEventName</h5>
+                                <p class="tile__registration-status">
+                                    @item.RegistrationStatusDescription
+                                </p>
+                                <p class="tile__identifier">ID: @item.CampaignTypeEventRegistrationStatus.CampaignTypeEventRegistrationStatus.Id</p>
+                            </div>
+                        }
+                    </div>
+                    <div id="chooseMessageType__tiles"></div>
+
+                    <div id="editor__container"></div>
+                }
+                else {
+                    @L("There are no campaign type event registration statuses.")
+                }
+            </div>
+        </form>
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

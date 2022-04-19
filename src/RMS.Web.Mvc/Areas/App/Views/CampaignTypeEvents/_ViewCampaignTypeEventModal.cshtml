@@ -1,0 +1,32 @@
+
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.CampaignTypeEvents
+@model CampaignTypeEventViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="CampaignTypeEventInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("SortOrder") :</h6>
+                @Model.CampaignTypeEvent.SortOrder
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("CampaignType")) @L("Name") :</h6>
+                @Model.CampaignTypeName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>(@L("ProcessEvent")) @L("Name") :</h6>
+                @Model.ProcessEventName
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

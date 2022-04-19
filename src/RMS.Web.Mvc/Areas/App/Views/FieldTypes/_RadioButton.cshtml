@@ -1,0 +1,69 @@
+﻿@model RMS.SBJ.Registrations.Dtos.ProcessRegistration.FormField
+@{
+    var disableLabel = (bool)ViewData["DisableLabel"];
+}
+
+@if (Model.FieldLineId.HasValue)
+{
+    @if (!disableLabel)
+    {
+        <label style="float: left; width: 100%;" for="@("Line" + Model.FieldType + "__" + Model.FieldLineId.Value.ToString() + Model.FieldId.ToString())">@Model.FieldLabel</label>
+    }
+
+    <div class="input-group">
+        <div class="input-group-prepend" style="float: left; width: auto;">
+            <label class="switch switch__registration-approval">
+                <input id="@("LineFieldRejected__" + Model.FieldType + "__" + Model.FieldLineId.Value.ToString() + Model.FieldId.ToString())" type="checkbox" checked="@(!Model.IsRejected)" disabled="@Model.IsReadOnly">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="input-group radio-group" style="float: left; width: 90%; margin-top: 0.5%;">
+            @foreach (var fieldValue in Model.FieldListValues)
+            {
+                <div style="float: left; width: 100%; margin-bottom: 0.5%;">
+                    @if (fieldValue.KeyValue == Model.FieldValue)
+                    {
+                        <input style="float: left; width: 3%;" name="@("Line" + Model.FieldType + "__" + Model.FieldLineId.Value.ToString() + Model.FieldId.ToString())" type="radio" class="form-control field__radio-button" value="@fieldValue.KeyValue" checked="checked" disabled="@Model.IsReadOnly" />
+                    }
+                    else
+                    {
+                        <input style="float: left; width: 3%;" name="@("Line" + Model.FieldType + "__" + Model.FieldLineId.Value.ToString() + Model.FieldId.ToString())" type="radio" class="form-control field__radio-button" value="@fieldValue.KeyValue" disabled="@Model.IsReadOnly" />
+                    }
+                    <label style="float: left;" for="@("Line" + Model.FieldType + "__" + Model.FieldLineId.Value.ToString() + Model.FieldId.ToString())">@fieldValue.Description</label><br>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    @if (!disableLabel)
+    {
+        <label style="float: left; width: 100%;" for="@(Model.FieldType + "__" + Model.FieldId)">@Model.FieldLabel</label>
+    }
+
+    <div class="input-group">
+        <div class="input-group-prepend" style="float: left; width: auto;">
+            <label class="switch switch__registration-approval">
+                <input id="@("FieldRejected__" + Model.FieldType + "__" + Model.FieldId)" type="checkbox" checked="@(!Model.IsRejected)" disabled="@Model.IsReadOnly">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="input-group radio-group" style="float: left; width: 90%; margin-top: 0.5%;">
+            @foreach (var fieldValue in Model.FieldListValues)
+            {
+                <div style="float: left; width: 100%; margin-bottom: 0.5%;">
+                    @if (fieldValue.KeyValue == Model.FieldValue)
+                    {
+                        <input style="float: left; width: 3%;" name="@(Model.FieldType + "__" + Model.FieldId.ToString())" type="radio" class="form-control field__radio-button" value="@fieldValue.KeyValue" checked="checked" disabled="@Model.IsReadOnly" />
+                    }
+                    else
+                    {
+                        <input style="float: left; width: 3%;" name="@(Model.FieldType + "__" + Model.FieldId.ToString())" type="radio" class="form-control field__radio-button" value="@fieldValue.KeyValue" disabled="@Model.IsReadOnly" />
+                    }
+                    <label style="float: left;" for="@(Model.FieldType + "__" + Model.FieldId.ToString())">@fieldValue.Description</label><br>
+                </div>
+            }
+        </div>
+    </div>
+}

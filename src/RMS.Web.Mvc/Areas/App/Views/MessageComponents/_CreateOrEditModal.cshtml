@@ -1,0 +1,78 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.MessageComponents
+@model CreateOrEditMessageComponentModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditMessageComponent")) : L("CreateNewMessageComponent")))
+
+<div class="modal-body">
+        <div id="MessageComponentInformationsTab">
+            <form name="MessageComponentInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.MessageComponent.Id" />
+                }
+
+                <div class="form-group m-form__group">
+                    <label for="MessageTypeName">@L("MessageType")</label>
+                    <div class="input-group">
+                        <input class="form-control" id="MessageTypeName" name="messageTypeName" value="@Model.MessageTypeName" type="text" disabled>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary blue" id="OpenMessageTypeLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+                        </div>
+                        <div class="input-group-prepend">
+                            <button class="btn btn-danger btn-icon" type="button" id="ClearMessageTypeNameButton"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.IsEditMode)
+                {
+                    <input class="form-control" id="MessageComponent_MessageTypeId" value="@Model.MessageComponent.MessageTypeId" type="text" name="messageTypeId" required hidden />
+                }
+                else
+                {
+                    <input class="form-control" id="MessageComponent_MessageTypeId" value="" type="text" name="messageTypeId" required hidden />
+                }
+
+
+                <div class="form-group m-form__group">
+                    <label for="MessageComponentTypeName">@L("MessageComponentType")</label>
+                    <div class="input-group">
+                        <input class="form-control" id="MessageComponentTypeName" name="messageComponentTypeName" value="@Model.MessageComponentTypeName" type="text" disabled>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary blue" id="OpenMessageComponentTypeLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+                        </div>
+                        <div class="input-group-prepend">
+                            <button class="btn btn-danger btn-icon" type="button" id="ClearMessageComponentTypeNameButton"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.IsEditMode)
+                {
+                    <input class="form-control" id="MessageComponent_MessageComponentTypeId" value="@Model.MessageComponent.MessageComponentTypeId" type="text" name="messageComponentTypeId" required hidden />
+                }
+                else
+                {
+                    <input class="form-control" id="MessageComponent_MessageComponentTypeId" value="" type="text" name="messageComponentTypeId" required hidden />
+                }
+
+
+
+                <div class="m-checkbox-list">
+                    <label for="MessageComponent_IsActive" class="kt-checkbox">
+                        <input id="MessageComponent_IsActive" type="checkbox" name="isActive" value="true" @Html.Raw(Model.MessageComponent.IsActive ? "checked=\"checked\"" : "") />
+                        @L("IsActive")
+                        <span></span>
+                    </label>
+                </div>
+
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

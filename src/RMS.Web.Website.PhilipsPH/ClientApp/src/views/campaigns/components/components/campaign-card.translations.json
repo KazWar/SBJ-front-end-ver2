@@ -1,0 +1,20 @@
+{
+    "en_gb": {
+        "campaign-card":{
+            "operational-date":"The campaign is active from: {startDate} to {endDate}"
+        }
+    },
+
+    "be_fr":{
+        "campaign-card":{
+            "operational-date":"The campaign is active from: {startDate} to {endDate}"
+        }
+    },
+
+    "be_nl":{
+        "campaign-card":{
+            "operational-date":"Deze campagne is actief van: {startDate} tot {endDate}"
+        }
+    }
+}
+  

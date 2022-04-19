@@ -1,0 +1,16 @@
+﻿@using Abp.Application.Services.Dto; 
+
+<div class="kt-form form__editors d-none">
+    @foreach (var messageComponent in ((PagedResultDto<RMS.SBJ.CampaignProcesses.Dtos.GetMessageComponentForViewDto>)Model).Items)
+    {
+        <h4 class="heading--small">Settings for @messageComponent.MessageTypeName</h4>
+
+        <h5 class="heading--small">@messageComponent.MessageComponentTypeName</h5>
+
+        <h5 class="heading--small">@messageComponent.MessageTypeName @messageComponent.MessageComponentTypeName</h5>
+        <div class="template__@messageComponent.MessageComponentTypeName.ToLower()"></div>
+        <hr />
+    }
+
+    <button id="message-component-contents__save-button" type="submit" class="btn btn-primary" onclick="saveEditorContentsAndPostToController(campaignTypeEventRegistrationStatusId)"><i class="fa fa-check"></i> Save</button>
+</div>

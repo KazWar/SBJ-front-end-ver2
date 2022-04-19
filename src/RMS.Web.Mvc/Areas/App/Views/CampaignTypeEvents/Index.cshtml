@@ -1,0 +1,105 @@
+@using RMS.Authorization
+@using RMS.Web.Areas.App.Models.CampaignTypeEvents
+@using RMS.Web.Areas.App.Startup
+@model CampaignTypeEventsViewModel
+@{
+    ViewBag.CurrentPageName = AppPageNames.Common.CampaignTypeEvents;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/App/Views/CampaignTypeEvents/Index.js" asp-append-version="true"></script>
+}
+
+@section Styles
+{
+    <link href="~/Common/Styles/SBJ/kanban.min.css" rel="stylesheet" asp-append-version="true"/>
+}
+
+<div id="campaignTypeEventsModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div id="modal-body" class="modal-body">
+                <p>Changes saved successfully!</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-modal" type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page-wrapper--campaignTypeEvents" class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+    <div class="kt-subheader kt-grid__item">
+        <div class="@(await GetContainerClass())">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <span>@L("CampaignTypeEvents")</span>
+                </h3>
+                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                <span class="kt-subheader__desc">
+                    @L("CampaignTypeEventsHeaderInfo")
+                </span>
+            </div>
+            <div class="kt-subheader__toolbar">
+                <div class="kt-subheader__wrapper">
+                    <button id="ExportToExcelButton" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-wrapper--content">
+        <div class="kt-portlet">
+            <div class="kt-portlet__body">
+                <ul id="tabs" class="nav nav-pills nav-fill " role="tablist">
+                    @if (Model.CampaignTypes.TotalCount > 0)
+                    {
+                        @for (int i = 0; i < Model.CampaignTypes.Items.Count; i++)
+                        {
+                            if (i == 0)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="@Model.CampaignTypes.Items[i].CampaignType.Id" data-toggle="tab" href="#pane-@Model.CampaignTypes.Items[0].CampaignType.Id">@Model.CampaignTypes.Items[0].CampaignType.Name</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" id="@Model.CampaignTypes.Items[i].CampaignType.Id" data-toggle="tab" href="#pane-@Model.CampaignTypes.Items[i].CampaignType.Id">@Model.CampaignTypes.Items[i].CampaignType.Name</a>
+                                </li>
+                            }
+                        }
+                    }
+                </ul>
+                <div class="kt-portlet__body">
+                    <div class="tab-content">
+                        @for (int i = 0; i < Model.CampaignTypes.Items.Count; i++)
+                        {
+                            if (i == 0)
+                            {
+                                <div class="tab-pane active" id="pane-@Model.CampaignTypes.Items[0].CampaignType.Id" role="tabpanel"></div>
+                            }
+                            else
+                            {
+                                <div class="tab-pane" id="pane-@Model.CampaignTypes.Items[i].CampaignType.Id" role="tabpanel"></div>
+                            }
+                        }
+
+                        <div id="kanbanProcessEvent"></div>
+                        <br />
+                        <div id="kanbanRegistrationStatuses"></div>
+                        <br />
+                        <button id="1" class="SaveEvents">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+                crossorigin="anonymous"></script>
+        <script src="~/lib/kanban/kanban.js"></script>
+        <script src="~/lib/kanban/CampaignTypeEvents.js"></script>
+    </div>
+    
+</div><!-- #page-wrapper--campaignTypeEvents -->

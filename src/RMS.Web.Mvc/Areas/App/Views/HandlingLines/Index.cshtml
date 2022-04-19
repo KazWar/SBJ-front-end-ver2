@@ -1,0 +1,161 @@
+﻿@using RMS.Authorization
+@using RMS.Web.Areas.App.Models.HandlingLines
+@using RMS.Web.Areas.App.Startup
+@model HandlingLinesViewModel
+@{
+    ViewBag.CurrentPageName = AppPageNames.Common.HandlingLines;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/App/Views/HandlingLines/Index.js" asp-append-version="true"></script>
+}
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+
+
+                <div class="kt-subheader kt-grid__item">
+                  <div class="@(await GetContainerClass())">
+                    <div class="kt-subheader__main">
+                        <h3 class="kt-subheader__title">
+                            <span>@L("HandlingLines")</span>
+                        </h3>
+                        <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                        <span class="kt-subheader__desc">
+                            @L("HandlingLinesHeaderInfo")
+                        </span>
+                    </div>
+                    <div class="kt-subheader__toolbar">
+                        <div class="kt-subheader__wrapper">
+                            <button id="ExportToExcelButton" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+            @if (IsGranted(AppPermissions.Pages_HandlingLines_Create))
+                            {
+                                <a href="\App\HandlingLines\CreateOrEdit" class="btn btn-primary blue"><i class="fa fa-plus"></i> @L("CreateNewHandlingLine")</a>                
+                            }
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            
+<div class="@(await GetContainerClass()) kt-grid__item kt-grid__item--fluid">   
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__body">
+            <div class="kt-form">
+                <div class="row align-items-center mb-4">
+                    <div class="col-xl-12">
+                        <div class="form-group align-items-center">
+                            <div class="input-group">
+                                <input type="text" id="HandlingLinesTableFilter" class="form-control m-input" placeholder="@L("SearchWithThreeDot")" value="@Model.FilterText">
+                                <span class="input-group-btn">
+                                    <button id="GetHandlingLinesButton" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+                <div id="AdvacedAuditFiltersArea" style="display: none" class="row mb-4">
+                    <div class="col-md-12">
+						<div class="kt-separator kt-separator--border-dashed"></div>
+					</div>
+
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinMinimumPurchaseAmountFilterId">@L("MinMax") @L("MinimumPurchaseAmount")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minMinimumPurchaseAmountFilter" id="MinMinimumPurchaseAmountFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxMinimumPurchaseAmountFilter"  id="MaxMinimumPurchaseAmountFilterId"/>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinMaximumPurchaseAmountFilterId">@L("MinMax") @L("MaximumPurchaseAmount")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minMaximumPurchaseAmountFilter" id="MinMaximumPurchaseAmountFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxMaximumPurchaseAmountFilter"  id="MaxMaximumPurchaseAmountFilterId"/>
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="CustomerCodeFilterId">@L("CustomerCode")</label>
+									<input type="text" class="form-control" name="customerCodeFilter" id="CustomerCodeFilterId">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinAmountFilterId">@L("MinMax") @L("Amount")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minAmountFilter" id="MinAmountFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxAmountFilter"  id="MaxAmountFilterId"/>
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<label for="FixedFilterId">@L("Fixed")</label>
+								<select class="form-control" name="FixedFilter" id="FixedFilterId">
+									<option value="-1">@L("All")</option>
+									<option value="0">@L("False")</option>
+									<option value="1">@L("True")</option>
+								</select>
+                            </div>
+							<div class="col-md-3">
+								<label for="ActivationCodeFilterId">@L("ActivationCode")</label>
+								<select class="form-control" name="ActivationCodeFilter" id="ActivationCodeFilterId">
+									<option value="-1">@L("All")</option>
+									<option value="0">@L("False")</option>
+									<option value="1">@L("True")</option>
+								</select>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinQuantityFilterId">@L("MinMax") @L("Quantity")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minQuantityFilter" id="MinQuantityFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxQuantityFilter"  id="MaxQuantityFilterId"/>
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="CampaignTypeNameFilterId">(@L("CampaignType")) @L("Name")</label>
+									<input type="text" class="form-control" name="campaignTypeNameFilter" id="CampaignTypeNameFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="ProductHandlingDescriptionFilterId">(@L("ProductHandling")) @L("Description")</label>
+									<input type="text" class="form-control" name="productHandlingDescriptionFilter" id="ProductHandlingDescriptionFilterId">
+								</div>
+                            </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xl-12">
+                        <span id="ShowAdvancedFiltersSpan" class="text-muted clickable-item"><i class="fa fa-angle-down"></i> @L("ShowAdvancedFilters")</span>
+                        <span id="HideAdvancedFiltersSpan" class="text-muted clickable-item" style="display: none"><i class="fa fa-angle-up"></i> @L("HideAdvancedFilters")</span>
+                    </div>
+                </div>
+            <div class="row align-items-center">
+                <table id="HandlingLinesTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            
+                            <th>@L("Actions")</th>
+								<th>@L("MinimumPurchaseAmount")</th>
+								<th>@L("MaximumPurchaseAmount")</th>
+								<th>@L("CustomerCode")</th>
+								<th>@L("Amount")</th>
+								<th>@L("Fixed")</th>
+								<th>@L("ActivationCode")</th>
+								<th>@L("Quantity")</th>
+								<th>@L("CampaignTypeName")</th>
+								<th>@L("ProductHandlingDescription")</th>
+                            
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

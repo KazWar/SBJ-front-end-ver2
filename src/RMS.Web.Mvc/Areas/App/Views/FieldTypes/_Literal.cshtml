@@ -1,0 +1,13 @@
+﻿@model RMS.SBJ.Registrations.Dtos.ProcessRegistration.FormField
+@{
+    var disableLabel = (bool)ViewData["DisableLabel"];
+}
+
+@if (!disableLabel)
+{
+    <label>@Model.FieldLabel</label>
+}
+
+<div class="input-group">
+    <h4>@Model.FieldValue</h4>
+</div>

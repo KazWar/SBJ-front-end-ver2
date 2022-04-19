@@ -1,0 +1,36 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.Countries
+@model CreateOrEditCountryModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditCountry")) : L("CreateNewCountry")))
+
+<div class="modal-body">
+        <div id="CountryInformationsTab">
+            <form name="CountryInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Country.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="Country_CountryCode">@L("CountryCode")</label>
+									<input class="form-control" id="Country_CountryCode" value="@Model.Country.CountryCode" type="text" name="countryCode"  required  maxlength="@RMS.SBJ.CodeTypeTables.CountryConsts.MaxCountryCodeLength"  minlength="@RMS.SBJ.CodeTypeTables.CountryConsts.MinCountryCodeLength"  pattern="@RMS.SBJ.CodeTypeTables.CountryConsts.CountryCodeRegex" />
+								</div>
+					
+								<div class="form-group">
+									<label for="Country_Description">@L("Description")</label>
+									<input class="form-control" id="Country_Description" value="@Model.Country.Description" type="text" name="description"  required    />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

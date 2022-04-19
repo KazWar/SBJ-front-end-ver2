@@ -1,0 +1,19 @@
+﻿@model RMS.SBJ.Registrations.Dtos.ProcessRegistration.FormField
+@{
+    var disableLabel = (bool)ViewData["DisableLabel"];
+}
+
+@if (!disableLabel)
+{
+    <label for="@(Model.FieldLabel + Model.FieldId)">@Model.FieldLabel</label>
+}
+
+<div class="input-group">
+    <div class="input-group-prepend">
+        <label class="switch switch__registration-approval">
+            <input id="@("FieldRejected__" + Model.FieldType + "__" + Model.FieldId)" type="checkbox" checked="@(!Model.IsRejected)" disabled="@Model.IsReadOnly">
+            <span class="slider round"></span>
+        </label>
+    </div>
+    <input id="@(Model.FieldLabel + Model.FieldId)" type="text" class="form-control text-field" value="@Model.FieldValue" disabled="@Model.IsReadOnly" />
+</div>
