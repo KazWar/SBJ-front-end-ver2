@@ -1,0 +1,20 @@
+{
+    "en_gb": {
+        "campaigns":{
+            "title":"Campaigns overview"
+        }
+    },
+
+    "be_fr": {
+        "campaigns":{
+            "title":"Aperçu de la campagne"
+        }
+    },
+
+    "be_nl": {
+        "campaigns":{
+            "title":"Campagneoverzicht"
+        }
+    }
+}
+  

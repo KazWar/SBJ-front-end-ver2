@@ -1,0 +1,28 @@
+﻿
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.Forms
+@model FormViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="FormInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Version") :</h6>
+                @Model.Form.Version
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("SystemLevel")) @L("Description") :</h6>
+                @Model.SystemLevelDescription
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

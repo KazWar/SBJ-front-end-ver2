@@ -1,0 +1,274 @@
+﻿@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.Promos
+@using RMS.Web.Areas.App.Startup
+@model CreateOrEditPromoViewModel
+@{
+    ViewBag.CurrentPageName = AppPageNames.Common.Promos;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/App/Views/Promos/CreateOrEdit.js" asp-append-version="true"></script>
+}
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+    <div class="kt-subheader kt-grid__item">
+        <div class="@(await GetContainerClass())">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    @if (Model.IsEditMode)
+                    {
+                        <span>@L("EditPromo")</span>
+                    }
+                    else
+                    {
+                        <span>@L("CreateNewPromo")</span>
+                    }
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="@(await GetContainerClass()) kt-grid__item kt-grid__item--fluid">
+        <div class="kt-portlet">
+            <div class="kt-portlet__body">
+                <form name="PromoInformationsForm" role="form" novalidate class="form-validation">
+
+                    @if (Model.IsEditMode)
+                    {
+                        <input type="hidden" name="id" value="@Model.Promo.Id" />
+                    }
+
+                    <div class="form-group m-form__group">
+                        <label for="PromoScopeDescription">@L("PromoScope")</label>
+                        <div class="input-group">
+                            <input class="form-control" id="PromoScopeDescription" name="promoScopeDescription" value="@Model.PromoScopeDescription" type="text" disabled>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary blue" id="OpenPromoScopeLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+                            </div>
+                            <div class="input-group-prepend">
+                                <button class="btn btn-danger btn-icon" type="button" id="ClearPromoScopeDescriptionButton"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model.IsEditMode)
+                    {
+                        <input class="form-control" id="Promo_PromoScopeId" value="@Model.Promo.PromoScopeId" type="text" name="promoScopeId" required hidden />
+                    }
+                    else
+                    {
+                        <input class="form-control" id="Promo_PromoScopeId" value="" type="text" name="promoScopeId" required hidden />
+                    }
+
+                    <div class="form-group m-form__group">
+                        <label for="CampaignTypeName">@L("CampaignType")</label>
+                        <div class="input-group">
+                            <input class="form-control" id="CampaignTypeName" name="campaignTypeName" value="@Model.CampaignTypeName" type="text" disabled>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary blue" id="OpenCampaignTypeLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+                            </div>
+                            <div class="input-group-prepend">
+                                <button class="btn btn-danger btn-icon" type="button" id="ClearCampaignTypeNameButton"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model.IsEditMode)
+                    {
+                        <input class="form-control" id="Promo_CampaignTypeId" value="@Model.Promo.CampaignTypeId" type="text" name="campaignTypeId" required hidden />
+                    }
+                    else
+                    {
+                        <input class="form-control" id="Promo_CampaignTypeId" value="" type="text" name="campaignTypeId" required hidden />
+                    }
+
+                    <div class="form-group m-form__group">
+                        <label for="ProductCategoryDescription">@L("ProductCategory")</label>
+                        <div class="input-group">
+                            <input class="form-control" id="ProductCategoryDescription" name="productCategoryDescription" value="@Model.ProductCategoryDescription" type="text" disabled>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary blue" id="OpenProductCategoryLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+                            </div>
+                            <div class="input-group-prepend">
+                                <button class="btn btn-danger btn-icon" type="button" id="ClearProductCategoryDescriptionButton"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model.IsEditMode)
+                    {
+                        <input class="form-control" id="Promo_ProductCategoryId" value="@Model.Promo.ProductCategoryId" type="text" name="productCategoryId" required hidden />
+                    }
+                    else
+                    {
+                        <input class="form-control" id="Promo_ProductCategoryId" value="" type="text" name="productCategoryId" required hidden />
+                    }
+
+                    <div class="form-group">
+                        <label for="Promo_Promocode">@L("Promocode")</label>
+                        <input class="form-control" id="Promo_Promocode" value="@Model.Promo.Promocode" type="text" name="promocode" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Promo_Description">@L("Description")</label>
+                        <input class="form-control" id="Promo_Description" value="@Model.Promo.Description" type="text" name="description" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Promo_PromoStart">@L("PromoStart")</label>
+                        <div class="controls" style="position: relative">
+                            <input class="form-control m-input date-picker" id="Promo_PromoStart" type="text" name="promoStart" value="@Model.Promo.PromoStart" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Promo_PromoEnd">@L("PromoEnd")</label>
+                        <div class="controls" style="position: relative">
+                            <input class="form-control m-input date-picker" id="Promo_PromoEnd" type="text" name="promoEnd" value="@Model.Promo.PromoEnd" />
+                        </div>
+                    </div>
+
+                    <!-- Products -->
+
+                    <div class="form-group">
+                        <label for="Promo_Products">@L("Products")</label> &nbsp; 
+                        <button class="btn btn-sm" id="OpenProductLookupTableButton" type="button"><i class="fa fa-plus"></i></button>
+                        <input type="hidden" id="Promo_PromoProducts" name="PromoProducts">
+                        <ul id="PromoProductList" class="list-group">
+                            @if (Model.IsEditMode)
+                            {
+                                @foreach (var promoProduct in Model.PromoProducts)
+                                {
+                                    <li class="list-group-item">
+                                        @promoProduct.Description (@promoProduct.CtnCode) &nbsp;
+                                        <button class="btn btn-sm" type="button" onclick="$(this).parent('li').remove();"><i class="fa fa-minus"></i></button>
+                                        <input type="hidden" name="ProductId" value="@promoProduct.ProductId" />
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Promo_Retailers">@L("Retailers")</label> &nbsp;
+                        <button class="btn btn-sm" id="OpenRetailerLookupTableButton" type="button"><i class="fa fa-plus"></i></button>
+                        <input type="hidden" id="Promo_PromoRetailers" name="PromoRetailers">
+                        <ul id="PromoRetailerList" class="list-group">
+                            @if (Model.IsEditMode)
+                            {
+                                @foreach (var promoRetailer in Model.PromoRetailers)
+                                {
+                                    <li class="list-group-item">
+                                        @promoRetailer.RetailerName (@promoRetailer.RetailerCode) &nbsp;<button class="btn btn-secondary" type="button" onclick="$(this).parent('li').remove();"><i class="fa fa-minus"></i></button>
+                                        <input type="hidden" name="RetailerId" value="@promoRetailer.RetailerId" />
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Promo_Countries">@L("Countries")</label> &nbsp;
+                        <button class="btn btn-sm" id="OpenCountryLookupTableButton" type="button"><i class="fa fa-plus"></i></button>
+                        <input type="hidden" id="Promo_PromoCountries" name="PromoCountries">
+                        <ul id="PromoCountryList" class="list-group">
+                            @if (Model.IsEditMode)
+                            {
+                                @foreach (var promoCountry in Model.PromoCountries)
+                                {
+                                    <li class="list-group-item">
+                                        @promoCountry.CountryName (@promoCountry.CountryCode) &nbsp;<button class="btn btn-secondary" type="button" onclick="$(this).parent('li').remove();"><i class="fa fa-minus"></i></button>
+                                        <input type="hidden" name="CountryId" value="@promoCountry.CountryId" />
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="form-group">
+                        @if (Model.IsEditMode && Model.PromoSteps.Count() > 0 && Model.PromoSteps.Last().Status == "in progress")
+                        {
+                            <div>
+                                @L("PromoSteps") &nbsp;
+                                <button style="display: none" class="btn btn-sm" id="InsertNextPromoStepTableButton" type="button"><i class="fa fa-plus"></i></button>
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                @L("PromoSteps") &nbsp;
+                                <button class="btn btn-sm" id="InsertNextPromoStepTableButton" type="button"><i class="fa fa-plus"></i></button>
+                            </div>
+                        }
+                        <input type="hidden" id="Promo_PromoSteps" name="PromoSteps">
+                        <table id="PromoStepTable" class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">@L("No.")</th>
+                                    <th scope="col">@L("PromoStepAndFields")</th>
+                                    <th scope="col">@L("Status")</th>
+                                    <th scope="col">@L("Actions")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.IsEditMode)
+                                {
+                                    @foreach (var promoStep in Model.PromoSteps)
+                                    {
+                                        <tr>
+                                            <td scope="row">@promoStep.Sequence&#46;<input type="hidden" name="StepId" value="@promoStep.StepId" /></td>
+                                            <td>
+                                                @promoStep.Description Hi
+
+                                                <ul class="list-group">
+                                                    @foreach (var promoStepField in promoStep.PromoStepFields)
+                                                    {
+                                                        @if (promoStep.Status == "in progress")
+                                                        {
+                                                            <li class="list-group-item">
+                                                                @promoStepField.FieldName :<br />
+                                                                <input class="form-control" name="FieldValue" value="@promoStepField.FieldValue" type="text" />
+                                                                <input type="hidden" name="FieldId" value="@promoStepField.FieldId" />
+                                                            </li>
+                                                        }
+                                                        else
+                                                        {
+                                                            @if (promoStepField.FieldValue != "")
+                                                            {
+                                                                <li class="list-group-item">
+                                                                    @promoStepField.FieldName :<br />
+                                                                    <label name="FieldValue">@promoStepField.FieldValue</label>
+                                                                    <input type="hidden" name="FieldId" value="@promoStepField.FieldId" />
+                                                                </li>
+                                                            }
+                                                        }
+                                                    }
+                                                </ul>
+                                            </td>
+                                            <td>@promoStep.Status</td>
+                                            <td>
+                                                @if (promoStep.Status == "in progress")
+                                                {
+                                                    <button class="btn btn-secondary" type="button" onclick="removePromoStep(this)"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn btn-secondary" type="button" onclick="finishPromoStep(this)"><i class="fa fa-check"></i></button>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </form>
+            </div>
+            <div class="kt-portlet__foot">
+                <div class="row align-items-center">
+                    <div class="col-md-12 kt-align-right pr-5">
+                        <button id="CancelButton" type="button" class="btn btn-secondary close-button">@L("Cancel")</button>
+                        <button id="SaveButton" type="button" class="btn btn-primary save-button"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

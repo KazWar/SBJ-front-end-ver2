@@ -1,0 +1,64 @@
+﻿@using RMS.Web.Areas.App.Startup
+@using RMS.Web.Areas.App.Models.HandlingBatches
+
+@model HandlingBatchViewModel
+@{ ViewBag.CurrentPageName = AppPageNames.Common.HandlingBatches; }
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/App/Views/HandlingBatches/CreateOrEdit.js" asp-append-version="true"></script>
+}
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+
+    <div class="kt-subheader kt-grid__item">
+        <div class="@(await GetContainerClass())">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <span>@L("Details")</span>
+                </h3>
+                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                <div class="kt-subheader__breadcrumbs">
+                    <a href="/App/HandlingBatches" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i>&thinsp;@L("HandlingBatches")</a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="javascript:;" class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">
+                        @L("Details")
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="@(await GetContainerClass()) kt-grid__item kt-grid__item--fluid">
+        <div class="kt-portlet kt-portlet--mobile ">
+            <div class="kt-portlet__body ">
+                <div id="HandlingBatchInformationsTab">
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <h6>@L("DateCreated") :</h6>
+                            @Model.HandlingBatch.DateCreated
+                        </div>
+                        <div class="col-6 mb-3">
+                            <h6>@L("Remarks") :</h6>
+                            @Model.HandlingBatch.Remarks
+                        </div>
+                        <div class="col-6 mb-3">
+                            <h6>(@L("CampaignType")) @L("Name") :</h6>
+                            @Model.CampaignTypeName
+                        </div>
+                        <div class="col-6 mb-3">
+                            <h6>(@L("HandlingBatchStatus")) @L("StatusDescription") :</h6>
+                            @Model.HandlingBatchStatusStatusDescription
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-portlet__foot">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <button type="button" id="goBackBtn" class="btn btn-secondary float-right mr-3 ml-3">@L("GoBack")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

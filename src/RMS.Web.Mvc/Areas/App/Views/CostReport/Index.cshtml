@@ -1,0 +1,107 @@
+﻿@using RMS.Web.Areas.App.Startup
+@using RMS.Web.Areas.App.Models.CostReport
+
+@model CostReportViewModel
+
+@{
+    ViewBag.CurrentPageName = AppPageNames.Common.CostReport;
+}
+
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/App/Views/CostReport/Index.js" asp-append-version="true"></script>
+}
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+
+    <div class="kt-subheader kt-grid__item">
+    <div class="@(await GetContainerClass())">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                <span>@L("CostReport")</span>
+            </h3>
+        </div>
+        <div class="kt-subheader__toolbar">
+            <div class="kt-subheader__wrapper">
+                <button id="ExportToExcelButton" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="@(await GetContainerClass()) kt-grid__item kt-grid__item--fluid">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__body">
+                <div class="row align-items-center">
+                    <div class="row mb-4">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="CampaignDescriptionFilterId">@L("CampaignDescription")</label>
+                                <select id="CampaignDescriptionFilterId" class="form-control dropdown"></select>
+                            </div>
+                            <span class="input-group-btn">
+                                <button id="GetCostReportButton" class="btn btn-primary" type="submit">@L("Refresh")</button>
+                            </span>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="StartDateFilterId">@L("StartDate")</label>
+                            <label class="float-right" for="EndDateFilterId">@L("EndDate")</label>
+                            <div class="input-group">
+                                <input class="form-control m-input date-picker" type="text" placeholder="@L("MinValue")" id="StartDateFilterId">
+                                <span style="line-height: 40px;padding: 0 15px 0 15px;"> &mdash; </span>
+                                <input class="form-control m-input date-picker" type="text" placeholder="@L("MaxValue")" id="EndDateFilterId">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="CostReportInformation">
+                        <table cellpadding="5" class="table-striped">
+                            <tbody>
+                                <tr>
+                                    <td><h6>@L("CampaignCode") :</h6></td>
+                                    <td><label id="CampaignCodeLabel"> - </label></td>
+                                </tr>
+                                <tr>
+                                    <td><h6>@L("CampaignName") :</h6></td>
+                                    <td><label id="CampaignNameLabel"> - </label></td>
+                                </tr>
+                                <tr>
+                                    <td><h6>@L("Campaign") @L("StartDate") :</h6></td>
+                                    <td><label id="CampaignStartDateLabel"> - </label></td>
+                                </tr>
+                                <tr>
+                                    <td><h6>@L("Campaign") @L("EndDate") :</h6></td>
+                                    <td><label id="CampaignEndDateLabel"> - </label></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+
+                    <table id="CostReportTable" class="display table table-striped table-bordered table-hover dt-responsive">
+                        <thead>
+                            <tr>
+
+                                <th>@L("Year")</th>
+                                <th>@L("Month")</th>
+                                <th>@L("NewRegistrations")</th>
+                                <th>@L("CompleteRegistrations")</th>
+                                <th>@L("ExtraHandling")</th>
+                                <th>@L("PaymentBatches")</th>
+                                <th>@L("PaymentsSent")</th>
+                                <th>@L("ActivationCodeBatches")</th>
+                                <th>@L("ActivationCodesSent")</th>
+                                <th>@L("PremiumBatches")</th>
+                                <th>@L("PremiumsSent")</th>
+
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr><th></th><th>@L("Total") : </th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

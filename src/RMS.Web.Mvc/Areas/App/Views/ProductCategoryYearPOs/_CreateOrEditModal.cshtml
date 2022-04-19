@@ -1,0 +1,64 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.ProductCategoryYearPOs
+@model CreateOrEditProductCategoryYearPOModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditProductCategoryYearPO")) : L("CreateNewProductCategoryYearPO")))
+
+<div class="modal-body">
+        <div id="ProductCategoryYearPOInformationsTab">
+            <form name="ProductCategoryYearPOInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.ProductCategoryYearPO.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="ProductCategoryCode">@L("ProductCategory")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ProductCategoryCode" name="productCategoryCode" value="@Model.ProductCategoryCode" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenProductCategoryLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearProductCategoryCodeButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="ProductCategoryYearPO_ProductCategoryId" value="@Model.ProductCategoryYearPO.ProductCategoryId" type="text" name="productCategoryId" required hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="ProductCategoryYearPO_ProductCategoryId" value="" type="text" name="productCategoryId" required hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="ProductCategoryYearPO_Year">@L("Year")</label>
+									<input class="form-control m-input" id="ProductCategoryYearPO_Year" value="@Model.ProductCategoryYearPO.Year.ToString(CultureInfo.InvariantCulture)" type="number" name="year"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductCategoryYearPO_PONumberHandling">@L("PoNumberHandling")</label>
+									<input class="form-control" id="ProductCategoryYearPO_PONumberHandling" value="@Model.ProductCategoryYearPO.PONumberHandling" type="text" name="poNumberHandling"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductCategoryYearPO_PONumberCashback">@L("PoNumberCashback")</label>
+									<input class="form-control" id="ProductCategoryYearPO_PONumberCashback" value="@Model.ProductCategoryYearPO.PONumberCashback" type="text" name="poNumberCashback"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

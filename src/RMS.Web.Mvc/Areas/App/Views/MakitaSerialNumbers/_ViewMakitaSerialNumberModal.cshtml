@@ -1,0 +1,32 @@
+﻿
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.MakitaSerialNumbers
+@model MakitaSerialNumberViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="MakitaSerialNumberInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("ProductCode") :</h6>
+                @Model.MakitaSerialNumber.ProductCode
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("SerialNumber") :</h6>
+                @Model.MakitaSerialNumber.SerialNumber
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("RetailerExternalCode") :</h6>
+                @Model.MakitaSerialNumber.RetailerExternalCode
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

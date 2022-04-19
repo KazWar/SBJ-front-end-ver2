@@ -1,0 +1,6 @@
+﻿@model RMS.Web.Areas.App.Models.PromoCountries.CountrySelectionViewModel
+    <div class="form-group mt-5 mb-0">
+        <h4><label for="Promo_Countries" class="mb-0">@L("Countries")</label></h4>
+
+        <select class="form-control" name="availableCountries" id="countries" asp-items="ViewBag.AvailableCountries" multiple></select>
+    </div>

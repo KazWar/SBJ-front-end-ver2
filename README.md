@@ -1,29 +1,15 @@
-# README #
+# Development of RMS 2.0
+This repo is for developing RMS 2.0
 
-This README would normally document whatever steps are necessary to get your application up and running. test
+# Getting started
+To get this repo started clone it to your computer.
+Make sure yarn is installed on your computer (https://yarnpkg.com/) you can check this on the commandline (in administration mode) pressing yarn -v
+Then go to the directory where RMS2.0 RMS.Web.Mvc is located:
+RMS2.0/src/RMS.Web.Mvc
+there simply type yarn then all the dependent packages will be installed
+after this has finished type in yarn create-bundles
+The css and javascript  files will be created
 
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+Open the solution RMS.Web.sln
+Set RMS.Web.Mvc as your StartUp Project
+Then build the solution

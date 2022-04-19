@@ -1,0 +1,157 @@
+﻿@using RMS.Authorization
+@using RMS.SBJ.Registrations.Helpers
+@using RMS.Web.Areas.App.Models.Registrations
+@using RMS.Web.Areas.App.Startup
+@model RegistrationsViewModel
+@{
+    ViewBag.CurrentPageName = AppPageNames.Common.Registrations;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/App/Views/Registrations/Index.js" asp-append-version="true"></script>
+}
+@section Styles
+{
+     <link rel="stylesheet" abp-href="/Common/Styles/SBJ/pages.min.css" asp-append-version="true" />
+}
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+    <div class="kt-subheader kt-grid__item">
+        <div class="@(await GetContainerClass())">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <span>@L("Registrations")</span>
+                </h3>
+                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                <span class="kt-subheader__desc">
+                    @L("RegistrationsHeaderInfo")
+                </span>
+            </div>
+            <div class="kt-subheader__toolbar">
+                <div class="kt-subheader__wrapper">
+                    @*<button id="ExportToExcelButton" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+                    @if (IsGranted(AppPermissions.Pages_Registrations_Create))
+                    {
+                        <a href="\App\Registrations\CreateOrEdit" class="btn btn-primary blue"><i class="fa fa-plus"></i> @L("CreateNewRegistration")</a>
+                    }*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="@(await GetContainerClass()) kt-grid__item kt-grid__item--fluid">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__body">
+                <div class="kt-form">
+                    <div class="row align-items-center mb-4">
+                        <div class="col-xl-12">
+                            <div class="form-group align-items-center">
+                                <div class="input-group">
+                                    <input type="text" id="RegistrationsTableFilter" class="form-control m-input" placeholder="@L("SearchWithThreeDot")" value="@Model.FilterText">
+                                    <span class="input-group-btn">
+                                        <button id="GetRegistrationsButton" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="AdvacedAuditFiltersArea" style="display: none" class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="kt-separator kt-separator--border-dashed"></div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="FirstNameFilterId">@L("FirstName")</label>
+                            <input type="text" class="form-control" name="firstNameFilter" id="FirstNameFilterId">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="LastNameFilterId">@L("LastName")</label>
+                            <input type="text" class="form-control" name="lastNameFilter" id="LastNameFilterId">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="CityFilterId">@L("City")</label>
+                            <input type="text" class="form-control" name="cityFilter" id="CityFilterId">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="EmailAddressFilterId">@L("EmailAddress")</label>
+                            <input type="text" class="form-control" name="emailAddressFilter" id="EmailAddressFilterId">
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="ActiveCampaignsOnlyFilterId" class="form-inline">@L("OnlyActiveCampaigns")</label>
+                            <input type="checkbox" class="form-control" style="width:25px" name="activeCampaignsOnlyFilter" id="ActiveCampaignsOnlyFilterId" checked>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="CampaignDescriptionFilterId">@L("CampaignDescription")</label>
+                            <select id="CampaignDescriptionFilterId" class="form-control dropdown" name="campaignDescriptionFilter">
+                                <option value="-1">@L("Any")</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="SerialNumberFilterId">@L("SerialNumber")</label>
+                            <input type="text" class="form-control" name="serialNumberFilter" id="SerialNumberFilterId" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="RegistrationStatusFilterId">@L("RegistrationStatus")</label>
+                            <select id="RegistrationStatusFilterId" class="form-control dropdown">
+                                @foreach (var registrationStatus in Model.RegistrationStatuses.Items)
+                                {
+                                    if (registrationStatus.RegistrationStatus.StatusCode == RegistrationStatusCodeHelper.Pending)
+                                    {
+                                        <option value="@registrationStatus.RegistrationStatus.Id" selected>@registrationStatus.RegistrationStatus.Description</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@registrationStatus.RegistrationStatus.Id">@registrationStatus.RegistrationStatus.Description</option>
+                                    } 
+                                }
+                                <option value="-1">@L("Any")</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="button" id="ResetFilter" class="btn btn-primary float-right">@L("ResetFilter")</button>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xl-12">
+                        <span id="ShowAdvancedFiltersSpan" class="text-muted clickable-item"><i class="fa fa-angle-down"></i> @L("ShowAdvancedFilters")</span>
+                        <span id="HideAdvancedFiltersSpan" class="text-muted clickable-item" style="display: none"><i class="fa fa-angle-up"></i> @L("HideAdvancedFilters")</span>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <table id="RegistrationsTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap">
+                        <thead>
+                            <tr>
+                                <th>@L("Actions")</th>
+                                <th></th>
+                                <th class="sorting_disabled">@L("ExternalCode")</th>
+                                <th class="sorting_disabled">@L("ProductCode")</th>
+                                <th class="sorting_disabled">@L("RegistrationId")</th>
+                                <th class="sorting_disabled">@L("FirstName")</th>
+                                <th class="sorting_disabled">@L("LastName")</th>
+                                <th class="sorting_disabled">@L("City")</th>
+                                <th class="sorting_disabled">@L("EmailAddress")</th>
+                                <th class="sorting_disabled">@L("DateCreated")</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

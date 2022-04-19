@@ -1,0 +1,119 @@
+﻿
+@using System.Globalization
+@using RMS.Authorization
+@using RMS.Web.Areas.App.Models.RetailerLocations
+@using RMS.Web.Areas.App.Startup
+@model CreateOrEditRetailerLocationViewModel
+
+@{
+    ViewBag.CurrentPageName = AppPageNames.Common.RetailerLocations;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/App/Views/RetailerLocations/CreateOrEdit.js" asp-append-version="true"></script>
+}
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"> 
+
+
+                <div class="kt-subheader kt-grid__item">
+                  <div class="@(await GetContainerClass())">
+                    <div class="kt-subheader__main">
+                        <h3 class="kt-subheader__title">
+                            <span>@(Model.IsEditMode ? (L("EditRetailerLocation")) : L("CreateNewRetailerLocation"))</span>
+                        </h3>
+                        <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                        <div class="kt-subheader__breadcrumbs">
+                            <a href="/App/RetailerLocations" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i>&thinsp;@L("RetailerLocations")</a>
+                            <span class="kt-subheader__breadcrumbs-separator"></span>
+                            <a href="javascript:;" class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">
+                               @(Model.IsEditMode ? (L("Edit")) : L("Create"))
+                            </a>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            
+
+<div class="@(await GetContainerClass()) kt-grid__item kt-grid__item--fluid">
+    <div class="kt-portlet kt-portlet--mobile">
+        <form name="RetailerLocationInformationsForm" role="form" novalidate class="form-validation">
+            <div class="kt-portlet__body">
+                <div class="kt-form">
+                     <div id="RetailerLocationInformationsTab">   
+                            @if (Model.IsEditMode)
+                            {
+                                <input type="hidden" name="id" value="@Model.RetailerLocation.Id" />
+                            }
+
+				                        
+								<div class="form-group m-form__group">
+										<label for="RetailerName">@L("Retailer")</label>
+									    <div class="input-group">
+											<input class="form-control" id="RetailerName" name="retailerName" value="@Model.RetailerName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenRetailerLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearRetailerNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="RetailerLocation_RetailerId" value="@Model.RetailerLocation.RetailerId" type="text" name="retailerId" required hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="RetailerLocation_RetailerId" value="" type="text" name="retailerId" required hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="AddressAddressLine1">@L("Address")</label>
+									    <div class="input-group">
+											<input class="form-control" id="AddressAddressLine1" name="addressAddressLine1" value="@Model.AddressAddressLine1" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenAddressLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearAddressAddressLine1Button"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="RetailerLocation_AddressId" value="@Model.RetailerLocation.AddressId" type="text" name="addressId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="RetailerLocation_AddressId" value="" type="text" name="addressId"  hidden/>
+								}
+
+
+
+				            
+								<div class="form-group">
+									<label for="RetailerLocation_Name">@L("Name")</label>
+									<input class="form-control" id="RetailerLocation_Name" value="@Model.RetailerLocation.Name" type="text" name="name"  required    />
+								</div>
+					                   
+                    </div>
+			    </div>            
+            </div>
+            <div class="kt-portlet__foot">
+			    <div class="row align-items-center">
+				    <div class="col-lg-12">
+					    <button type="button" id="saveBtn" class="btn btn-success float-right"><i class="fa fa-save"></i> @L("Save")</button>
+					    @if (!Model.IsEditMode)
+                        {
+					        <button type="button" id="saveAndNewBtn" class="btn btn-success float-right"><i class="fa fa-save"></i> @L("SaveAndNew")</button>
+					    }
+				    </div>
+			    </div>
+		    </div>
+         </form>
+    </div>
+  </div>
+</div>

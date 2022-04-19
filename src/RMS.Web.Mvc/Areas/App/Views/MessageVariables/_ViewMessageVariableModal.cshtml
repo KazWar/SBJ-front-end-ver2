@@ -1,0 +1,32 @@
+﻿
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.MessageVariables
+@model MessageVariableViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="MessageVariableInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Description") :</h6>
+                @Model.MessageVariable.Description
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("RmsTable") :</h6>
+                @Model.MessageVariable.RmsTable
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TableField") :</h6>
+                @Model.MessageVariable.TableField
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

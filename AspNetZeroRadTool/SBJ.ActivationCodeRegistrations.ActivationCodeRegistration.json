@@ -1,0 +1,50 @@
+{
+  "IsRegenerate": false,
+  "MenuPosition": null,
+  "RelativeNamespace": "SBJ.ActivationCodeRegistrations",
+  "EntityName": "ActivationCodeRegistration",
+  "EntityNamePlural": "ActivationCodeRegistrations",
+  "TableName": "ActivationCodeRegistration",
+  "PrimaryKeyType": "long",
+  "BaseClass": "Entity",
+  "EntityHistory": false,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
+  "CreateUserInterface": false,
+  "CreateViewOnly": false,
+  "CreateExcelExport": false,
+  "IsNonModalCRUDPage": false,
+  "IsMasterDetailPage": false,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [],
+  "NavigationProperties": [
+    {
+      "Namespace": "RMS.SBJ.ActivationCodes",
+      "ForeignEntityName": "ActivationCode",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "ActivationCodeId",
+      "DisplayPropertyName": "Code",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "LookupTable"
+    },
+    {
+      "Namespace": "RMS.SBJ.Registrations",
+      "ForeignEntityName": "Registration",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "RegistrationId",
+      "DisplayPropertyName": "FirstName",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "LookupTable"
+    }
+  ],
+  "NavigationPropertyOneToManyTables": [],
+  "EnumDefinitions": [],
+  "DbContext": null
+}

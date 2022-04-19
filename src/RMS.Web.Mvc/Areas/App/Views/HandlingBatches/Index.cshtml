@@ -1,0 +1,138 @@
+﻿@using RMS.Authorization
+@using RMS.Web.Areas.App.Models.HandlingBatches
+@using RMS.Web.Areas.App.Startup
+
+@model HandlingBatchesViewModel
+@{ ViewBag.CurrentPageName = AppPageNames.Common.HandlingBatches; }
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/App/Views/HandlingBatches/Index.js" asp-append-version="true"></script>
+}
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+    <div class="kt-subheader kt-grid__item">
+        <div class="@(await GetContainerClass())">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <span>@L("HandlingBatches")</span>
+                </h3>
+                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                <span class="kt-subheader__desc">
+                    @L("HandlingBatchesHeaderInfo")
+                </span>
+            </div>
+            <div class="kt-subheader__toolbar">
+                <div class="kt-subheader__wrapper">
+                    @*<button id="ExportToExcelButton" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="@(await GetContainerClass()) kt-grid__item kt-grid__item--fluid">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__body">
+                <div class="kt-form">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12">
+                            <div class="form-group align-items-center">
+                                <div>
+                                    @if (IsGranted(AppPermissions.Pages_HandlingBatches_Create) && IsGranted(AppPermissions.Pages_HandlingBatches_Edit))
+                                    {
+                                        <input type="hidden" id="WarehouseId" value="@Model.WarehouseId" />
+                                        <input type="hidden" id="OrderUserId" value="@Model.OrderUserId" />
+                                        <input type="hidden" id="Password" value="@Model.Password" />
+                                        <input type="hidden" id="SepaInitiator" value="@Model.SepaInitiator" />
+                                        <a id="CreatePremiumButton" href="\App\HandlingBatches\CreatePremium" class="btn btn-primary blue"><i class="fa fa-plus"></i>@L("CreateNewPremiumBatch")</a>
+                                        <a id="CreateCashRefundButton" href="\App\HandlingBatches\CreateCashRefund" class="btn btn-primary blue"><i class="fa fa-plus"></i>@L("CreateNewCashRefundBatch")</a>
+                                        <a id="CreateActivationCodeButton" href="\App\HandlingBatches\CreateActivationCode" class="btn btn-primary blue"><i class="fa fa-plus"></i>@L("CreateNewActivationCodeBatch")</a>
+                                        <button id="ProcessPremiumsButton" class="btn btn-outline-success">@L("ProcessPremiums")</button>
+                                        <button id="ProcessWarehouseButton" class="btn btn-outline-success">@L("ScanWarehouseStatus")</button>
+                                        <button id="ProcessSendgridButton" class="btn btn-outline-success">@L("ScanSendgridStatus")</button>
+                                        <label id="PremiumResultLabel" style="color:orange;font-weight:bold;margin-left:5px;margin-top:10px;"></label>
+                                    }
+                                </div>
+                                @*<div class="input-group">
+                                    <input type="text" id="HandlingBatchesTableFilter" class="form-control m-input" placeholder="@L("SearchWithThreeDot")" value="@Model.FilterText">
+                                    <span class="input-group-btn">
+                                        <button id="GetHandlingBatchesButton" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                    </span>
+                                </div>*@
+                            </div>
+                            </div>
+                    </div>
+                </div>
+                <div id="AdvancedAuditFiltersArea" style="display: none" class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="kt-separator kt-separator--border-dashed"></div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="CampaignTypeNameFilterId">@L("CampaignTypeName")</label>
+                            <select id="CampaignTypeFilterId" class="form-control dropdown">
+                                <option value="">- Any -</option>
+                                <option value="PM">Premium</option>
+                                <option value="CR">Cash Refund</option>
+                                <option value="AC">Activation Code</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="HandlingBatchStatusStatusDescriptionFilterId">@L("StatusDescription")</label>
+                            <select id="HandlingBatchStatusFilterId" class="form-control dropdown">
+                                <option value="">- Any -</option>
+                                <option value="100">Pending</option>
+                                <option value="200">In Progress</option>
+                                <option value="210">Processed partially with failed orders</option>
+                                <option value="220">Processed partially with blocked lines</option>
+                                <option value="230">Processed partially with failed orders & blocked lines</option>
+                                <option value="240">Unprocessed because of failed orders</option>
+                                <option value="250">Unprocessed because of blocked lines</option>
+                                <option value="260">Unprocessed because of failed orders & blocked lines</option>
+                                <option value="300">Finished</option>
+                                <option value="900">Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="MinDateCreatedFilterId">@L("DateCreated")</label>
+                            <div class="input-group">
+                                <input class="form-control m-input date-picker" type="text" placeholder="@L("MinValue")" id="MinDateCreatedFilterId">
+                                <span style="line-height: 40px;padding: 0 15px 0 15px;"> &mdash; </span>
+                                <input class="form-control m-input date-picker" type="text" placeholder="@L("MaxValue")" id="MaxDateCreatedFilterId">
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="col-md-3">
+                        <div class="form-group">
+                            <label for="RemarksFilterId">@L("Remarks")</label>
+                            <input type="text" class="form-control" name="remarksFilter" id="RemarksFilterId">
+                        </div>
+                    </div>*@
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xl-12">
+                        <span id="ShowAdvancedFiltersSpan" class="text-muted clickable-item"><i class="fa fa-angle-down"></i> @L("ShowAdvancedFilters")</span>
+                        <span id="HideAdvancedFiltersSpan" class="text-muted clickable-item" style="display: none"><i class="fa fa-angle-up"></i> @L("HideAdvancedFilters")</span>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <table id="HandlingBatchesTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap">
+                        <thead>
+                            <tr>
+                                <th>@L("Actions")</th>
+                                <th>ID</th>
+                                <th>@L("CampaignTypeName")</th>
+                                <th>@L("DateCreated")</th>
+                                <th>@L("StatusDescription")</th>
+                                @*<th>@L("Remarks")</th>*@
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

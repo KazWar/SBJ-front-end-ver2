@@ -1,0 +1,31 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.CampaignCategoryTranslations
+@model CreateOrEditCampaignCategoryTranslationModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditCampaignCategoryTranslation")) : L("CreateNewCampaignCategoryTranslation")))
+
+<div class="modal-body">
+        <div id="CampaignCategoryTranslationInformationsTab">
+            <form name="CampaignCategoryTranslationInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.CampaignCategoryTranslation.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="CampaignCategoryTranslation_Name">@L("Name")</label>
+									<input class="form-control" id="CampaignCategoryTranslation_Name" value="@Model.CampaignCategoryTranslation.Name" type="text" name="name"  required    />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

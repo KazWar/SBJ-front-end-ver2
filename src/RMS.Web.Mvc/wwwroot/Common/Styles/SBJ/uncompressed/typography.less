@@ -1,0 +1,61 @@
+﻿@import (css) url('https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap');
+
+@font-face {
+    font-family: 'DINPro Light';
+    font-style: normal;
+    font-weight: normal;
+    src: local('DINPro Light'), url('fonts/DINPro-Light.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'DINPro Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('DINPro Regular'), url('fonts/DINPro-Regular.woff') format('woff');
+}
+
+
+
+@font-face {
+    font-family: 'DINPro Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('DINPro Medium'), url('fonts/DINPro-Medium.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'DINPro Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('DINPro Bold'), url('fonts/DINPro-Bold.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'DINPro Black';
+    font-style: normal;
+    font-weight: normal;
+    src: local('DINPro Black'), url('fonts/DINPro-Black.woff') format('woff');
+}
+
+:root {
+    --font-body: 'DINPro Regular','Lexend Deca', 'Poppins', sans-serif;
+    --font-headings: 'DINPro Bold','Lexend Deca', 'Poppins', sans-serif;
+}
+
+/*html {
+    font-size: 62.5% !important;
+}*/
+
+body, p, label {
+    font-family: var(--font-body);
+}
+
+body {
+    font-size: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headings);
+}

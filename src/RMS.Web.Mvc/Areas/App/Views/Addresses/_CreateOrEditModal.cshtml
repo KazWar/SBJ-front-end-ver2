@@ -1,0 +1,46 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.Addresses
+@model CreateOrEditAddressModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditAddress")) : L("CreateNewAddress")))
+
+<div class="modal-body">
+        <div id="AddressInformationsTab">
+            <form name="AddressInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Address.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="Address_AddressLine1">@L("AddressLine1")</label>
+									<input class="form-control" id="Address_AddressLine1" value="@Model.Address.AddressLine1" type="text" name="addressLine1"  required    />
+								</div>
+					
+								<div class="form-group">
+									<label for="Address_AddressLine2">@L("AddressLine2")</label>
+									<input class="form-control" id="Address_AddressLine2" value="@Model.Address.AddressLine2" type="text" name="addressLine2"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Address_PostalCode">@L("PostalCode")</label>
+									<input class="form-control" id="Address_PostalCode" value="@Model.Address.PostalCode" type="text" name="postalCode"  required  maxlength="@RMS.SBJ.Company.AddressConsts.MaxPostalCodeLength"  minlength="@RMS.SBJ.Company.AddressConsts.MinPostalCodeLength"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Address_City">@L("City")</label>
+									<input class="form-control" id="Address_City" value="@Model.Address.City" type="text" name="city"  required    />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

@@ -1,0 +1,31 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.MessageComponentTypes
+@model CreateOrEditMessageComponentTypeModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditMessageComponentType")) : L("CreateNewMessageComponentType")))
+
+<div class="modal-body">
+        <div id="MessageComponentTypeInformationsTab">
+            <form name="MessageComponentTypeInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.MessageComponentType.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="MessageComponentType_Name">@L("Name")</label>
+									<input class="form-control" id="MessageComponentType_Name" value="@Model.MessageComponentType.Name" type="text" name="name"  required    />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

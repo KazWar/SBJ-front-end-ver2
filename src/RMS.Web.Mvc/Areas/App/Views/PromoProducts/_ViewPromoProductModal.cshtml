@@ -1,0 +1,28 @@
+﻿
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.PromoProducts
+@model PromoProductViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="PromoProductInformationsTab">
+        
+        <div class="row">
+
+            <div class="col-6 mb-3">
+                <h6>(@L("Promo")) @L("Promocode") :</h6>
+                @Model.PromoPromocode
+            </div>
+            <div class="col-6 mb-3">
+                <h6>(@L("Product")) @L("Ctn") :</h6>
+                @Model.ProductCtn
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

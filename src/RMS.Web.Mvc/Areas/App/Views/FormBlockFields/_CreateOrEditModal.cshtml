@@ -1,0 +1,77 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.FormBlockFields
+@model CreateOrEditFormBlockFieldModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditFormBlockField")) : L("CreateNewFormBlockField")))
+
+<div class="modal-body">
+        <div id="FormBlockFieldInformationsTab">
+            <form name="FormBlockFieldInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.FormBlockField.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="FormFieldDescription">@L("FormField")</label>
+									    <div class="input-group">
+											<input class="form-control" id="FormFieldDescription" name="formFieldDescription" value="@Model.FormFieldDescription" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenFormFieldLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearFormFieldDescriptionButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="FormBlockField_FormFieldId" value="@Model.FormBlockField.FormFieldId" type="text" name="formFieldId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="FormBlockField_FormFieldId" value="" type="text" name="formFieldId"  hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="FormBlockDescription">@L("FormBlock")</label>
+									    <div class="input-group">
+											<input class="form-control" id="FormBlockDescription" name="formBlockDescription" value="@Model.FormBlockDescription" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenFormBlockLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearFormBlockDescriptionButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="FormBlockField_FormBlockId" value="@Model.FormBlockField.FormBlockId" type="text" name="formBlockId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="FormBlockField_FormBlockId" value="" type="text" name="formBlockId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="FormBlockField_SortOrder">@L("SortOrder")</label>
+									<input class="form-control m-input" id="FormBlockField_SortOrder" value="@Model.FormBlockField.SortOrder.ToString(CultureInfo.InvariantCulture)" type="number" name="sortOrder"  />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

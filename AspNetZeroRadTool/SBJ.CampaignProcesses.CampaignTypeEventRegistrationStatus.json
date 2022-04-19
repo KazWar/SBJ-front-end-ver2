@@ -1,0 +1,68 @@
+{
+  "IsRegenerate": true,
+  "MenuPosition": "main",
+  "RelativeNamespace": "SBJ.CampaignProcesses",
+  "EntityName": "CampaignTypeEventRegistrationStatus",
+  "EntityNamePlural": "CampaignTypeEventRegistrationStatuses",
+  "TableName": "CampaignTypeEventRegistrationStatus",
+  "PrimaryKeyType": "long",
+  "BaseClass": "FullAuditedEntity",
+  "EntityHistory": true,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
+  "CreateUserInterface": true,
+  "CreateViewOnly": true,
+  "CreateExcelExport": true,
+  "IsMasterDetailPage": false,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [
+    {
+      "Name": "SortOrder",
+      "Type": "int",
+      "MaxLength": -1,
+      "MinLength": -1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0,
+        "MaximumValue": 0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      }
+    }
+  ],
+  "NavigationProperties": [
+    {
+      "Namespace": "RMS.SBJ.CampaignProcesses",
+      "ForeignEntityName": "CampaignTypeEvent",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "CampaignTypeEventId",
+      "DisplayPropertyName": "SortOrder",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": ""
+    },
+    {
+      "Namespace": "RMS.SBJ.CodeTypeTables",
+      "ForeignEntityName": "RegistrationStatus",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "RegistrationStatusId",
+      "DisplayPropertyName": "Description",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": ""
+    }
+  ],
+  "EnumDefinitions": [],
+  "DbContext": null
+}

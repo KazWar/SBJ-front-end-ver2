@@ -1,0 +1,50 @@
+{
+  "IsRegenerate": false,
+  "MenuPosition": null,
+  "RelativeNamespace": "SBJ.HandlingLineLocales",
+  "EntityName": "HandlingLineLocale",
+  "EntityNamePlural": "HandlingLineLocales",
+  "TableName": "HandlingLineLocale",
+  "PrimaryKeyType": "long",
+  "BaseClass": "Entity",
+  "EntityHistory": false,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
+  "CreateUserInterface": false,
+  "CreateViewOnly": false,
+  "CreateExcelExport": false,
+  "IsNonModalCRUDPage": false,
+  "IsMasterDetailPage": false,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [],
+  "NavigationProperties": [
+    {
+      "Namespace": "RMS.SBJ.HandlingLines",
+      "ForeignEntityName": "HandlingLine",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "HandlingLineId",
+      "DisplayPropertyName": "CustomerCode",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "LookupTable"
+    },
+    {
+      "Namespace": "RMS.SBJ.CodeTypeTables",
+      "ForeignEntityName": "Locale",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "LocaleId",
+      "DisplayPropertyName": "LanguageCode",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "LookupTable"
+    }
+  ],
+  "NavigationPropertyOneToManyTables": [],
+  "EnumDefinitions": [],
+  "DbContext": null
+}

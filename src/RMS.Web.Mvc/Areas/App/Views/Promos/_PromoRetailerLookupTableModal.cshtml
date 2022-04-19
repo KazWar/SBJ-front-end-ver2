@@ -1,0 +1,47 @@
+﻿@using RMS.Authorization
+@using RMS.Web.Areas.App.Models.Promos
+@using RMS.Web.Areas.App.Startup
+@using RMS.Web.Areas.App.Models.Common.Modals
+@model PromoRetailerLookupTableViewModel
+
+@section Scripts
+    {
+    <script abp-src="/view-resources/Areas/App/Views/PromoRetailers/_PromoRetailerRetailerLookupTableModal.js" asp-append-version="true"></script>
+}
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("PickRetailer")))
+
+<div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid">
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__body">
+            <div class="kt-form">
+                <div class="row align-items-center mb-4">
+                    <div class="col-xl-12">
+                        <div class="kt-group align-items-center">
+                            <div class="input-group">
+                                <input type="text" id="RetailerTableFilter" class="form-control m-input" placeholder="@L("SearchWithThreeDot")" value="@Model.FilterText">
+                                <input type="hidden" id="FilterId" value="@Model.Id">
+                                <input type="hidden" id="FilterEx" value="@Model.DisplayName">
+                                <span class="input-group-btn">
+                                    <button id="GetRetailerButton" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <table id="RetailerTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>@L("Actions")</th>
+                            <th>@L("Code")</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")

@@ -1,0 +1,36 @@
+﻿
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.PromoStepFields
+@model PromoStepFieldViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="PromoStepFieldInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("FormFieldId") :</h6>
+                @Model.PromoStepField.FormFieldId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Description") :</h6>
+                @Model.PromoStepField.Description
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Sequence") :</h6>
+                @Model.PromoStepField.Sequence
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("PromoStep")) @L("Description") :</h6>
+                @Model.PromoStepDescription
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

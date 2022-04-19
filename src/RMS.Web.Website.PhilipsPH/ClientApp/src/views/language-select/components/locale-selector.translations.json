@@ -1,0 +1,26 @@
+{
+    "en_gb": {
+        "languageSelection":{
+            "selector":{
+                "description": "Choose your language..."
+            }
+        }
+    },
+
+    "be_fr":{
+        "languageSelection":{
+            "selector":{
+                "description": "Choose your language..."
+            }
+        }
+    },
+
+    "be_nl":{
+        "languageSelection":{
+            "selector":{
+                "description": "Choose your language..."
+            }
+        }
+    }
+}
+  

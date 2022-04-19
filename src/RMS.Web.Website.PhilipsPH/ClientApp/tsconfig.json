@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "exactOptionalPropertyTypes": true,
+    "strictNullChecks":true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "useDefineForClassFields": true,
+    "lib": ["esnext", "dom"],
+    "types": ["node", "@intlify/vite-plugin-vue-i18n/lib", "vitest/globals"],
+    "baseUrl": "./src",
+    "paths": {
+      "@/*":["./*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": ["/dist", "node_modules"]
+}

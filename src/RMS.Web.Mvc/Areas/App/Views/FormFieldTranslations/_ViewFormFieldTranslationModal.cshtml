@@ -1,0 +1,40 @@
+﻿
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.FormFieldTranslations
+@model FormFieldTranslationViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="FormFieldTranslationInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Label") :</h6>
+                @Model.FormFieldTranslation.Label
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("DefaultValue") :</h6>
+                @Model.FormFieldTranslation.DefaultValue
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("RegularExpression") :</h6>
+                @Model.FormFieldTranslation.RegularExpression
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("FormField")) @L("Description") :</h6>
+                @Model.FormFieldDescription
+            </div>
+            <div class="col-6 mb-3">
+                <h6>(@L("Locale")) @L("LanguageCode") :</h6>
+                @Model.LocaleLanguageCode
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

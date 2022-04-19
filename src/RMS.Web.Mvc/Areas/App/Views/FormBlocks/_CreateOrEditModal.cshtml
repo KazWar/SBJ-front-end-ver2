@@ -1,0 +1,66 @@
+﻿@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.FormBlocks
+@model CreateOrEditFormBlockModalViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditFormBlock")) : L("CreateNewFormBlock")))
+
+<div class="modal-body">
+        <div id="FormBlockInformationsTab">
+            <form name="FormBlockInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.FormBlock.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="FormLocaleDescription">@L("FormLocale")</label>
+									    <div class="input-group">
+											<input class="form-control" id="FormLocaleDescription" name="formLocaleDescription" value="@Model.FormLocaleDescription" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenFormLocaleLookupTableButton" type="button" disabled><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearFormLocaleDescriptionButton" disabled><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="FormBlock_FormLocaleId" value="@Model.FormBlock.FormLocaleId" type="text" name="formLocaleId" required hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="FormBlock_FormLocaleId" value="" type="text" name="formLocaleId" required hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="FormBlock_Description">@L("Description")</label>
+									<input class="form-control" id="FormBlock_Description" value="@Model.FormBlock.Description" type="text" name="description"     />
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="FormBlock_IsPurchaseRegistration" class="kt-checkbox">
+										<input id="FormBlock_IsPurchaseRegistration" type="checkbox" name="isPurchaseRegistration" value="true" @Html.Raw(Model.FormBlock.IsPurchaseRegistration ?"checked=\"checked\"":"") />
+										@L("IsPurchaseRegistration")
+										<span></span>
+									</label>
+								</div>
+					
+								<div class="form-group" hidden>
+									<label for="FormBlock_SortOrder">@L("SortOrder")</label>
+									<input class="form-control m-input" id="FormBlock_SortOrder" value="0" @*value="@Model.FormBlock.SortOrder.ToString(CultureInfo.InvariantCulture)"*@ type="number" name="sortOrder"   />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

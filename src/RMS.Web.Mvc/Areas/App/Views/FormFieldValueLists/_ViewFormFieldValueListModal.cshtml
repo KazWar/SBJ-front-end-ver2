@@ -1,0 +1,32 @@
+﻿
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.FormFieldValueLists
+@model FormFieldValueListViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="FormFieldValueListInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("PossibleListValues") :</h6>
+                @Model.FormFieldValueList.PossibleListValues
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("FormField")) @L("Description") :</h6>
+                @Model.FormFieldDescription
+            </div>
+            <div class="col-6 mb-3">
+                <h6>(@L("ValueList")) @L("Description") :</h6>
+                @Model.ValueListDescription
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

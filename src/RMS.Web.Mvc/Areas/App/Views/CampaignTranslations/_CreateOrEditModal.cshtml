@@ -1,0 +1,82 @@
+﻿
+@using System.Globalization
+@using RMS.Web.Areas.App.Models.Common.Modals
+@using RMS.Web.Areas.App.Models.CampaignTranslations
+@model CreateOrEditCampaignTranslationModalViewModel
+@using Abp.Extensions
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditCampaignTranslation")) : L("CreateNewCampaignTranslation")))
+
+<div class="modal-body">
+        <div id="CampaignTranslationInformationsTab">
+            <form name="CampaignTranslationInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.CampaignTranslation.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="CampaignName">@L("Campaign")</label>
+									    <div class="input-group">
+											<input class="form-control" id="CampaignName" name="campaignName" value="@Model.CampaignName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenCampaignLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearCampaignNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="CampaignTranslation_CampaignId" value="@Model.CampaignTranslation.CampaignId" type="text" name="campaignId" required hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="CampaignTranslation_CampaignId" value="" type="text" name="campaignId" required hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="LocaleDescription">@L("Locale")</label>
+									    <div class="input-group">
+											<input class="form-control" id="LocaleDescription" name="localeDescription" value="@Model.LocaleDescription" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenLocaleLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearLocaleDescriptionButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="CampaignTranslation_LocaleId" value="@Model.CampaignTranslation.LocaleId" type="text" name="localeId" required hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="CampaignTranslation_LocaleId" value="" type="text" name="localeId" required hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="CampaignTranslation_Name">@L("Name")</label>
+									<input class="form-control" id="CampaignTranslation_Name" value="@Model.CampaignTranslation.Name" type="text" name="name"  required    />
+								</div>
+					
+								<div class="form-group">
+									<label for="CampaignTranslation_Description">@L("Description")</label>
+									<input class="form-control" id="CampaignTranslation_Description" value="@Model.CampaignTranslation.Description" type="text" name="description"  required    />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

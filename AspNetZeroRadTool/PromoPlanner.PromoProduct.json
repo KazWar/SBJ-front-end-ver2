@@ -1,0 +1,48 @@
+{
+  "IsRegenerate": false,
+  "MenuPosition": "main",
+  "RelativeNamespace": "PromoPlanner",
+  "EntityName": "PromoProduct",
+  "EntityNamePlural": "PromoProducts",
+  "TableName": "PromoProduct",
+  "PrimaryKeyType": "long",
+  "BaseClass": "Entity",
+  "EntityHistory": false,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
+  "CreateUserInterface": true,
+  "CreateViewOnly": true,
+  "CreateExcelExport": true,
+  "IsMasterDetailPage": false,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [],
+  "NavigationProperties": [
+    {
+      "Namespace": "RMS.PromoPlanner",
+      "ForeignEntityName": "Promo",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "PromoId",
+      "DisplayPropertyName": "Promocode",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "LookupTable"
+    },
+    {
+      "Namespace": "RMS.SBJ.Products",
+      "ForeignEntityName": "Product",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "ProductId",
+      "DisplayPropertyName": "Ctn",
+      "DuplicationNumber": 0,
+      "RelationType": "single",
+      "ViewType": "LookupTable"
+    }
+  ],
+  "EnumDefinitions": [],
+  "DbContext": null
+}
