@@ -42,6 +42,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Websites", "Websites", "{C7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RMS.Web.Website.PhilipsPH", "src\RMS.Web.Website.PhilipsPH\RMS.Web.Website.PhilipsPH.csproj", "{3705D5F8-0B64-4F27-8B6D-1FB801D38252}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMS.Web.Shared", "RMS.Web.Shared\RMS.Web.Shared.csproj", "{B05041D1-1CCB-4C9A-BD5D-1F86C1B9039F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,10 @@ Global
 		{3705D5F8-0B64-4F27-8B6D-1FB801D38252}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3705D5F8-0B64-4F27-8B6D-1FB801D38252}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3705D5F8-0B64-4F27-8B6D-1FB801D38252}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B05041D1-1CCB-4C9A-BD5D-1F86C1B9039F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B05041D1-1CCB-4C9A-BD5D-1F86C1B9039F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B05041D1-1CCB-4C9A-BD5D-1F86C1B9039F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B05041D1-1CCB-4C9A-BD5D-1F86C1B9039F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +129,7 @@ Global
 		{E09101B3-F77E-4C72-8465-7B430FA93AD1} = {F10AA149-2626-486E-85BB-9CD5365F3016}
 		{62EC592B-CC95-43C2-9736-0EC6E46B01FA} = {F10AA149-2626-486E-85BB-9CD5365F3016}
 		{3705D5F8-0B64-4F27-8B6D-1FB801D38252} = {C7865FAC-D92D-4D4C-BA37-C64C8A08FC06}
+		{B05041D1-1CCB-4C9A-BD5D-1F86C1B9039F} = {C7865FAC-D92D-4D4C-BA37-C64C8A08FC06}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23CD4D4B-B131-473D-9ECB-5DD96E739671}

@@ -1,0 +1,10 @@
+﻿global using Microsoft.Extensions.Options;
+global using Newtonsoft.Json;
+global using Microsoft.AspNetCore.Mvc;
+global using System.Net;
+global using RMS.SBJ.Forms.Dtos;
+global using RMS.SBJ.Registrations.Dtos;
+global using RMS.Web.Areas.App.Models.UniqueCodes;
+global using RestSharp;
+global using RestSharp.Authenticators;
+global using RMS.Web.Shared.Configuration;

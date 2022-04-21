@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TypeScriptTarget>ESNext</TypeScriptTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TypeScriptTarget>ESNext</TypeScriptTarget>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Program\" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.4" />
+	  <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.24" />
+	  <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.4" />
+	  <PackageReference Include="RestSharp" Version="107.3.0" />
+	  <PackageReference Include="System.ServiceModel.Duplex" Version="4.9.0" />
+	  <PackageReference Include="System.ServiceModel.Http" Version="4.9.0" />
+	  <PackageReference Include="System.ServiceModel.NetTcp" Version="4.9.0" />
+	  <PackageReference Include="System.ServiceModel.Security" Version="4.9.0" />
+	  <PackageReference Include="VueCliMiddleware" Version="6.0.0" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Using Include="VueCliMiddleware" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\src\RMS.Application.Shared\RMS.Application.Shared.csproj" />
+    <ProjectReference Include="..\src\RMS.Web.Mvc\RMS.Web.Mvc.csproj" />
+  </ItemGroup>
+
+</Project>

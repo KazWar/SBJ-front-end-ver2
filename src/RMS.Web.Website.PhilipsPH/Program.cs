@@ -1,9 +1,15 @@
+// Define Variables
+var SPA_ROOT_PATH = "wwwroot";
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Bind the Newtonsoft Serializer to the controllers.
-builder.Services.AddControllers().AddNewtonsoftJson();
+// Add services to the container with endpoint routing disabled as we use Attribute routing instead.
+// Bind the Newtonsoft Serializer to the services.
+builder.Services
+    .AddControllers(options => options.EnableEndpointRouting = false)
+    .AddNewtonsoftJson();
 
+// Configure the CORS header for requests.
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", builder =>
@@ -16,27 +22,64 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddMvc(option => option.EnableEndpointRouting = false);
+// Add SPA static files to the container.
+builder.Services.AddSpaStaticFiles(configuration: options => {
+    options.RootPath = "wwwroot/dist"; 
+});
 
+// Bind the appsettings.json sections to the builder configuration.
+builder.Configuration
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true);
+
+// Build the container using the above settings
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
+    // The default HSTS value is 30 days. You may want to change
+    // this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+} else {
+    // Output exceptions during development mode.
+    app.UseDeveloperExceptionPage();
 }
 
-app.UseStaticFiles();
-
-
+// Add HTTP to HTTPS redirection to the app.
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
+// Add routing to the app.
 app.UseRouting();
 
+// Add the SPA statis files to the app.
+app.UseSpaStaticFiles();
+
+// Bind the CORS header to our app.
+app.UseCors("CorsPolicy");
+
+// Disabled feature, it may be re-enabled in the future.
 //app.UseAuthorization();
 
+// Add MVC to the app.
+app.UseMvc();
 
+// Configure the SPA route if it's production or development.
+app.UseSpa(spa =>
+{
+    if (app.Environment.IsDevelopment())
+    {
+        spa.Options.SourcePath = $"{SPA_ROOT_PATH}/";
+        spa.Options.StartupTimeout = TimeSpan.FromSeconds(120);
+        spa.UseVueCli(npmScript: "dev");
+    }
+    else
+    {
+        spa.Options.SourcePath = SPA_ROOT_PATH;
+    }
+});
+
+// Initialize the app
 app.Run();
