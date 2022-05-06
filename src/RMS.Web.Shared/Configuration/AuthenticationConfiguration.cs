@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace RMS.Web.Shared.Configuration
+﻿namespace RMS.Web.Shared.Configuration
 {
     public sealed class AuthenticationConfiguration
     {

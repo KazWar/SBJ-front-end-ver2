@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace RMS.Web.Shared.Configuration
+﻿namespace RMS.Web.Shared.Configuration
 {
 
     public class ApiConfiguration

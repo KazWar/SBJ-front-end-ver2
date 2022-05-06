@@ -66,6 +66,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RMS.Application.Shared\RMS.Application.Shared.csproj" />
     <ProjectReference Include="..\RMS.Web.Mvc\RMS.Web.Mvc.csproj" />
+    <ProjectReference Include="..\RMS.Web.Shared\RMS.Web.Shared.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

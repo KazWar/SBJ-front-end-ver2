@@ -12,10 +12,14 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Program\" />
+    <Compile Remove="Program\**" />
+    <Content Remove="Program\**" />
+    <EmbeddedResource Remove="Program\**" />
+    <None Remove="Program\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,8 +39,8 @@
 	</ItemGroup>
 	
   <ItemGroup>
-    <ProjectReference Include="..\src\RMS.Application.Shared\RMS.Application.Shared.csproj" />
-    <ProjectReference Include="..\src\RMS.Web.Mvc\RMS.Web.Mvc.csproj" />
+    <ProjectReference Include="..\RMS.Application.Shared\RMS.Application.Shared.csproj" />
+    <ProjectReference Include="..\RMS.Web.Mvc\RMS.Web.Mvc.csproj" />
   </ItemGroup>
 
 </Project>

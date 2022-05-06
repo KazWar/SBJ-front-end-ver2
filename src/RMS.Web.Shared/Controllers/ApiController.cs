@@ -1,10 +1,12 @@
-﻿
-namespace RMS.Web.Shared.Controllers
+﻿namespace RMS.Web.Shared.Controllers
 {
     [Route("api/v2")]
     public class ApiController : Controller
     {
-        // Get the appsettings options
+        // Load the configurations from appsettings.json
+        readonly IConfigurationRoot Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+
+        // Define the configurations 
         private readonly TenantConfiguration TenantConfig;
         private readonly AuthenticationConfiguration AuthenticationConfiguration;
         private readonly ApiConfiguration ApiConfig;
@@ -12,38 +14,40 @@ namespace RMS.Web.Shared.Controllers
         private readonly IbanRechnerConfiguration IbanRechnerConfig;
         private readonly PostCodeApi PostCodeApiConfig;
 
+        // Define the REST clients
         private RestClient Client = null!;
         private RestClient AddressClient = null!;
         private RestClient TokenClient = null!;
         private RestClient UniqueCodeClient = null!;
         private RestClient IbanRechnerClient = null!;
 
+        /// <summary>
+        /// Creates an instance of the shared API controller.
+        /// </summary>
+        /// <param name="authenticationConfiguration"></param>
+        /// <param name="tenantConfiguration"></param>
+        /// <param name="buildConfig"></param>
         public ApiController(
                 AuthenticationConfiguration authenticationConfiguration,
                 TenantConfiguration tenantConfiguration,
-                BuildConfiguration buildConfig,
-                ApiConfiguration apiConfig,
-                PostCodeApi postCodeApiConfig,
-                IbanRechnerConfiguration ibanRechnerConfig
+                BuildConfiguration buildConfig
             )
         {
-            // Bind props to config values for direct property access.
-            // Props are bound in ConfigureServices in Startup.
+            // These configurations must be provided from the website specific appsettings.
             TenantConfig = tenantConfiguration;
             AuthenticationConfiguration = authenticationConfiguration;
             BuildConfig = buildConfig;
-            ApiConfig = apiConfig;
-            PostCodeApiConfig = postCodeApiConfig;
-            IbanRechnerConfig = ibanRechnerConfig;
+
+            // These configurations are taken from the shared appsettings.
+            ApiConfig = Configuration.GetSection("Api").Get<ApiConfiguration>();
+            PostCodeApiConfig = Configuration.GetSection("PostCodeApi").Get<PostCodeApi>();
+            IbanRechnerConfig = Configuration.GetSection("IbanRechner").Get<IbanRechnerConfiguration>();
 
             Init();
         }
 
         /// <summary>
-        /// Initializes client instances for the api to use:
-        /// Client = General use Client for all api calls
-        /// TokenClient = Client for getting tokens
-        /// AddressClient = Client for checking addresses
+        /// Initializes client instances for the api to use
         /// </summary>
         public void Init()
         {
@@ -90,7 +94,6 @@ namespace RMS.Web.Shared.Controllers
             var password = IbanRechnerConfig.Password;
 
             // Create the Iban rechner Client
-            // Using the WSDL'd service
             IbanRechnerClient = new RestClient(IbanRechnerUrl)
                 .UseAuthenticator(new HttpBasicAuthenticator(user, password));
         }
@@ -156,7 +159,7 @@ namespace RMS.Web.Shared.Controllers
 
             string data = JsonConvert.SerializeObject(vueJsToRmsModel);
 
-            // Match & execute matching api call to the admin RMS
+            // Match & execute matching api call to the RMS
             return method switch
             {
                 // This entire internal api is crap. Update, send and get for registration with 3 seperate addresses.

@@ -1,5 +1,5 @@
-﻿using RMS.Web.Shared.Controllers;
-using RMS.Web.Shared.Configuration;
+﻿using RMS.Web.Shared.Configuration;
+using RMS.Web.Shared.Controllers;
 
 namespace RMS.Web.Website.PhilipsPH;
 public class Controller
@@ -7,29 +7,23 @@ public class Controller
     private readonly AuthenticationConfiguration AuthenticationConfig;
     private readonly TenantConfiguration TenantConfiguration;
     private readonly BuildConfiguration BuildConfiguration;
-    private readonly ApiConfiguration ApiConfiguration;
-    private readonly PostCodeApi PostCodeApiConfiguration;
-    private readonly IbanRechnerConfiguration IbanRechnerConfiguration;
     private readonly ApiController ApiController;
 
     public Controller(IConfiguration configuration)
     {
+        // Bind the appsettings.json configurations
         AuthenticationConfig = configuration.GetSection("Authentication").Get<AuthenticationConfiguration>();
         TenantConfiguration = configuration.GetSection("Tenant").Get<TenantConfiguration>();
-        ApiConfiguration = configuration.GetSection("Api").Get<ApiConfiguration>();
         BuildConfiguration = configuration.GetSection("Build").Get<BuildConfiguration>();
-        PostCodeApiConfiguration = configuration.GetSection("PostCodeApi").Get<PostCodeApi>();
-        IbanRechnerConfiguration = configuration.GetSection("IbanRechner").Get<IbanRechnerConfiguration>();
 
+        // Create an instance of the shared API controller
         ApiController = new ApiController(
             AuthenticationConfig,
             TenantConfiguration,
-            BuildConfiguration,
-            ApiConfiguration,
-            PostCodeApiConfiguration,
-            IbanRechnerConfiguration
+            BuildConfiguration
         );
 
+        // Start the API controller
         ApiController.Init();
     }
 }

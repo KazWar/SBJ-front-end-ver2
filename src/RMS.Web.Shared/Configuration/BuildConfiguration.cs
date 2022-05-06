@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-
-namespace RMS.Web.Shared.Configuration
+﻿namespace RMS.Web.Shared.Configuration
 {
     [JsonConverter(typeof(StringEnumConverter))]
     public enum BuildFlags
