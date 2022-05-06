@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "1",
+    "LocaleCode": "BE_NL",
+    "LanguageCode": "NL",
+    "CountryCode": "BE",
+    "Name": "Dutch",
+    "Description": "Belgian Dutch language "
+  },
+  {
+    "Id": "2",
+    "LocaleCode": "BE_FR",
+    "LanguageCode": "FR",
+    "CountryCode": "BE",
+    "Name": "French",
+    "Description": "Belgian French language"
+  },
+  {
+    "Id": "3",
+    "LocaleCode": "NL_NL",
+    "LanguageCode": "NL",
+    "CountryCode": "NL",
+    "Name": "Dutch",
+    "Description": "Dutch language"
+  },
+  {
+    "Id": "4",
+    "LocaleCode": "NL_EN",
+    "LanguageCode": "EN",
+    "CountryCode": "NL",
+    "Name": "English",
+    "Description": "Dutch English language"
+  },
+  {
+    "Id": "5",
+    "LocaleCode": "PL_PL",
+    "LanguageCode": "PL",
+    "CountryCode": "PL",
+    "Name": "Polish",
+    "Description": "Polish language"
+  }
+]

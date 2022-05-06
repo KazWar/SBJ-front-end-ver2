@@ -1,0 +1,41 @@
+{
+  "AbpZeroLicenseCode": "00q73465aQcycxyIkCStKZMw==3c7a1cccab795e88453c0b6cc260fa99",
+
+  "Authentication": {
+    "UserNameOrEmailAddress": "admin",
+    "Password": "123qwe",
+    "JwtBearer": {
+      "IsEnabled": "true",
+      "SecurityKey": "RMS_8CFB2EC534E14D56",
+      "Issuer": "RMS",
+      "Audience": "RMS"
+    }
+  },
+
+  "Api": {
+    "ApiRootAddresses": {
+      "prod": "https://app-sbj-rms2.azurewebsites.net/app",
+      "test": "https://app-sbj-rms2-test.azurewebsites.net/app/",
+      "local": "https://localhost:44302/app"
+    }
+  },
+
+  "PostCodeApi": {
+    "key": "PwTdCXnbPcXTZ5nv9XQmxnDYNWfnv2WJu8wuCo2JLBI",
+    "secret": "984CLD4E8Jb9i9pzJ1BVX1jwogu9zWjRK3SfrIH2gC0QN9J7lT"
+  },
+
+  "IbanRechner": {
+    "user": "sbjrms",
+    "password": "rms2011"
+  },
+
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*"
+}
