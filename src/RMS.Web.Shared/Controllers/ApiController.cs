@@ -1,19 +1,25 @@
-﻿namespace RMS.Web.Shared.Controllers
+﻿using Microsoft.Extensions.Options;
+using System.Reflection;
+
+namespace RMS.Web.Shared.Controllers
 {
     [Route("api/v2")]
-    public class ApiController : Controller
+    public abstract class ApiController : Controller
     {
-        // Load the configurations from appsettings.json
-        readonly IConfigurationRoot Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+        static readonly IConfiguration Configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .Build();
 
-        // Define the configurations 
-        private readonly TenantConfiguration TenantConfig;
-        private readonly AuthenticationConfiguration AuthenticationConfiguration;
-        private readonly ApiConfiguration ApiConfig;
-        private readonly BuildConfiguration BuildConfig;
+        // These configurations MUST be supplied by the websites themselves.
+        public BuildConfiguration BuildConfiguration { get; set; }
+        public AuthenticationConfiguration AuthenticationConfiguration { get; set; }
+        public TenantConfiguration TenantConfiguration { get; set; }
+
+        // Shares configurations properties
         private readonly IbanRechnerConfiguration IbanRechnerConfig;
         private readonly PostCodeApi PostCodeApiConfig;
-
+        private readonly ApiConfiguration ApiConfig;
         // Define the REST clients
         private RestClient Client = null!;
         private RestClient AddressClient = null!;
@@ -26,34 +32,35 @@
         /// </summary>
         /// <param name="authenticationConfiguration"></param>
         /// <param name="tenantConfiguration"></param>
-        /// <param name="buildConfig"></param>
+        /// <param name="buildConfiguration"></param>
         public ApiController(
-                AuthenticationConfiguration authenticationConfiguration,
-                TenantConfiguration tenantConfiguration,
-                BuildConfiguration buildConfig
+                IOptions<AuthenticationConfiguration> authenticationConfiguration,
+                IOptions<TenantConfiguration> tenantConfiguration,
+                IOptions<BuildConfiguration> buildConfiguration
             )
         {
             // These configurations must be provided from the website specific appsettings.
-            TenantConfig = tenantConfiguration;
-            AuthenticationConfiguration = authenticationConfiguration;
-            BuildConfig = buildConfig;
+            TenantConfiguration = tenantConfiguration.Value;
+            AuthenticationConfiguration = authenticationConfiguration.Value;
+            BuildConfiguration = buildConfiguration.Value;
 
             // These configurations are taken from the shared appsettings.
             ApiConfig = Configuration.GetSection("Api").Get<ApiConfiguration>();
             PostCodeApiConfig = Configuration.GetSection("PostCodeApi").Get<PostCodeApi>();
             IbanRechnerConfig = Configuration.GetSection("IbanRechner").Get<IbanRechnerConfiguration>();
 
+            Console.WriteLine("Starting app");
             Init();
         }
 
         /// <summary>
         /// Initializes client instances for the api to use
         /// </summary>
-        public void Init()
+        public virtual void Init()
         {
             // Get the urls from the appsettings.json
             // BaseUrl is based of the environment flag set in the appsettings build configuration.
-            var baseUrl = ApiConfig.ApiRootAddresses[BuildConfig.Environment];
+            var baseUrl = ApiConfig.ApiRootAddresses[BuildConfiguration.Environment];
             var tokenURL = "https://app-sbj-rms2.azurewebsites.net/api";
             var UniqueCodeUrl = "https://app-sbj-rms2.azurewebsites.net/app";
             var addressUrl = "https://api.postcode.eu/";
@@ -61,7 +68,7 @@
 
             // First iniate the token Client as it will be used by the general api Client to get a token.
             TokenClient = new RestClient(tokenURL)
-                .AddDefaultHeader("Abp.TenantId", TenantConfig.Id.ToString())
+                .AddDefaultHeader("Abp.TenantId", TenantConfiguration.Id.ToString())
                 .AddDefaultHeader("Content-Type", "application/json");
 
             // Create default Client options.
@@ -69,7 +76,7 @@
 
             // Create a default Client instance to handle all API calls.
             Client = new RestClient(options)
-                    .AddDefaultHeader("Abp.TenantId", TenantConfig.Id.ToString())
+                    .AddDefaultHeader("Abp.TenantId", TenantConfiguration.Id.ToString())
                     .AddDefaultHeader("Content-Type", "application/json")
                     .UseAuthenticator(new JwtAuthenticator(UnpackBearerToken(GetToken())));
 
@@ -85,7 +92,7 @@
 
             // Create the uniqueCodes Client
             UniqueCodeClient = new RestClient(UniqueCodeUrl)
-                    .AddDefaultHeader("Abp.TenantId", TenantConfig.Id.ToString())
+                    .AddDefaultHeader("Abp.TenantId", TenantConfiguration.Id.ToString())
                     .AddDefaultHeader("Content-Type", "application/json")
                     .UseAuthenticator(new JwtAuthenticator(UnpackBearerToken(GetToken())));
 
@@ -105,7 +112,7 @@
         /// The bearer token is then returned.
         /// </summary>
         /// <returns>A RestResponse object of the token API request</returns>
-        public async Task<RestResponse> GetToken()
+        public virtual async Task<RestResponse> GetToken()
         {
             // Use the special token client instance.
             return await TokenClient.PostAsync(

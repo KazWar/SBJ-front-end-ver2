@@ -5,53 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Makita BE",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/RMS.Web.Website.MakitaBE/bin/Debug/netcoreapp3.1/RMS.Web.Website.MakitaBE.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/src/RMS.Web.Website.MakitaBE",
-            "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
-            }
-        },
-        {
             "name": "Philips PH",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "buildPH",
-            "program": "${workspaceFolder}/src/RMS.Web.Website.PhilipsPH/bin/Debug/netcoreapp3.1/RMS.Web.Website.PhilipsPH.dll",
+            "program": "${workspaceFolder}/src/RMS.Web.Website.PhilipsPH/bin/Debug/net6.0/RMS.Web.Website.PhilipsPH.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/RMS.Web.Website.PhilipsPH",
-            "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
-            }
-        },
-        {
-            "name": "Philips DA",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "buildDA",
-            "program": "${workspaceFolder}/src/RMS.Web.Website.PhilipsDA/bin/Debug/netcoreapp3.1/RMS.Web.Website.PhilipsDA.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/src/RMS.Web.Website.PhilipsDA",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",

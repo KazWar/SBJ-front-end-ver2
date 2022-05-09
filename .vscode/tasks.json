@@ -10,36 +10,12 @@
             "type": "shell"
         },
         {
-            "label": "build1",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/src/RMS.Web.Website.MakitaBE/RMS.Web.Website.MakitaBE.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
             "label": "build2",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
                 "${workspaceFolder}/src/RMS.Web.Website.PhilipsPH/RMS.Web.Website.PhilipsPH.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "build3",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/src/RMS.Web.Website.PhilipsDA/RMS.Web.Website.PhilipsDA.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -69,22 +45,6 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "build",
-            "dependsOrder": "sequence",
-            "dependsOn":[
-                "killNode",
-                "build1"
-            ]
-        },
-        {
-            "label": "buildDA",
-            "dependsOrder": "sequence",
-            "dependsOn":[
-                "killNode",
-                "build3"
-            ]
         },
         {
             "label": "buildPH",

@@ -3,6 +3,10 @@ var SPA_ROOT_PATH = "wwwroot";
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<AuthenticationConfiguration>(builder.Configuration.GetSection("Authentication"));
+builder.Services.Configure<TenantConfiguration>(builder.Configuration.GetSection("Tenant"));
+builder.Services.Configure<BuildConfiguration>(builder.Configuration.GetSection("Build"));
+
 // Add services to the container with endpoint routing disabled as we use Attribute routing instead.
 // Bind the Newtonsoft Serializer to the services.
 builder.Services
@@ -26,11 +30,6 @@ builder.Services.AddCors(options =>
 builder.Services.AddSpaStaticFiles(configuration: options => {
     options.RootPath = "wwwroot/dist"; 
 });
-
-// Bind the appsettings.json sections to the builder configuration.
-builder.Configuration
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true);
 
 // Build the container using the above settings
 var app = builder.Build();
@@ -80,6 +79,8 @@ app.UseSpa(spa =>
         spa.Options.SourcePath = SPA_ROOT_PATH;
     }
 });
+
+app.MapControllers();
 
 // Initialize the app
 app.Run();

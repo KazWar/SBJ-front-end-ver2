@@ -23,7 +23,7 @@ const App = createApp(app)
 
 //* Initialize the components
 await useComponents(App)
-await useSentry(App, router)
+//await useSentry(App, router)
 
 //* Bind plugins to vue instance
 App

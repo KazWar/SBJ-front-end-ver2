@@ -1,9 +1,9 @@
 /**
  * Returns unique elements from the specified array
- * @param {Array} items Elements to select from
- * @param {String|Function} valueSelector Property name or function extracting value from array elements.
+ * @param items - Elements to select from
+ * @param valueSelector - Property name or function extracting value from array elements.
  * If not specified, array elements are treated as values.
- * @returns {Array} Unique elements from the specified array
+ * @returns Unique elements from the specified array
  */
 
 export function uniqueElements (items:any, valueSelector:any) {

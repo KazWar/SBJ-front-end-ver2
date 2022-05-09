@@ -26,6 +26,7 @@
 	  <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.4" />
 	  <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.24" />
 	  <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.4" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
 	  <PackageReference Include="RestSharp" Version="107.3.0" />
 	  <PackageReference Include="System.ServiceModel.Duplex" Version="4.9.0" />
 	  <PackageReference Include="System.ServiceModel.Http" Version="4.9.0" />
@@ -41,6 +42,16 @@
   <ItemGroup>
     <ProjectReference Include="..\RMS.Application.Shared\RMS.Application.Shared.csproj" />
     <ProjectReference Include="..\RMS.Web.Mvc\RMS.Web.Mvc.csproj" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
