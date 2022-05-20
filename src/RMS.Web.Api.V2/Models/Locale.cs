@@ -8,7 +8,7 @@
 
         [Key]
         [Required]
-        public string LocaleCode { get; set; } = default!;
+        public string Code { get; set; } = default!;
 
         [Key]
         [Required]

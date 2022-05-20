@@ -9,21 +9,21 @@
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status405MethodNotAllowed)]
         public async Task<ActionResult<Locale[]>> GetAll(
             [FromQuery] string? languageCode,
             [FromQuery] string? countryCode)
         {
-            return Locales!.Where(locale =>
-                locale.CountryCode == countryCode ||
-                locale.LanguageCode == languageCode).ToArray();
+            return Locales!;
         }
 
-        [HttpGet("locale/{id:int}")]
-        public Locale GetSingle(
-            [FromRoute] int id)
+        [HttpGet("locale")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Locale[]>> GetAll(
+            [FromQuery] string? tenantId)
         {
-            return Locales!.Where(x => x.Id == id).First();
+            return Locales!;
         }
     }
 }

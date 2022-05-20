@@ -1,7 +1,7 @@
 [
   {
     "Id": "1",
-    "LocaleCode": "BE_NL",
+    "Code": "BE_NL",
     "LanguageCode": "NL",
     "CountryCode": "BE",
     "Name": "Dutch",
@@ -9,7 +9,7 @@
   },
   {
     "Id": "2",
-    "LocaleCode": "BE_FR",
+    "Code": "BE_FR",
     "LanguageCode": "FR",
     "CountryCode": "BE",
     "Name": "French",
@@ -17,7 +17,7 @@
   },
   {
     "Id": "3",
-    "LocaleCode": "NL_NL",
+    "Code": "NL_NL",
     "LanguageCode": "NL",
     "CountryCode": "NL",
     "Name": "Dutch",
@@ -25,7 +25,7 @@
   },
   {
     "Id": "4",
-    "LocaleCode": "NL_EN",
+    "Code": "NL_EN",
     "LanguageCode": "EN",
     "CountryCode": "NL",
     "Name": "English",
@@ -33,7 +33,7 @@
   },
   {
     "Id": "5",
-    "LocaleCode": "PL_PL",
+    "Code": "PL_PL",
     "LanguageCode": "PL",
     "CountryCode": "PL",
     "Name": "Polish",

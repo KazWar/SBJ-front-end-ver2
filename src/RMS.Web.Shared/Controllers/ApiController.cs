@@ -1,25 +1,18 @@
-﻿using Microsoft.Extensions.Options;
-using System.Reflection;
-
-namespace RMS.Web.Shared.Controllers
+﻿namespace RMS.Web.Shared.Controllers
 {
     [Route("api/v2")]
     public abstract class ApiController : Controller
     {
-        static readonly IConfiguration Configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build();
-
         // These configurations MUST be supplied by the websites themselves.
         public BuildConfiguration BuildConfiguration { get; set; }
         public AuthenticationConfiguration AuthenticationConfiguration { get; set; }
         public TenantConfiguration TenantConfiguration { get; set; }
 
-        // Shares configurations properties
+        // Shared configurations properties
         private readonly IbanRechnerConfiguration IbanRechnerConfig;
         private readonly PostCodeApi PostCodeApiConfig;
         private readonly ApiConfiguration ApiConfig;
+
         // Define the REST clients
         private RestClient Client = null!;
         private RestClient AddressClient = null!;
@@ -39,6 +32,17 @@ namespace RMS.Web.Shared.Controllers
                 IOptions<BuildConfiguration> buildConfiguration
             )
         {
+            // Import the appsettings resource
+            byte[] AppsettingsResource = Properties.Resources.appsettings;
+
+            // Convert byte array to stream for the configuration builder
+            MemoryStream stream = new(AppsettingsResource);
+
+            // Create an app configuration object from the stream.
+            var Configuration = new ConfigurationBuilder()
+                .AddJsonStream(stream)
+                .Build();
+
             // These configurations must be provided from the website specific appsettings.
             TenantConfiguration = tenantConfiguration.Value;
             AuthenticationConfiguration = authenticationConfiguration.Value;
@@ -111,7 +115,7 @@ namespace RMS.Web.Shared.Controllers
         /// Calls the authentication API url and gets a response.
         /// The bearer token is then returned.
         /// </summary>
-        /// <returns>A RestResponse object of the token API request</returns>
+        /// <returns>A RestResponse object containing token data</returns>
         public virtual async Task<RestResponse> GetToken()
         {
             // Use the special token client instance.

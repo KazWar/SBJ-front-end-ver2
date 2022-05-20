@@ -9,4 +9,4 @@ global using RestSharp.Authenticators;
 global using RMS.Web.Shared.Configuration;
 global using Newtonsoft.Json.Converters;
 global using Microsoft.Extensions.Configuration;
-global using Microsoft.Extensions.Configuration.Json;
+global using Microsoft.Extensions.Options;
