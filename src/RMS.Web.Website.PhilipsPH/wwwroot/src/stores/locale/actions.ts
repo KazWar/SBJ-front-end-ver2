@@ -22,7 +22,7 @@ export default {
 
         //* Get the locales and return them directly.
         return await GetLocales()
-            .then(response => response.locales)
+            .then(response => response)
             .catch(error => error)
     },
 
@@ -31,7 +31,7 @@ export default {
      * Otherwise it fetches them from the API, 
      * saturates the state and returns the items.
      * 
-     * @returns {(Locale[] | Error)} An array of Locales or an Error if the function fails
+     * @returns An array of Locales or an Error if the function fails
      */
     async RequireLocales(): Promise<Locale[] | Error>{
         let { items } = $(this.requireLocaleStore())
@@ -45,8 +45,8 @@ export default {
         //* Retrieve the locales from the API
         return await GetLocales()
             .then(response => {
-                items = response.locales
-                return response.locales
+                items = response
+                return response
             })
             .catch(error => error)
     }

@@ -19,7 +19,7 @@ describe("Locale store action tests", () => {
         requireLocaleService = vi.spyOn(Actions, 'requireLocaleService')
           .mockImplementation(():any => {
             return {
-              GetLocales: vi.fn().mockResolvedValue({ locales: [1,2,3] })
+              GetLocales: vi.fn().mockResolvedValue([1,2,3])
             } 
           }
         )
@@ -72,7 +72,7 @@ describe("Locale store action tests", () => {
         requireLocaleService = vi.spyOn(Actions, 'requireLocaleService')
           .mockImplementation(():any => {
             return {
-              GetLocales: vi.fn().mockResolvedValue({ locales: [1,2,3] })
+              GetLocales: vi.fn().mockResolvedValue([1,2,3])
             } 
           }
         )

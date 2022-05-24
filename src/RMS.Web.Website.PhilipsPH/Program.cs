@@ -21,8 +21,7 @@ builder.Services.AddCors(options =>
         builder
         .AllowAnyHeader()
         .AllowAnyMethod()
-        .AllowCredentials()
-        .WithOrigins("https://philipsph.rms2.eu/");
+        .AllowCredentials();
     });
 });
 
@@ -80,6 +79,7 @@ app.UseSpa(spa =>
     }
 });
 
+// Add controllers to the app
 app.MapControllers();
 
 // Initialize the app

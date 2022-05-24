@@ -135,8 +135,7 @@
         [Route("locale")]
         public async Task<RestResponse> Locale()
         {
-            return await Client.GetAsync(
-                Request("Campaigns/GetCampaignLocalesApi"));
+            return await Client.GetAsync(Request("locale"));
         }
 
         [HttpGet]
@@ -146,7 +145,7 @@
             [FromRoute] string code)
         {
             return await Client.GetAsync(
-                Request("/Campaigns/GetCampaignOverviewApi")
+                Request("/v2")
                 .AddQueryParameter("currentLocale", code));
         }
 

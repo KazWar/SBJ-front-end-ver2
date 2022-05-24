@@ -3,7 +3,7 @@ import { Navigate } from "@/common/utilities"
 import { useI18n } from "vue-i18n"
 import CountryFlag from "vue-country-flag-next"
 import { useLocaleStore } from '@/stores'
-import { Ref, ref, onMounted }  from "vue"
+import { Ref, ref }  from "vue"
 
 const { RequireLocales } = useLocaleStore()
 
@@ -22,7 +22,7 @@ function ChangeLocale(selection:any) {
 }
 
 //* Get the options
-const options = await RequireLocales()
+const options:any = await RequireLocales()
 
 </script>
 
@@ -35,7 +35,7 @@ const options = await RequireLocales()
     square
     :options="options"
     option-label="name"
-    :label="t('languageSelection.selector.description')"
+    label="Pick your language...."
     @update:model-value="
         //* Set the global i18n Locale to the selection
         ChangeLocale(selection),
@@ -53,7 +53,7 @@ const options = await RequireLocales()
         <q-item-section avatar>
           <!-- remove this code hack with better locale implementation -->
           <country-flag
-            :country="`${scope.opt.description.substr(3, 5)}`"
+            :country="scope.opt.countryCode"
           />
         </q-item-section>
         <q-item-section>
@@ -70,5 +70,3 @@ const options = await RequireLocales()
   margin: -0.5em -1em -0.5em -1em !important;
 }
 </style>
-
-<i18n src="./locale-selector.translations.json" />
