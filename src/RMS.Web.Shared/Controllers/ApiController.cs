@@ -1,7 +1,7 @@
 ﻿namespace RMS.Web.Shared.Controllers
 {
     [Route("api/v2")]
-    public abstract class ApiController : Controller
+    public abstract class ApiController : ControllerBase
     {
         // These configurations MUST be supplied by the websites themselves.
         public BuildConfiguration BuildConfiguration { get; set; }
@@ -9,16 +9,11 @@
         public TenantConfiguration TenantConfiguration { get; set; }
 
         // Shared configurations properties
-        private readonly IbanRechnerConfiguration IbanRechnerConfig;
-        private readonly PostCodeApi PostCodeApiConfig;
         private readonly ApiConfiguration ApiConfig;
 
         // Define the REST clients
         private RestClient Client = null!;
-        private RestClient AddressClient = null!;
         private RestClient TokenClient = null!;
-        private RestClient UniqueCodeClient = null!;
-        private RestClient IbanRechnerClient = null!;
 
         /// <summary>
         /// Creates an instance of the shared API controller.
@@ -50,8 +45,6 @@
 
             // These configurations are taken from the shared appsettings.
             ApiConfig = Configuration.GetSection("Api").Get<ApiConfiguration>();
-            PostCodeApiConfig = Configuration.GetSection("PostCodeApi").Get<PostCodeApi>();
-            IbanRechnerConfig = Configuration.GetSection("IbanRechner").Get<IbanRechnerConfiguration>();
 
             Console.WriteLine("Starting app");
             Init();
@@ -66,9 +59,6 @@
             // BaseUrl is based of the environment flag set in the appsettings build configuration.
             var baseUrl = ApiConfig.ApiRootAddresses[BuildConfiguration.Environment];
             var tokenURL = "https://app-sbj-rms2.azurewebsites.net/api";
-            var UniqueCodeUrl = "https://app-sbj-rms2.azurewebsites.net/app";
-            var addressUrl = "https://api.postcode.eu/";
-            var IbanRechnerUrl = "https://rest.sepatools.eu/";
 
             // First iniate the token Client as it will be used by the general api Client to get a token.
             TokenClient = new RestClient(tokenURL)
@@ -83,30 +73,6 @@
                     .AddDefaultHeader("Abp.TenantId", TenantConfiguration.Id.ToString())
                     .AddDefaultHeader("Content-Type", "application/json")
                     .UseAuthenticator(new JwtAuthenticator(UnpackBearerToken(GetToken())));
-
-            // Append postcode API credentials
-            var key = PostCodeApiConfig.key.ToString();
-            var secret = PostCodeApiConfig.secret.ToString();
-
-            // Create the address Client
-            AddressClient = new RestClient(addressUrl)
-                    .AddDefaultHeader("Content-Type", "application/json")
-                    .AddDefaultHeader("mode", "no-cors")
-                    .UseAuthenticator(new HttpBasicAuthenticator(key, secret));
-
-            // Create the uniqueCodes Client
-            UniqueCodeClient = new RestClient(UniqueCodeUrl)
-                    .AddDefaultHeader("Abp.TenantId", TenantConfiguration.Id.ToString())
-                    .AddDefaultHeader("Content-Type", "application/json")
-                    .UseAuthenticator(new JwtAuthenticator(UnpackBearerToken(GetToken())));
-
-
-            var user = IbanRechnerConfig.User;
-            var password = IbanRechnerConfig.Password;
-
-            // Create the Iban rechner Client
-            IbanRechnerClient = new RestClient(IbanRechnerUrl)
-                .UseAuthenticator(new HttpBasicAuthenticator(user, password));
         }
 
         #region API call functions
@@ -140,13 +106,13 @@
 
         [HttpGet]
         // Get all campaigns by Locale
-        [Route("locale/{code:maxlength(5)}/campaign")]
+        [Route("campaign")]
         public async Task<RestResponse> Campaign(
             [FromRoute] string code)
         {
             return await Client.GetAsync(
-                Request("/v2")
-                .AddQueryParameter("currentLocale", code));
+                Request("campaign")
+                .AddQueryParameter("locale", code));
         }
 
         [AcceptVerbs("GET", "POST", "PUT")]
@@ -217,62 +183,6 @@
                 Request("FormLocales/GetFormAndProductHandlingApi")
                 .AddQueryParameter("currentLocale", code)
                 .AddQueryParameter("currentCampaignId", id));
-        }
-
-        [HttpGet]
-        [Route("address")]
-        // This should return a RestResponse like the others, but it's coded to use JSON at the front-end.
-        // Will change in future revamp.
-        public async Task<JsonResult> Address(
-            [FromQuery]string postalcode,
-            [FromQuery]string housenumber)
-        {
-            var response = await AddressClient.GetAsync(
-                Request("nl/v1/addresses/postcode/{postalcode}/{housenumber}")
-                .AddUrlSegment("postalcode", postalcode)
-                .AddUrlSegment("housenumber", housenumber));
-
-            return (response.StatusCode == HttpStatusCode.OK) ? Json(response.Content) : Json(response.StatusCode);
-        }
-
-	    [AcceptVerbs("GET", "POST")]
-        [Route("unique-code")]
-        public async Task<RestResponse> SetUniqueCode(
-            [FromBody] UniqueCodeViewModel model,
-            [FromQuery] string code)
-        {
-            // Extract the used method from the request
-            string method = HttpContext.Request.Method;
-
-            // Match & execute matching api call to the admin RMS
-            return method switch
-            {
-                "GET" => await UniqueCodeClient.GetAsync(
-                    Request("UniqueCodes/IsCodeValid")
-                    .AddQueryParameter("code", code)),
-
-                "POST" => await UniqueCodeClient.PostAsync(
-                    Request("UniqueCodes/SetCodeUsed", Method.Post)
-                    .AddJsonBody(
-                        new UniqueCodeViewModel
-						{
-							Code = model.Code
-                        })
-                    ),
-                    
-                    //Default case
-                _ => throw new ArgumentOutOfRangeException(),// Replace with a a better error.
-            };
-        }
-
-        [HttpGet]
-        [Route("iban/{iban}")]
-        public async Task<RestResponse> Iban(
-                [FromRoute] string iban)
-        {
-            return await IbanRechnerClient.GetAsync(
-                Request("validate_iban_dummy/{iban}")
-                .AddUrlSegment("iban", iban));
         }
 
         #endregion

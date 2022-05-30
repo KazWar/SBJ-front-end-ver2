@@ -68,6 +68,7 @@ module.exports = {
     "vue/valid-v-on":"warn",
     "vue/multi-word-component-names": ["warn", {
       "ignores": [
+        "Home",
         "About",
         "Error",
         "Footer"

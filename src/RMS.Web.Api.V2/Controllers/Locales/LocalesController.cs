@@ -25,7 +25,6 @@
         public async Task<ActionResult<Locale>> GetOne(
             [FromRoute] int id)
         {
-
             if (NullOrEmptyOrWhiteSpace.Check(id.ToString())) 
                 return BadRequest($"Id: {id} is a null, contains only whitespace or is empty.");
 

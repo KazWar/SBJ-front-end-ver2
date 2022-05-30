@@ -20,10 +20,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\LocalesController\Models\" />
+    <Folder Include="Controllers\Locales\Models\" />
+    <Folder Include="Controllers\NewFolder\" />
   </ItemGroup>
 	
     <PropertyGroup>
 		<IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
 	</PropertyGroup>
+	
+    <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 </Project>

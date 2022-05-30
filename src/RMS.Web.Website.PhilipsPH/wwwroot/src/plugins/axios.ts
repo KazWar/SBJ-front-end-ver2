@@ -11,6 +11,8 @@ export default axios.create({
     "redirect": 'follow'
   },
 
+  baseURL:'http://localhost:5000/api/v2/',
+
   //* Force parse the data part of the response
   //* Otherwise it remains a stringified text blob
   //* Axios already does this automatically once, but the API response is stringified twice.

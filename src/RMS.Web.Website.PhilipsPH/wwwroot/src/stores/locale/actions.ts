@@ -15,7 +15,7 @@ export default {
      * Fetches the items directly from the API call,
      * without storing them in the state.
      * 
-     * @returns 
+     * @returns An array of Locales or an Error if the function fails
      */
     async FetchLocales(): Promise<Locale[] | Error> {
         const { GetLocales } = this.requireLocaleService()

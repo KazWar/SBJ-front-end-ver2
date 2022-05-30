@@ -10,9 +10,6 @@ const { RequireLocales } = useLocaleStore()
 //* Setting reactive properties for the component
 const selection: Ref<Locale | undefined> = ref()
 
-//* Translations initialization
-let { t } = useI18n()
-
 //* Explicitly create an i18n instance using the global scope to adjust locale
 let { locale } = useI18n({ useScope: "global" })
 
@@ -28,14 +25,15 @@ const options:any = await RequireLocales()
 
 <template>
   <q-select
+    name="LocaleSelector"
     v-model="selection"
     outlined
     emit-value
     map-options
     square
     :options="options"
+    label="Pick your locale...."
     option-label="name"
-    label="Pick your language...."
     @update:model-value="
         //* Set the global i18n Locale to the selection
         ChangeLocale(selection),
@@ -43,7 +41,7 @@ const options:any = await RequireLocales()
         //* Navigate to the campaign overview page
         Navigate({
           name: 'Campaigns',
-          params: { locale: selection!.description },
+          params: { locale: selection!.code },
         })
       "
     >
