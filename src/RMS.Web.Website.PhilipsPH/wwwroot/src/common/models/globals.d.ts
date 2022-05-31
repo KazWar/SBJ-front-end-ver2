@@ -6,3 +6,9 @@ type Locale = {
     name:string
     description:string
 }
+
+type Category = {
+    id:number
+    name:string
+    description:string
+}

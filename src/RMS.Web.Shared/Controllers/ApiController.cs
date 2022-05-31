@@ -97,6 +97,8 @@
                 );
         }
 
+
+        
         [HttpGet]
         [Route("locale")]
         public async Task<RestResponse> Locale()
@@ -105,10 +107,9 @@
         }
 
         [HttpGet]
-        // Get all campaigns by Locale
         [Route("campaign")]
         public async Task<RestResponse> Campaign(
-            [FromRoute] string code)
+            [FromQuery] string code)
         {
             return await Client.GetAsync(
                 Request("campaign")

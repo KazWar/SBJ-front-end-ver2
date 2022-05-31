@@ -1,21 +1,22 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import { Navigate } from '@/common/utilities'
 
-const { campaign } = defineProps<{
-    campaign:Campaign
+defineProps<{
+    name:string
+    code:number | undefined
+    description:string | undefined
+    startDate: Date  
+    endDate: Date
+    thumbnailUrl:string | undefined
+    conditionsUrl:string | undefined
+    bannerUrl:string | undefined
+    category: Category
 }>()
-
-const { name, code, description, thumbnail, startDate, endDate } = campaign
-
-//* Initialize i18n for the 'i18n-t' tag
-useI18n({})
 
 </script>
 
 <template>
-    <q-card 
-        v-ripple 
+    <q-card
         class="campaign-card shadow-1 text-left cursor-pointer"
         square
         @click="Navigate({ 
@@ -33,31 +34,19 @@ useI18n({})
                 <q-separator/>
 
                 <div class="text-caption text-weight-medium">
-                    <i18n-t keypath="campaign-card.operational-date" tag="p">
-                        <template #startDate>
-                            <span class="text-subtitle2">
-                                {{ new Date(startDate).toDateString() }}
-                            </span>
-                        </template>
-                        <template #endDate>
-                            <span class="text-subtitle2">
-                                {{ new Date(endDate).toDateString() }}
-                            </span>
-                        </template>
-                    </i18n-t> 
+                    {{ startDate.toDateString() }} to {{ endDate.toDateString() }}
                 </div>
 
                 <q-separator/>
                 
                 <div class="text-body1">
-                    <!-- eslint-disable-next-line vue/no-v-html -->
-                    <div v-html="description"></div>
+                    {{ description }}
                 </div>
             </q-card-section>
 
             <!-- If thumbnail path is empty/null, don't show thumbnail -->
             <q-img
-                v-if="thumbnail"
+                v-if="thumbnailUrl"
                 class="col-4"
                 src="https://cdn.quasar.dev/img/parallax2.jpg"
             />
@@ -75,5 +64,3 @@ useI18n({})
     }
 }
 </style>
-
-<i18n src="./campaign-card.translations.json"/>

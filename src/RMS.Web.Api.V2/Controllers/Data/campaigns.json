@@ -8,8 +8,8 @@
       "Name": "Wasmiddelen"
     },
     "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    "StartDate": "2022-05-01",
-    "EndDate": "2022-06-30",
+    "StartDate": "2022-05-01T00:00:00Z",
+    "EndDate": "2022-06-30T00:00:00Z",
     "ThumbnailUrl": "",
     "BannerUrl": "",
     "ConditionsUrl": ""
@@ -23,8 +23,8 @@
       "Name": "Wasmiddelen"
     },
     "Description": "when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    "StartDate": "2022-05-01",
-    "EndDate": "2022-06-30",
+    "StartDate": "2022-05-01T00:00:00Z",
+    "EndDate": "2022-06-30T00:00:00Z",
     "ThumbnailUrl": "",
     "BannerUrl": "",
     "ConditionsUrl": ""
@@ -38,8 +38,8 @@
       "Name": "Wasmiddelen"
     },
     "Description": "It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages",
-    "StartDate": "2022-05-01",
-    "EndDate": "2022-06-30",
+    "StartDate": "2022-05-01T00:00:00Z",
+    "EndDate": "2022-06-30T00:00:00Z",
     "ThumbnailUrl": "",
     "BannerUrl": "",
     "ConditionsUrl": ""
@@ -47,16 +47,16 @@
   {
     "Name": "Expired campaign 1",
     "Description": "and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "StartDate": "2022-04-01",
-    "EndDate": "2022-04-30",
+    "StartDate": "2022-04-01T00:00:00Z",
+    "EndDate": "2022-04-30T00:00:00Z",
     "ThumbnailUrl": "",
     "ConditionsUrl": ""
   },
   {
     "Name": "Upcoming campaign 1",
     "Description": "and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "StartDate": "2022-07-01",
-    "EndDate": "2022-07-31",
+    "StartDate": "2022-07-01T00:00:00Z",
+    "EndDate": "2022-07-31T00:00:00Z",
     "ThumbnailUrl": "",
     "ConditionsUrl": ""
   }

@@ -2,6 +2,7 @@
 import CampaignCard from './components/campaign-card.vue'
 import { useCampaignStore } from '@/stores'
 import { useI18n } from 'vue-i18n'
+import { Campaign } from '@/common/models'
 
 //* Destructure the parameterized getter from the store
 const { RequireCampaigns } = useCampaignStore()
@@ -10,12 +11,21 @@ const { RequireCampaigns } = useCampaignStore()
 const { locale } = $(useI18n({ useScope: "global" }))
 
 //* Get the campaigns
-const campaigns = await RequireCampaigns(String(locale))
+const campaigns = await RequireCampaigns(String(locale)) as Campaign[]
 </script>
 
 <template>
     <template v-for="(campaign, index) in campaigns" :key="index">
-        <campaign-card :campaign="campaign"/>
+        <template v-if="new Date() < campaign.startDate">
+            Campaign has yet to begin
+        </template>
+        <template v-else-if="new Date() > campaign.startDate && new Date() < campaign.endDate">
+            Campaign has begun
+        </template>
+        <template v-else-if="campaign.endDate > new Date()">
+            Campaign has expired
+        </template>
+        <campaign-card v-bind="campaign"/>
     </template>
 </template>
 

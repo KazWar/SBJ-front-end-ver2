@@ -1,6 +1,7 @@
 import { useCampaignStore } from '@/stores'
 import { useCampaignService } from "@/services"
 import { storeToRefs } from 'pinia'
+import { Campaign } from '@/common/models'
 
 const requireCampaignService = () => {
     return useCampaignService()
@@ -23,7 +24,7 @@ export default {
         //* Get the locales and return them directly.
         return await GetCampaigns(locale)
             .then(response => {
-                return Promise.resolve(response.campaigns)
+                return Promise.resolve(response)
             })
             .catch(error => {
                 return Promise.reject(error)
@@ -37,7 +38,7 @@ export default {
      * 
      * @returns 
      */
-     async RequireCampaigns (locale:string): Promise<Campaign[] | unknown> {
+     async RequireCampaigns (locale:string): Promise<Campaign[] | Error> {
         let { items } = $(requireCampaignStore())
         const { GetCampaigns } = requireCampaignService()
 
@@ -49,8 +50,8 @@ export default {
         //* Retrieve the campaigns from the API
         return await GetCampaigns(locale)
             .then(response => {
-                items = response.campaigns
-                return Promise.resolve(response.campaigns)
+                items = response
+                return Promise.resolve(response)
             })
             .catch(error => {
                 return Promise.reject(error)

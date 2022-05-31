@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios, { AxiosResponseTransformer } from "axios"
 
 export default axios.create({
   responseType: 'json',
@@ -17,7 +17,7 @@ export default axios.create({
   //* Otherwise it remains a stringified text blob
   //* Axios already does this automatically once, but the API response is stringified twice.
   transformResponse: [
-    ...axios.defaults.transformResponse as any,
+    ...axios.defaults.transformResponse as AxiosResponseTransformer[],
       (data) => {
           data.content = JSON.parse(data.content)
       return data
