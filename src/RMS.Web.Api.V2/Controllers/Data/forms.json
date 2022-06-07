@@ -1,0 +1,273 @@
+﻿[
+  {
+    "id": "1",
+    "name": "",
+    "description": "",
+    "locale": "be_nl",
+    "sections": [
+      {
+        "id": "1",
+        "name": "NAW",
+        "description": "Naam, addres en woonplaats gegevens.",
+        "bundles": [
+          {
+            "id": "1",
+            "name": "NAWBundle",
+            "description": "Contains all the fields required for the NAW data.",
+            "multiples": 1,
+            "fields": [
+              {
+                "id": 1,
+                "type": {
+                  "name": "input",
+                  "description": "",
+                  "subType": "text"
+                },
+                "formFieldId": 1,
+                "name": "Name",
+                "description": "First name",
+                "label": "lbl_Put in your name here",
+                "tooltip": "tip_Put in your name here",
+                "editable": false,
+                "destination": "Registration",
+                "linkId": null,
+                "rules": [
+                  {
+                    "name": "Required",
+                    "conditions": []
+                  }
+                ],
+                "options": [],
+                "design": null,
+                "features": null,
+                "mask": null
+              },
+              {
+                "id": 2,
+                "type": {
+                  "name": "input",
+                  "description": "",
+                  "subType": "text"
+                },
+                "formFieldId": 2,
+                "name": "Surname",
+                "description": "Middle & last name",
+                "label": "lbl_Put in your name here",
+                "tooltip": "tip_Put in your name here",
+                "editable": false,
+                "destination": "Registration",
+                "linkId": null,
+                "rules": [
+                  {
+                    "name": "Required",
+                    "conditions": []
+                  }
+
+                ],
+                "options": [],
+                "design": null,
+                "features": null,
+                "mask": null
+              },
+              {
+                "id": 3,
+                "type": {
+                  "name": "input",
+                  "description": "",
+                  "subType": "email"
+                },
+                "formFieldId": 3,
+                "name": "Email",
+                "description": "Email",
+                "label": "lbl_Put in your email here",
+                "tooltip": "tip_Email must contain one @ and end with a domain. E.G test@test.nl",
+                "editable": true,
+                "destination": "Registration",
+                "linkId": null,
+                "rules": [],
+                "options": [],
+                "design": null,
+                "features": null,
+                "mask": null
+              },
+              {
+                "id": 4,
+                "type": {
+                  "name": "input",
+                  "description": "",
+                  "subType": null
+                },
+                "formFieldId": 4,
+                "name": "Name",
+                "description": "First name",
+                "label": "lbl_Put in your name here",
+                "tooltip": "tip_Put in your name here",
+                "editable": true,
+                "destination": "Registration",
+                "linkId": null,
+                "rules": [],
+                "options": [],
+                "design": null,
+                "features": null,
+                "mask": null
+              },
+              {
+                "id": 5,
+                "type": {
+                  "name": "input",
+                  "description": "",
+                  "subType": null
+                },
+                "formFieldId": 5,
+                "name": "Name",
+                "description": "First name",
+                "label": "lbl_Put in your name here",
+                "tooltip": "tip_Put in your name here",
+                "editable": true,
+                "destination": "Registration",
+                "linkId": null,
+                "rules": [],
+                "options": [],
+                "design": null,
+                "features": null,
+                "mask": null
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "id": "2",
+        "name": "Registratie",
+        "description": "Registratie gegevens.",
+        "bundles": [
+          {
+            "id": "1",
+            "name": "Registration bundle",
+            "description": "Contains all the fields required for the NAW data.",
+            "multiples": 1,
+            "fields": [
+              {
+                "id": 1,
+                "type": {
+                  "name": "input",
+                  "description": "",
+                  "subType": "text"
+                },
+                "formFieldId": 1,
+                "name": "Name",
+                "description": "First name",
+                "label": "lbl_Put in your name here",
+                "tooltip": "tip_Put in your name here",
+                "editable": false,
+                "destination": "Registration",
+                "linkId": null,
+                "rules": [
+                  {
+                    "name": "Required",
+                    "conditions": []
+                  }
+                ],
+                "options": [],
+                "design": null,
+                "features": null,
+                "mask": null
+              },
+              {
+                "id": 2,
+                "type": {
+                  "name": "input",
+                  "description": "",
+                  "subType": "text"
+                },
+                "formFieldId": 2,
+                "name": "Surname",
+                "description": "Middle & last name",
+                "label": "lbl_Put in your name here",
+                "tooltip": "tip_Put in your name here",
+                "editable": false,
+                "destination": "Registration",
+                "linkId": null,
+                "rules": [
+                  {
+                    "name": "Required",
+                    "conditions": []
+                  }
+
+                ],
+                "options": [],
+                "design": null,
+                "features": null,
+                "mask": null
+              },
+              {
+                "id": 3,
+                "type": {
+                  "name": "input",
+                  "description": "",
+                  "subType": "email"
+                },
+                "formFieldId": 3,
+                "name": "Email",
+                "description": "Email",
+                "label": "lbl_Put in your email here",
+                "tooltip": "tip_Email must contain one @ and end with a domain. E.G test@test.nl",
+                "editable": true,
+                "destination": "Registration",
+                "linkId": null,
+                "rules": [],
+                "options": [],
+                "design": null,
+                "features": null,
+                "mask": null
+              },
+              {
+                "id": 4,
+                "type": {
+                  "name": "input",
+                  "description": "",
+                  "subType": null
+                },
+                "formFieldId": 4,
+                "name": "Name",
+                "description": "First name",
+                "label": "lbl_Put in your name here",
+                "tooltip": "tip_Put in your name here",
+                "editable": true,
+                "destination": "Registration",
+                "linkId": null,
+                "rules": [],
+                "options": [],
+                "design": null,
+                "features": null,
+                "mask": null
+              },
+              {
+                "id": 5,
+                "type": {
+                  "name": "input",
+                  "description": "",
+                  "subType": null
+                },
+                "formFieldId": 5,
+                "name": "Name",
+                "description": "First name",
+                "label": "lbl_Put in your name here",
+                "tooltip": "tip_Put in your name here",
+                "editable": true,
+                "destination": "Registration",
+                "linkId": null,
+                "rules": [],
+                "options": [],
+                "design": null,
+                "features": null,
+                "mask": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

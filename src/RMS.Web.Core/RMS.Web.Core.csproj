@@ -13,7 +13,6 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RMS.GraphQL\RMS.GraphQL.csproj" />
     <ProjectReference Include="..\RMS.Application\RMS.Application.csproj" />
     <ProjectReference Include="..\RMS.EntityFrameworkCore\RMS.EntityFrameworkCore.csproj" />
   </ItemGroup>

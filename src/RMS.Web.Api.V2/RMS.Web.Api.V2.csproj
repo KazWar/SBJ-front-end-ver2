@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Locales\Models\" />
-    <Folder Include="Controllers\NewFolder\" />
   </ItemGroup>
 	
     <PropertyGroup>

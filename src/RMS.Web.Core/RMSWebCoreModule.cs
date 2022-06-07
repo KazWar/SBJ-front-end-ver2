@@ -23,7 +23,6 @@ using Microsoft.IdentityModel.Tokens;
 using RMS.Chat;
 using RMS.Configuration;
 using RMS.EntityFrameworkCore;
-using RMS.Startup;
 using RMS.Web.Authentication.JwtBearer;
 using RMS.Web.Authentication.TwoFactor;
 using RMS.Web.Chat.SignalR;
@@ -37,7 +36,6 @@ namespace RMS.Web
         typeof(RMSEntityFrameworkCoreModule),
         typeof(AbpAspNetZeroCoreWebModule),
         typeof(AbpAspNetCoreSignalRModule),
-        typeof(RMSGraphQLModule),
         typeof(AbpRedisCacheModule), //AbpRedisCacheModule dependency (and Abp.RedisCache nuget package) can be removed if not using Redis cache
         typeof(AbpHangfireAspNetCoreModule) //AbpHangfireModule dependency (and Abp.Hangfire.AspNetCore nuget package) can be removed if not using Hangfire
     )]

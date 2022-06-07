@@ -14,8 +14,6 @@ using Stripe;
 using Hangfire;
 using Owl.reCAPTCHA;
 using Castle.Facilities.Logging;
-using GraphQL.Server;
-using GraphQL.Server.Ui.Playground;
 using IdentityServer4.Configuration;
 using Abp.Hangfire;
 using Abp.PlugIns;
@@ -26,10 +24,8 @@ using Abp.AspNetZeroCore.Web.Authentication.JwtBearer;
 using Abp.Castle.Logging.Log4Net;
 using RMS.Authorization;
 using RMS.Configuration;
-using RMS.Configure;
 using RMS.EntityFrameworkCore;
 using RMS.Identity;
-using RMS.Schemas;
 using RMS.Web.Chat.SignalR;
 using RMS.Web.Common;
 using RMS.Web.Resources;
@@ -142,11 +138,6 @@ namespace RMS.Web.Startup
 
             services.AddScoped<IWebResourceManager, WebResourceManager>();
             services.AddSignalR();
-
-            if (WebConsts.GraphQL.Enabled)
-            {
-                services.AddAndConfigureGraphQL();
-            }
 
             services.Configure<SecurityStampValidatorOptions>(options =>
             {
@@ -281,15 +272,6 @@ namespace RMS.Web.Startup
                 StripeConfiguration.ApiKey = _appConfiguration["Payment:Stripe:SecretKey"];
             }
 
-            if (WebConsts.GraphQL.Enabled)
-            {
-                app.UseGraphQL<MainSchema>(path: "/request");
-                if (WebConsts.GraphQL.PlaygroundEnabled)
-                {
-                    app.UseGraphQLPlayground(
-                        new GraphQLPlaygroundOptions()); //to explorer API navigate https://*DOMAIN*/ui/playground
-                }
-            }
 
             app.UseEndpoints(endpoints =>
             {

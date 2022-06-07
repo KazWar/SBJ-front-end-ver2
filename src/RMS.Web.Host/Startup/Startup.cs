@@ -26,15 +26,11 @@ using RMS.Web.IdentityServer;
 using RMS.Web.Swagger;
 using Stripe;
 using ILoggerFactory = Microsoft.Extensions.Logging.ILoggerFactory;
-using GraphQL.Server;
-using GraphQL.Server.Ui.Playground;
 using HealthChecks.UI.Client;
 using IdentityServer4.Configuration;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using RMS.Configure;
-using RMS.Schemas;
 using RMS.Web.HealthCheck;
 using Owl.reCAPTCHA;
 using HealthChecksUISettings = HealthChecks.UI.Configuration.Settings;
@@ -134,10 +130,6 @@ namespace RMS.Web.Startup
             //    });
             //}
 
-            if (WebConsts.GraphQL.Enabled)
-            {
-                services.AddAndConfigureGraphQL();
-            }
 
             if (bool.Parse(_appConfiguration["HealthChecks:HealthChecksEnabled"]))
             {
@@ -227,16 +219,6 @@ namespace RMS.Web.Startup
             if (bool.Parse(_appConfiguration["Payment:Stripe:IsActive"]))
             {
                 StripeConfiguration.ApiKey = _appConfiguration["Payment:Stripe:SecretKey"];
-            }
-
-            if (WebConsts.GraphQL.Enabled)
-            {
-                app.UseGraphQL<MainSchema>();
-                if (WebConsts.GraphQL.PlaygroundEnabled)
-                {
-                    app.UseGraphQLPlayground(
-                        new GraphQLPlaygroundOptions()); //to explorer API navigate https://*DOMAIN*/ui/playground
-                }
             }
 
             app.UseEndpoints(endpoints =>

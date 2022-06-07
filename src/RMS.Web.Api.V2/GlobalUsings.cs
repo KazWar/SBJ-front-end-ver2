@@ -4,3 +4,4 @@ global using RMS.Web.Api.V2.Models;
 global using Newtonsoft.Json;
 global using System.ComponentModel;
 global using RMS.Web.Api.V2.Utilities;
+global using System.ComponentModel.DataAnnotations.Schema;

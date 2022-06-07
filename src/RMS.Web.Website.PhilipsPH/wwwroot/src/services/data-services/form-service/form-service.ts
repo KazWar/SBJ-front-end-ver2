@@ -14,7 +14,10 @@ export const useFormService = () => {
         //! Extract the other contents of errors, success, etc... for later use
         const { data }:any = await request({
                 method:'get',
-                url:`/api/v2/locale/${locale}/campaign/${id}/form`
+                url:`form/${id}`,
+                params:{
+                    locale:locale
+                }
             }
         )
 
@@ -38,16 +41,6 @@ export const useFormService = () => {
         )
 
         return processData(data.content)
-    }
-    
-    /**
-     * Parses JSON response data into a Form type object
-     * 
-     * @param 
-     * @returns Form type object
-     */
-    const processData = (response:any):Form => {
-        return (response) ? Form.fromDTO(response.formbuilder) : AssertNever(response as never)
     }
 
     return {

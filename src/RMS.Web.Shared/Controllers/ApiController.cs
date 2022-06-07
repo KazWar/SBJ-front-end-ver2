@@ -101,14 +101,14 @@
         
         [HttpGet]
         [Route("locale")]
-        public async Task<RestResponse> Locale()
+        public async Task<RestResponse> GetLocales()
         {
             return await Client.GetAsync(Request("locale"));
         }
 
         [HttpGet]
         [Route("campaign")]
-        public async Task<RestResponse> Campaign(
+        public async Task<RestResponse> GetCampaigns(
             [FromQuery] string code)
         {
             return await Client.GetAsync(
@@ -116,74 +116,62 @@
                 .AddQueryParameter("locale", code));
         }
 
-        [AcceptVerbs("GET", "POST", "PUT")]
-        [Route("locale/{code:maxlength(5)}/campaign/{cid:int}/registration/{rid:int?}")]
-        public async Task<RestResponse> Form(
-            // There are actually 2 DTO's for creating & update, FormRegistrationHandlingDto and UpdateRegistrationDataDto respectively
-            // But it's not possible to have 2 [FromBody] attributes as the first one 'consumes' it
-            // However FormRegistrationHandlingDto has everything UpdateRegistrationDataDto has
-            [FromBody] FormRegistrationHandlingDto vueJsToRmsModel,
-            [FromRoute] int rid,
-            [FromRoute] string code,
-            [FromQuery] string password)
+        /// <summary>
+        /// Gets an empty form if no password is provided,
+        /// otherwise gets a filled form.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="password">Only required for form editing</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("form/{id:int}")]
+        public async Task<RestResponse> GetForm(
+            [FromRoute] int id,
+            [FromQuery] string locale,
+            [FromBody] string? password)
         {
-            var method = "";
+            // If password is not filled, use GET
+            // Otherwise use POST as it's safer for transfering passwords.
+            var call = (password == null) ?
+                Client.GetAsync(Request($"form/{id}").AddQueryParameter(locale, locale)) :
+                Client.PostAsync(Request($"form/{id}", Method.Post)
+                    .AddQueryParameter(locale, locale)
+                    .AddBody("password:password"));
 
-            if (ModelState.IsValid) { 
-                // Extract the used method from the request
-                method = HttpContext.Request.Method;
-            }
-
-            string data = JsonConvert.SerializeObject(vueJsToRmsModel);
-
-            // Match & execute matching api call to the RMS
-            return method switch
-            {
-                // This entire internal api is crap. Update, send and get for registration with 3 seperate addresses.
-                // it should all resolve to /registration and then depending on the method either create, update or get the registration.
-                // But this is the best way to do it now.
-                "GET" => await Client.PostAsync(
-                    Request("Registrations/GetEditForRegistration", Method.Post)
-                    .AddJsonBody(
-                        new GetFormLayoutAndDataInput
-                        {
-                            RegistrationId = rid,
-                            Password = password,
-                            Locale = code
-                        })
-                    ),
-
-                "POST" => await Client.PostAsync(
-                    Request("Registrations/SendFormData", Method.Post)
-                    .AddJsonBody(
-                        new FormRegistrationHandlingDto {
-                            Data = data
-                        }
-                    )),
-
-                "PUT" => await Client.PutAsync(
-                    Request("Registrations/UpdateFormData", Method.Put)
-                    .AddJsonBody(
-                        new UpdateRegistrationDataDto {
-                            Data = vueJsToRmsModel.Data
-                        })
-                    ),
-
-                    //Default case
-                _ => throw new ArgumentOutOfRangeException(),// Replace with a a better error.
-            };
+            return await call;
         }
 
-        [HttpGet]
-        [Route("locale/{code:maxlength(5)}/campaign/{id:int}/form")]
-        public async Task<RestResponse> FormAndProductHandling(
-            [FromRoute] string code,
-            [FromRoute] int id)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("form/{id:int}")]
+        public async Task<RestResponse> PostForm(
+           [FromRoute] int id)
         {
             return await Client.GetAsync(
-                Request("FormLocales/GetFormAndProductHandlingApi")
-                .AddQueryParameter("currentLocale", code)
-                .AddQueryParameter("currentCampaignId", id));
+                Request("campaign")
+                .AddQueryParameter("locale", id));
+        }
+
+        
+        /// <summary>
+        /// Updates a specific form
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="form"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("form/{id:int}")]
+        public async Task<RestResponse> PutForm(
+           [FromRoute] int id,
+           [FromBody] Form form)
+        {
+            return await Client.GetAsync(
+                Request("campaign")
+                .AddQueryParameter("locale", id));
         }
 
         #endregion
