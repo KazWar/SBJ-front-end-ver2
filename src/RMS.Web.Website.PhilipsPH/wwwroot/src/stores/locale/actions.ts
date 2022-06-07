@@ -20,7 +20,6 @@ export default {
     async FetchLocales(): Promise<Locale[] | Error> {
         const { GetLocales } = this.requireLocaleService()
 
-        //* Get the locales and return them directly.
         return await GetLocales()
             .then(response => response)
             .catch(error => error)
@@ -42,7 +41,6 @@ export default {
             return Promise.resolve(items)
         }
 
-        //* Retrieve the locales from the API
         return await GetLocales()
             .then(response => {
                 items = response

@@ -1,42 +1,31 @@
 <script setup lang="ts">
 //* External library
-import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
-import { Form } from '@/common/models'
-import { storeToRefs } from 'pinia'
-import { onMounted } from 'vue'
 //* Components
 import FormStepper from './components/form-stepper.vue'
 //* Stores
-import { useCampaignStore, useFormStore } from '@/stores'
+import { useFormStore, useCampaignStore } from '@/stores'
 
-//* Access the navigated route to obtain url parameters
+//* Get the route params
 const { params } = useRoute()
 
-//* Explicitly create an i18n instance using the global scope to get the global locale
-const { locale } = $(useI18n({ useScope: "global" }))
-
 //* Get the required methods from the stores
-const { getCampaignByCode } = useCampaignStore()
-const { loadForm } = useFormStore()
-const { item } = storeToRefs(useFormStore())
+const { RequireForm } = useFormStore()
+const { GetCampaignByCode } = useCampaignStore()
 
-/**
- * Primary Key ID off the selected campaign
- */
-const id:number = getCampaignByCode(Number(params.campaignCode)).id
+//* Define variables
+const code = Number(params.campaignCode)
+const formId:number = GetCampaignByCode(code).formId
 
-let loaded = $ref(false)
-
-onMounted(async () => {
-  loaded = await loadForm(String(locale), id) as boolean
-})
+let loaded: unknown = $ref()
+loaded = await RequireForm(1)
 </script>
 
 <template>
     <div class="row registration-form">
       <q-page class="offset-md-3 col-6 ">
-        <form-stepper v-if="loaded" :form="(item as Form)"/>
+          stuff
+        {{ loaded }}
       </q-page>
     </div>
 </template>

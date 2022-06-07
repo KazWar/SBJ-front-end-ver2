@@ -15,7 +15,7 @@ let { locale } = useI18n({ useScope: "global" })
 
 //* helper function for changing the locale
 function ChangeLocale(selection:any) {
-  locale.value = selection.description
+  locale.value = selection.code
 }
 
 //* Get the options

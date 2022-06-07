@@ -22,13 +22,12 @@
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Form>> GetOne(
-            [FromRoute] int id,
-            [FromQuery] string? locale)
+            [FromRoute] int id)
         {
             if (NullOrEmptyOrWhiteSpace.Check(id.ToString()))
                 return BadRequest($"Id: {id} is a null, contains only whitespace or is empty.");
 
-            var form = forms!.First(x=> x.Id == id && x.Locale == locale);
+            var form = forms!.First(x=> x.Id == id);
 
             // Check if a locale is found
             if (forms != null)

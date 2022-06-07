@@ -1,8 +1,5 @@
 import { useBaseService } from '../base-service'
-import { 
-    AssertNever,
-    Form
-} from '@/common'
+import { Form } from '@/common'
 
 /**
  * Returns a composer instance of the form service.
@@ -10,18 +7,15 @@ import {
 export const useFormService = () => {
     const { request } = useBaseService()
 
-    const GetForm = async (locale:string, id:number): Promise<Form> => {
+    const GetForm = async (id:number): Promise<Form> => {
         //! Extract the other contents of errors, success, etc... for later use
         const { data }:any = await request({
                 method:'get',
-                url:`form/${id}`,
-                params:{
-                    locale:locale
-                }
+                url:`form/${id}`
             }
         )
 
-        return processData(data.content)
+        return data.content as Form
     }
 
     /**
@@ -40,7 +34,7 @@ export const useFormService = () => {
             }
         )
 
-        return processData(data.content)
+        return data.content
     }
 
     return {

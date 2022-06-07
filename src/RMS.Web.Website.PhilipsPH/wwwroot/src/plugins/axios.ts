@@ -11,7 +11,7 @@ export default axios.create({
     "redirect": 'follow'
   },
 
-  baseURL:'http://localhost:5000/api/v2/',
+  baseURL:'http://localhost:5000/',
 
   //* Force parse the data part of the response
   //* Otherwise it remains a stringified text blob

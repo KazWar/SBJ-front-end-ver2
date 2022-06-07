@@ -10,11 +10,14 @@ export const useCampaignService = () => {
      * 
      * @returns A RestSharp RestResponse object containing an array of Campaign type objects
      */
-    const GetCampaigns = async ():Promise<Campaign[]> => {
+    const GetCampaigns = async (locale:string):Promise<Campaign[]> => {
         //! Extract the other contents of errors, success, etc... for later use
         const { data }:any = await request({
                 method:'get',
-                url:'campaign'
+                url:'campaign',
+                params:{
+                    locale:locale
+                }
             }
         )
         

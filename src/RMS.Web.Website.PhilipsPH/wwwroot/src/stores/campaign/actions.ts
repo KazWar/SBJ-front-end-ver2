@@ -51,10 +51,8 @@ export default {
         return await GetCampaigns(locale)
             .then(response => {
                 items = response
-                return Promise.resolve(response)
+                return response
             })
-            .catch(error => {
-                return Promise.reject(error)
-            })
+            .catch(error => error)
     }
 }

@@ -1,3 +1,4 @@
+import { Campaign } from '@/common'
 import { StateTree } from 'pinia'
 
 export default {
@@ -7,7 +8,7 @@ export default {
   * @example getCampaignByCode(16050)
   * @param campaignCode - Code of the select campaign
   */
-  getCampaignByCode: (state:StateTree) => (campaignCode:number):Campaign => {
-    return state.items.find((item:Campaign) => item.Code = campaignCode)
+  GetCampaignByCode: (state:StateTree) => (campaignCode:number):Campaign => {
+    return state.items.find((item:Campaign) => item.code = campaignCode)
   }
 }

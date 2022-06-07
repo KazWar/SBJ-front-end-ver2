@@ -7,13 +7,6 @@
         public int Id { get; set; }
 
         /// <summary>
-        /// Foreign key to determine which bundle this field is a part of.
-        /// </summary>
-        [ForeignKey("BundleId")]
-        [Required]
-        public int BundleId { get; set; }
-
-        /// <summary>
         /// Unique name for the field within a bundle
         /// </summary>
         [Required]
@@ -34,11 +27,6 @@
         /// </summary>
         public string? Tooltip { get; set; }
 
-        /// <summary>
-        /// Defines whether the service center is allowed to modify the value
-        /// </summary>
-        [Required]
-        public bool Editable { get; set; }
 
         /// <summary>
         /// Determines which table this field's data belongs to.

@@ -1,6 +1,5 @@
 ﻿namespace RMS.Web.Shared.Controllers
 {
-    [Route("api/v2")]
     public abstract class ApiController : ControllerBase
     {
         // These configurations MUST be supplied by the websites themselves.
@@ -97,8 +96,6 @@
                 );
         }
 
-
-        
         [HttpGet]
         [Route("locale")]
         public async Task<RestResponse> GetLocales()

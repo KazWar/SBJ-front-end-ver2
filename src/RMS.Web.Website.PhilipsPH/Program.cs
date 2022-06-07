@@ -47,7 +47,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 // Add HTTP to HTTPS redirection to the app.
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 // Add routing to the app.
 app.UseRouting();

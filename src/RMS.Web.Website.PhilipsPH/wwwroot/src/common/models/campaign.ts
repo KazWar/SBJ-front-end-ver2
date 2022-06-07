@@ -1,5 +1,6 @@
 export class Campaign {
     name:string
+    formId: number
     code:number | undefined
     description:string | undefined
     startDate:Date
@@ -11,6 +12,7 @@ export class Campaign {
 
     constructor(data:Campaign) {
         this.name = data.name
+        this.formId = data.formId
         this.code = data.code
         this.description = data.description
         this.startDate = ParseDate(data.endDate)

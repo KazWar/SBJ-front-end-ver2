@@ -33,5 +33,3 @@ const { t } = useI18n({})
   padding-bottom: 50px;
 }
 </style>
-
-<i18n src="./campaigns.translations.json"/>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Navigate } from '@/common/utilities'
+import { useI18n } from 'vue-i18n'
 
 defineProps<{
     name:string
