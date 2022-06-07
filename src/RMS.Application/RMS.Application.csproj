@@ -26,11 +26,6 @@
     <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RMS.Application.Shared\RMS.Application.Shared.csproj" />
-    <ProjectReference Include="..\RMS.Core\RMS.Core.csproj" />
-    <ProjectReference Include="..\RMS.EntityFrameworkCore\RMS.EntityFrameworkCore.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 </Project>

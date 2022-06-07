@@ -8,7 +8,4 @@
     <PackageReference Include="Abp.Web.Common" Version="5.7.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RMS.Core.Shared\RMS.Core.Shared.csproj" />
-  </ItemGroup>
 </Project>

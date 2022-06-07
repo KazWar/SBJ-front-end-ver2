@@ -40,7 +40,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.5" />
     <PackageReference Include="VueCliMiddleware" Version="6.0.0" />
   </ItemGroup>
 	
@@ -66,8 +65,6 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\RMS.Application.Shared\RMS.Application.Shared.csproj" />
-    <ProjectReference Include="..\RMS.Web.Mvc\RMS.Web.Mvc.csproj" />
     <ProjectReference Include="..\RMS.Web.Shared\RMS.Web.Shared.csproj" />
   </ItemGroup>
 

@@ -26,7 +26,6 @@
 	
   <ItemGroup>
     <ProjectReference Include="..\RMS.Web.Api.V2\RMS.Web.Api.V2.csproj" />
-    <ProjectReference Include="..\RMS.Web.Mvc\RMS.Web.Mvc.csproj" />
   </ItemGroup>
 	
   <ItemGroup>
