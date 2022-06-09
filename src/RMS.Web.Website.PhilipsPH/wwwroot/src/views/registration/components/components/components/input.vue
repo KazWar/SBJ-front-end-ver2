@@ -5,48 +5,21 @@
 </script>
 
 <script setup lang=ts>
+import { Field } from '@/common';
+import { FormKitFrameworkContext } from '@formkit/core'
 
-const { label, icon, mask, type, name } = defineProps<{
-    label:string
-    name:string
-    icon?:string | undefined
-    mask?: string | undefined
-    type?: 
-        | "text"
-        | "password"
-        | "textarea"
-        | "email"
-        | "search"
-        | "tel"
-        | "number"
-        | "url"
-        | "time"
-        | "date"
-        | undefined;
+
+const { context } = defineProps<{
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    context: FormKitFrameworkContext
 }>()
 
-/**
- * Create a default value ref
- */
-const value = $ref('')
+const { name, description, label } = context.field as Field
 
-/**
- * Define an emit for updating the v-model in the parent
- */
-const emit = defineEmits(['update:modelValue'])
-
-/**
- * Create a function to take in the new value and emit it
- * 
- * @param value new model value
- */
-function emitInput(value: number | Date | string | null): void {
-    emit('update:modelValue', value)
+function handleInput(e:any) {
+  context.node.input(e.target.value)
 }
 
-function required (value: any) {
-    return (value.length < 1) ? '' : true
-}
 </script>
 
 <template>
@@ -55,7 +28,7 @@ function required (value: any) {
             <div class="col">
                 <q-input
                     :ref="name"
-                    v-model="value"
+                    :value="context._value"
                     :type="type"
                     square
                     filled
@@ -63,9 +36,6 @@ function required (value: any) {
                     value=""
                     :label="label"
                     :rules="[required]"
-                    :mask="mask"
-                    fill-mask
-                    unmasked-value
                     @update:model-value="(value) => { emitInput(value) }"
                 >
                     <template #after >

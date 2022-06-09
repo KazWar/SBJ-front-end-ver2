@@ -10,12 +10,15 @@ import '@quasar/extras/material-icons/material-icons.css'
 //* Common components import
 import { useComponents } from '@/common/components'
 
+//* Formkit import
+import { plugin, defaultConfig } from '@formkit/vue'
+import '@formkit/themes/genesis'
+
 //* Plugins folder import
 import {
   pinia,
   router,
-  i18n,
-  useSentry
+  i18n
 } from '@/plugins'
 
 //* Create app instance
@@ -23,7 +26,6 @@ const App = createApp(app)
 
 //* Initialize the components
 await useComponents(App)
-//await useSentry(App, router)
 
 //* Bind plugins to vue instance
 App
@@ -31,6 +33,7 @@ App
   .use(Quasar)
   .use(router)
   .use(i18n)
+  .use(plugin,defaultConfig)
 
 //* Mount the app instance
 App.mount('#app')

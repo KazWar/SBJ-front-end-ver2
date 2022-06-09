@@ -124,51 +124,17 @@
         [Route("form/{id:int}")]
         public async Task<RestResponse> GetForm(
             [FromRoute] int id,
-            [FromQuery] string locale,
             [FromBody] string? password)
         {
+            var test = password;
             // If password is not filled, use GET
             // Otherwise use POST as it's safer for transfering passwords.
             var call = (password == null) ?
-                Client.GetAsync(Request($"form/{id}").AddQueryParameter(locale, locale)) :
+                Client.GetAsync(Request($"form/{id}")) :
                 Client.PostAsync(Request($"form/{id}", Method.Post)
-                    .AddQueryParameter(locale, locale)
                     .AddBody("password:password"));
 
             return await call;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("form/{id:int}")]
-        public async Task<RestResponse> PostForm(
-           [FromRoute] int id)
-        {
-            return await Client.GetAsync(
-                Request("campaign")
-                .AddQueryParameter("locale", id));
-        }
-
-        
-        /// <summary>
-        /// Updates a specific form
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="form"></param>
-        /// <returns></returns>
-        [HttpPut]
-        [Route("form/{id:int}")]
-        public async Task<RestResponse> PutForm(
-           [FromRoute] int id,
-           [FromBody] Form form)
-        {
-            return await Client.GetAsync(
-                Request("campaign")
-                .AddQueryParameter("locale", id));
         }
 
         #endregion

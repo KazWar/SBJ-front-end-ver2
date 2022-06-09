@@ -1,3 +1,5 @@
+import { Type } from "ts-toolbelt/out/Any/Type"
+
 export type Form = {
     formId: number
     name: string
@@ -24,6 +26,7 @@ export type Bundle = {
 export class Field {
     id: number
     name: string
+    type: fieldType
     description: string | undefined
     label: string | undefined
     tooltip: string | undefined
@@ -45,4 +48,10 @@ export type Rule = {
      * Contains int values, which help to set the rule floor/ceiling.
      */
     conditions: number[]
+}
+
+export type fieldType = {
+    name: string
+    description: string | undefined
+    subType: string | undefined
 }

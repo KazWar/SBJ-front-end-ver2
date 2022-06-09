@@ -75,7 +75,8 @@ module.exports = {
         "Home",
         "About",
         "Error",
-        "Footer"
+        "Footer",
+        "Registration"
       ]
     }],
     "@typescript-eslint/no-explicit-any": "off",

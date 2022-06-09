@@ -7,11 +7,21 @@ import { Form } from '@/common'
 export const useFormService = () => {
     const { request } = useBaseService()
 
-    const GetForm = async (id:number): Promise<Form> => {
+    /**
+     * Sends a POST request to the form api endpoint.
+     * 
+     * @param id - Form id, taken from selected campaign.
+     * @param password - Optional password for form edits
+     * @returns An empty form or a filled in form
+     */
+    const GetForm = async (id:number, password?:string): Promise<Form> => {
         //! Extract the other contents of errors, success, etc... for later use
         const { data }:any = await request({
                 method:'get',
-                url:`form/${id}`
+                url:`form/${id}`,
+                data:{
+                    password:password
+                }
             }
         )
 

@@ -38,13 +38,11 @@ export default {
      * @returns A promise containing the form or an error.
      */
     async RequireForm(id:number):Promise<Form | Error> {
-        debugger
         let { item } = $(this.requireFormStore())
         const { GetForm } = this.requireFormService()
 
         //* Check if there is an item in the state already
-        console.log(item)
-        if (item.length !== 0){
+        if (Object.keys(item).length != 0){
             return Promise.resolve(item)
         }
 
